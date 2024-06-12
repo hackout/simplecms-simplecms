@@ -1,4 +1,6 @@
 {
+    "name": "SimpleCMS",
+    "description": "简易测试包",
     "private": true,
     "type": "module",
     "scripts": {
