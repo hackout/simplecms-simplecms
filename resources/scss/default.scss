@@ -1,0 +1,9 @@
+.simpleCMS{
+    &-layout{
+        width: 100vw;
+        min-height: 100vh;
+        >.el-container > .el-aside{
+            overflow: hidden;
+        }
+    }
+}

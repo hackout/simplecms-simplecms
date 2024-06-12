@@ -1,0 +1,30 @@
+.simpleCMS {
+
+    &-upload-file {
+        width: 100%;
+        .el-input__suffix{
+            cursor: pointer;
+        }
+        .invisible{
+            position: fixed;
+            top: -9999rem;
+        }
+    }
+}
+
+.simpleCMS-upload-file-tooltip {
+    z-index: calc(var(--el-index-popper) + 4001) !important;
+    border-radius: var(--el-border-radius-base) !important;
+    background-color: var(--el-bg-color-overlay) !important;
+    box-shadow: var(--el-box-shadow-dark) !important;
+    padding: 0 !important;
+    width: 128px;
+    height: 128px;
+    .el-image{
+        border-radius: var(--el-border-radius-base) !important;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

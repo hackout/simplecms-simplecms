@@ -1,0 +1,45 @@
+.SimpleCMS {
+    &-system {
+        width: 100%;
+        height: auto;
+        @extend .flex;
+        flex-direction: column;
+
+        .el-divider__text {
+            background: var(--el-bg-color-page) !important;
+        }
+        &-form{
+            width: 100%;
+            margin-top: 24px;
+        }
+        &-form-item{
+            min-height: auto !important;
+        }
+        &-extra {
+            position: absolute;
+            top: 13px;
+            right: 16px;
+            height: 60px;
+            width: 50vw;
+            z-index: 2000;
+            background-color: var(--el-bg-color-overlay);
+
+            &-form {
+                @extend .flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                .el-form-item{
+                    margin-right: 13px;
+                    min-height: 46px;
+                    margin-bottom: 0;
+                    width: auto;
+                }
+            }
+        }
+    }
+}
+
+.avatar {
+    border: thin var(--el-border-color) solid;
+    cursor: pointer;
+}

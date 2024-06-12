@@ -1,0 +1,92 @@
+.simpleCMS-dialog {
+    
+    & + &,
+    .el-button + &,
+    & + .el-button{
+        margin-left: 6px;
+    }
+    &-overlay {
+        --cms-dialog-z-index: var(--el-index-top);
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: var(--el-overlay-color-lighter);
+        z-index: calc(var(--cms-dialog-z-index) + 1001);
+    }
+
+    &-box {
+        --cms-dialog-z-index: var(--el-index-top);
+        width: var(--cms-dialog-width);
+        border-radius: var(--el-border-radius-base);
+        background-color: var(--el-bg-color-overlay);
+        box-shadow: var(--el-box-shadow-dark);
+        position: absolute;
+        left: calc(50vw - var(--cms-dialog-left));
+        top: calc(50vh - var(--cms-dialog-top));
+        z-index: calc(var(--cms-dialog-z-index) + 1002);
+        transition: background-color .25s ease;
+
+        &.animation {
+            animation: DialogIn .25s;
+        }
+    }
+
+    &-header {
+        padding: 20px 24px 0;
+        position: relative;
+        font-size: 16px;
+        font-weight: 500;
+        color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity));
+
+        &-close {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            right: -15px;
+            top: -15px;
+            border-radius: var(--el-border-radius-base);
+            background-color: var(--el-bg-color-overlay);
+            box-shadow: var(--el-box-shadow-dark);
+            color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity));
+            @extend .flex;
+            cursor: pointer;
+
+            &:active {
+                right: -10px;
+                top: -10px;
+            }
+        }
+    }
+
+    &-body {
+        font-size: 14px;
+        font-weight: 400;
+        padding: 20px 24px 20px;
+        color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity));
+    }
+
+    &-footer {
+        padding: 20px 24px 20px;
+        @extend .flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
+
+@keyframes DialogIn {
+    0% {
+        left: var(--cms-dialog-left-start);
+        top: var(--cms-dialog-top-start);
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        left: calc(50vw - var(--cms-dialog-left));
+        top: calc(50vh - var(--cms-dialog-top));
+        opacity: 1;
+        transform: scale(1);
+    }
+}

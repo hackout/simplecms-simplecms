@@ -1,0 +1,117 @@
+.login{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    @extend .flex;
+    &-block{
+        width: 488px;
+        min-height: 600px;
+        z-index: 2;
+        position: relative;
+    }
+    &-top,
+    &-bottom{
+        width: 233px;
+        height: 238px;
+        position: absolute;
+        color: var(--el-color-primary);
+    }
+    &-top{
+        top: -77px;
+        left: -44px;
+    }
+    &-bottom{
+        bottom: -55px;
+        right: -55px;
+    }
+    &-card{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 2;
+        color: var(--el-text-color-primary);
+        &-title{
+            font-size: 15px;
+            padding: 24px;
+            @extend .flex;
+            flex-direction: row;
+            img{
+                width: 36px;
+                height: 36px;
+                margin-right: 16px;
+            }
+            span{
+                font-weight: 600;
+                font-size: 18px;
+                text-transform: capitalize;
+                font-variant: petite-caps;
+                color: rgba(var(--cms-color-primary-rgb),var(--cms-text-opacity));
+            }
+        }
+        &-body{
+            padding: 16px;
+            box-sizing: border-box;
+            &-title{
+                padding: 8px;
+                @extend .flex;
+                flex-direction: column;
+                align-items: flex-start;
+                span{
+                    font-size: 18px;
+                    line-height: 1.5;
+                    &:last-child{
+                        font-size: 14px;
+                    }
+                }
+            }
+            .el-form{
+                padding: 8px;
+                .el-form-item{
+                    &__content{
+                        @extend .flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        --el-input-border-color: var(--el-border-color-lighter) !important;
+                        --el-input-hover-border-color: var(--el-border-color-lighter) !important;
+                    }
+                    &__label{
+                        margin-bottom: 2px !important;
+                    }
+                    &:last-child{
+                        .el-form-item__content{
+                            justify-content: center;
+                        }
+                    }
+                }
+                .el-input--large .el-input__wrapper{
+                    padding: 8px 16px;
+                    font-size: 16px;
+                    box-sizing: border-box;
+                    .el-input__icon{
+                        font-size: 18px;
+                    }
+                    input {
+                        background-color: var(--el-fill-color-blank);
+                        caret-color: var(--el-text-color-primary);
+                        color: var(--el-text-color-primary);
+                        letter-spacing: 0.009375em;
+                        &:-webkit-autofill,
+                        &:-webkit-autofill:hover,
+                        &:-webkit-autofill:focus,
+                        &:-webkit-autofill:active {
+                          transition: background-color 5000s;
+                          -webkit-text-fill-color: var(--el-text-color-primary) !important;
+                        }
+                   }
+                }
+            }
+        }
+        .link{
+            @extend .flex;
+            flex-direction: row;
+            span{
+                margin: 0 4px;
+            }
+        }
+    }
+}

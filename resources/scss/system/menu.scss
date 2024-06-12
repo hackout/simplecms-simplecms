@@ -1,0 +1,77 @@
+.SimpleCMS {
+    &-menu {
+        width: 100%;
+        height: calc(-220px + 100vh);
+        @extend .flex;
+        flex-direction: column;
+
+        &-form {
+            &-label {
+                width: 100%;
+                height: 100%;
+                @extend .flex;
+                flex-direction: row;
+                justify-content: space-between;
+                :deep(.el-link__inner){
+                    height: 16px;
+                    @extend .flex;
+                    flex-direction: row;
+                }
+                .span {
+                    margin-left: 3px;
+                    font-size: 12px;
+                }
+            }
+        }
+
+        &-switch {
+            --el-switch-on-color: var(--cms-color-primary);
+            --el-switch-off-color: var(--cms-color-dark-1);
+
+            :deep(.el-switch__core) {
+                height: 32px;
+                min-width: 86px;
+                border-radius: 16px;
+                @extend .flex;
+
+                .el-switch__action {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 12px;
+                    left: 3px;
+                }
+            }
+
+            &.el-switch--large.is-checked {
+                :deep(.el-switch__core .el-switch__action) {
+                    left: calc(100% - 27px);
+                }
+            }
+
+            &-inactive,
+            &-active {
+                font-size: 14px;
+                height: 20px;
+            }
+        }
+
+        &-box {
+            width: 100%;
+            padding: 6px 0;
+            box-sizing: border-box;
+            flex: 1;
+        }
+    }
+}
+
+.SimpleCMS-menu-icons {
+    width: 100%;
+    height: 100%;
+    @extend .flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    span {
+        margin-left: 12px;
+    }
+}

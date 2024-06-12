@@ -1,0 +1,217 @@
+.SimpleCMS {
+
+    &-table {
+        --el-mask-color: rgba(var(--cms-color-primary-rgb), .15);
+        width: 100%;
+        height: calc(100% - 10px);
+        @extend .flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: flex-start;
+        background-color: var(--el-bg-color-overlay);
+        box-shadow: var(--el-box-shadow-dark);
+        --cms-table-right-padding: 0;
+
+        &.padding {
+            --cms-table-right-padding: 24px;
+        }
+
+        &.rounded {
+            border-radius: var(--el-border-radius-base);
+        }
+
+        &-body {
+            padding: 6px var(--cms-table-right-padding);
+            box-sizing: border-box;
+            width: 100%;
+            min-height: 300px;
+        }
+
+        &-header {
+            width: 100%;
+            min-height: 52px;
+            padding: 12px var(--cms-table-right-padding);
+            box-sizing: border-box;
+            overflow: hidden;
+            @extend .flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            &-left {
+                margin-right: var(--el-border-radius-base);
+            }
+
+            &-right {
+                display: flex;
+                margin-left: var(--el-border-radius-base);
+                justify-content: flex-end;
+            }
+
+            .el-form-item {
+                width: auto;
+                margin-bottom: 0 !important;
+                margin-right: var(--el-border-radius-base) !important;
+
+                &:last-child {
+                    margin-right: 0 !important;
+                }
+            }
+        }
+
+        &-footer {
+            width: 100%;
+            height: 66px;
+            padding: 20px 12px 24px 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+            @extend .flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            &-left {
+                font-size: 14px;
+                font-weight: 400;
+                color: var(--el-text-color-placeholder);
+                margin-right: var(--el-border-radius-base);
+            }
+
+            &-right {
+                .el-button--dark {
+                    --el-button-bg-color: var(--el-bg-color) !important;
+                    --el-button-disabled-bg-color: var(--el-bg-color) !important;
+                    --el-button-text-color: var(--el-text-color-placeholder) !important;
+                    --el-button-active-bg-color: var(--el-color-primary) !important;
+                    --el-button-hover-bg-color: var(--el-color-primary) !important;
+                    --el-button-hover-text-color: var(--el-color-white) !important;
+                    width: 40px;
+                    height: 40px;
+                }
+
+                margin-left: var(--el-border-radius-base);
+                @extend .flex;
+                flex-direction: row;
+                justify-content: flex-end;
+
+                &-item {
+                    margin-right: 12px;
+                    width: 82px;
+
+                    .el-select__wrapper {
+                        --el-border-color: var(--el-button-disabled-border-color);
+                    }
+                }
+
+                &-buttons {
+                    --cms-button-left: 4px;
+                    margin: 0 12px;
+                    background-color: var(--el-bg-color);
+                    border-radius: 20px;
+                    padding: 4px;
+                    box-sizing: border-box;
+                    height: 40px;
+                    @extend .flex;
+                    flex-direction: row;
+                    position: relative;
+
+                    &::before {
+                        transition: left .1s linear;
+                        width: 32px;
+                        height: 32px;
+                        top: 4px;
+                        left: var(--cms-button-left);
+                        background-color: var(--el-color-primary);
+                        border-radius: 16px;
+                        content: '';
+                        position: absolute;
+                        z-index: 1;
+                    }
+
+                    &-item {
+                        position: relative;
+                        z-index: 2;
+                        height: 32px;
+                        width: 32px;
+                        margin-right: 6px;
+                        font-size: 16px;
+                        font-weight: 400;
+                        border-radius: 16px;
+                        line-height: 36px;
+                        text-align: center;
+                        cursor: pointer;
+                        color: var(--el-text-color-placeholder);
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
+
+                        &:hover {
+                            color: var(--el-color-primary);
+                        }
+
+                        &.active {
+                            color: var(--el-color-white);
+
+                            &:hover {
+                                color: var(--cms-border-color-lighter);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .el-table {
+            --el-table-tr-bg-color: var(--cms-bg-color-page) !important;
+            --el-table-header-bg-color: var(--cms-bg-color-page) !important;
+            --el-table-row-hover-bg-color: var(--cms-bg-color-page) !important;
+
+            border-right: var(--el-table-border-color) 1px solid;
+            height: 100%;
+            .el-checkbox__input {
+                --el-checkbox-input-border: var(--el-table-border);
+            }
+
+            thead {
+                color: var(--el-table-text-color) !important;
+
+                th {
+                    font-weight: 400;
+
+                    .cell {
+                        .caret-wrapper {
+                            position: absolute;
+                            right: 0;
+                            margin-top: 4px;
+                        }
+                    }
+                }
+            }
+
+            .el-table__empty-block {
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            td.el-table__cell {
+                .cell {
+                    width: 100%;
+
+                    >div {
+                        display: inline-block;
+
+                        +div {
+                            margin-left: 6px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .el-table--border .el-table__inner-wrapper::after,
+        .el-table--border::after,
+        .el-table--border::before,
+        .el-table__inner-wrapper::before {
+            height: 1px;
+        }
+    }
+}

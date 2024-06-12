@@ -1,0 +1,53 @@
+.SimpleCMS {
+    &-breadcrumb {
+        @extend .flex;
+        height: 66px;
+        flex-direction: row;
+        justify-content: space-between;
+        &-main{
+            @extend .flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            h2{
+                color: var(--el-text-color-primary);
+                width: auto;
+                font-weight: 500;
+            }
+            .el-divider{
+                --el-border-color: var(--el-border-color-lighter);
+                margin: 0 16px;
+            }
+            .el-breadcrumb__separator.el-icon{
+                font-size: 18px;
+            }
+            .el-breadcrumb{
+                height: 32px;
+                @extend .flex;
+                flex-direction: row;
+            }
+            &-link{
+                height: 32px;
+                @extend .flex;
+                flex-direction: row;
+                cursor: pointer;
+                &:active,
+                &:hover{
+                    color: var(--el-color-primary-light-3);
+                }
+                .el-breadcrumb__inner{
+                    color: var(--el-color-primary);
+                    &:active,
+                    &:hover{
+                        color: var(--el-color-primary-light-3);
+                    }
+                }
+            }
+        }
+
+        &-extra {
+            .el-button--large {
+                padding: 12px !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.simpleCMS-tableDrawer {
+    --el-drawer-padding-primary: 0 !important;
+    .simpleCMS-table{
+        height: 100% !important;
+    }
+    .el-drawer__header {
+        color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity)) !important;
+        
+        padding: 20px;
+        padding-bottom: 0;
+        box-sizing: border-box;
+    }
+
+    .el-drawer__close-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: var(--el-border-radius-base);
+        background-color: var(--el-bg-color-overlay);
+        box-shadow: var(--el-box-shadow-dark);
+        color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity));
+        @extend .flex;
+        cursor: pointer;
+
+        &:active {
+            margin-right: 10px;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+.SimpleCMS-card {
+    width: 100%;
+    height: auto;
+    @extend .flex;
+    flex-direction: column;
+    border-radius: var(--el-border-radius-base);
+    background-color: var(--el-bg-color-overlay);
+    box-shadow: var(--el-box-shadow-dark);
+    box-sizing: border-box;
+    position: relative;
+
+    &-header {
+        width: 100%;
+        border-bottom: var(--cms-border-color-light-1) 1px solid;
+        box-sizing: border-box;
+        padding: 13px 16px;
+        box-sizing: border-box;
+    }
+
+    &-footer {
+        width: 100%;
+        border-top: var(--cms-border-color-light-1) 1px solid;
+        box-sizing: border-box;
+        padding: 13px 16px;
+        box-sizing: border-box;
+    }
+
+    &-body {
+        width: 100%;
+        padding: 13px 16px;
+        box-sizing: border-box;
+        color: var(--el-text-color-primary);
+    }
+}

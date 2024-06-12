@@ -1,0 +1,89 @@
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+    $colors: (
+      'primary': (
+        'base': #3366CC,
+      ),
+      'success': (
+        'base': #28c76f,
+      ),
+      'info': (
+        'base': #00cfe8,
+      ),
+      'warning': (
+        'base': #ff9f43,
+      ),
+      'error': (
+        'base': #ea5455,
+      ),
+      'danger': (
+        'base': #ea5455,
+      )
+    ),
+    $text-color: (
+      'primary': #daddf4,
+      'regular':#a5aac5,
+      'secondary': #a8aaae,
+      'placeholder': #a8aaae,
+      'disabled': #a8aaae
+    ),
+    $border-color: (
+      '': #dfe2f5,
+      'light':#1c2738,
+      'lighter':#7b839a,
+      'extra-light': #7b839a,
+      'dark': #d4d7de,
+      'darker': #cdd0d6
+    ),
+    $fill-color: (
+      '': #dfe2f5,
+      'light':#e4e7ed,
+      'lighter':#ebeef5,
+      'extra-light': #f2f6fc,
+      'dark': #d4d7de,
+      'darker': #cdd0d6,
+      'blank': #1c2738
+    ),
+    $bg-color: (
+      '': #111827,
+      'page':#1c2738,
+      'overlay':#192334,
+    ),
+    $border-radius:(
+        'base': 6px,
+        'small': 4px,
+        'round': 26px,
+        'circle': 100%,
+    )
+);
+
+@use "element-plus/theme-chalk/src/var.scss" as *;
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fullWidth{
+    width: 100%;
+}
+.el-card{
+    --el-card-border-radius: 6px !important;
+    --el-card-padding: 16px !important;
+}
+.el-popper.is-light{
+  .el-popper__arrow{
+    &:before{
+      background-color: var(--el-border-color-lighter);
+      border-color: var(--el-border-color-lighter)
+    }
+    &:after{
+      content: '';
+      background: var(--el-bg-color-overlay);
+      width: 10px;
+      height: 20px;
+      transform: rotate(90deg);
+      position: relative;
+      display: inline-block;
+      bottom: 0;
+    }
+  }
+}
