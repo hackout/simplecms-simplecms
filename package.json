@@ -1,8 +1,7 @@
 {
     "name": "SimpleCMS",
     "description": "简易测试包",
-    "private": true,
-    "type": "module",
+    "type": "project",
     "scripts": {
         "dev": "node --max_old_space_size=4096 ./node_modules/vite/bin/vite.js",
         "build": "vite build"
