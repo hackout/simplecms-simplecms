@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use SimpleCMS\Framework\Facades\Dict;
 use App\Services\Backend\MenuService;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
-use SimpleCMS\Framework\Facades\Dict;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 

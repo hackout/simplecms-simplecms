@@ -1,0 +1,15 @@
+.SimpleCMS {
+    &-role {
+        width: 100%;
+        height: calc(-220px + 100vh);
+        @extend .flex;
+        flex-direction: column;
+
+        &-box {
+            width: 100%;
+            padding: 6px 0;
+            box-sizing: border-box;
+            flex: 1;
+        }
+    }
+}

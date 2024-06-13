@@ -2,14 +2,14 @@
     <div class="SimpleCMS-breadcrumb">
         <div class="SimpleCMS-breadcrumb-main">
             <h2>{{ pageTitle }}</h2>
-            <el-divider direction="vertical" />
+            <el-divider v-if="breadcrumb && breadcrumb.length > 0" direction="vertical" />
             <el-breadcrumb v-if="breadcrumb && breadcrumb.length > 0" :separator-icon="iconComponent">
                 <el-breadcrumb-item class="SimpleCMS-breadcrumb-main-link"
                     @click="$ajax.visit($route('backend.dashboard'))">
                     <SimpleCMSIconHome size="18px"></SimpleCMSIconHome>
                 </el-breadcrumb-item>
                 <el-breadcrumb-item :class="{ 'SimpleCMS-breadcrumb-main-link': index + 1 < breadcrumb.length }"
-                    @click="index + 1 < breadcrumb.length ? $ajax.visit($route('backend.dashboard')) : ''"
+                    @click="index + 1 < breadcrumb.length ? $ajax.visit($route('backend.dashboard')) : $ajax.visit($route(item.url.name))"
                     v-for="(item, index) in breadcrumb" :key="index">{{ item.name }}</el-breadcrumb-item>
             </el-breadcrumb>
         </div>

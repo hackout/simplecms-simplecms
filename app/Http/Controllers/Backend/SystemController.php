@@ -6,8 +6,8 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
-use App\Services\Backend\SystemConfigService;
 use SimpleCMS\Framework\Attributes\ApiName;
+use App\Services\Backend\SystemConfigService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 

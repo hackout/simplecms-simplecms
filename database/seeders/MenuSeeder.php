@@ -35,10 +35,10 @@ class MenuSeeder extends Seeder
                 'can_delete' => false,
                 'icon' => 'IconSettings',
                 'url' => [
-                        'uri' => 'backend/system',
-                        'name' => 'backend.system',
-                        'param' => []
-                    ],
+                    'uri' => 'backend/system',
+                    'name' => 'backend.system',
+                    'param' => []
+                ],
                 'children' => [
                     [
                         'name' => '系统参数',
@@ -49,10 +49,10 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconSettingsCog',
                         'url' => [
-                                'uri' => 'backend/system',
-                                'name' => 'backend.system',
-                                'param' => []
-                            ]
+                            'uri' => 'backend/system',
+                            'name' => 'backend.system',
+                            'param' => []
+                        ]
                     ],
                     [
                         'name' => '菜单管理',
@@ -63,10 +63,10 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconServerCog',
                         'url' => [
-                                'uri' => 'backend/system/menu',
-                                'name' => 'backend.menu',
-                                'param' => []
-                            ]
+                            'uri' => 'backend/system/menu',
+                            'name' => 'backend.menu',
+                            'param' => []
+                        ]
                     ],
                     [
                         'name' => '字典管理',
@@ -77,10 +77,10 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconTableOptions',
                         'url' => [
-                                'uri' => 'backend/system/dict',
-                                'name' => 'backend.dict',
-                                'param' => []
-                            ]
+                            'uri' => 'backend/system/dict',
+                            'name' => 'backend.dict',
+                            'param' => []
+                        ]
                     ],
                     [
                         'name' => '系统缓存',
@@ -91,10 +91,10 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconReplace',
                         'url' => [
-                                'uri' => 'backend/system/cache',
-                                'name' => 'backend.system_cache',
-                                'param' => []
-                            ]
+                            'uri' => 'backend/system/cache',
+                            'name' => 'backend.system_cache',
+                            'param' => []
+                        ]
                     ]
                 ]
             ],
@@ -107,10 +107,10 @@ class MenuSeeder extends Seeder
                 'can_delete' => false,
                 'icon' => 'IconUsersGroup',
                 'url' => [
-                        'uri' => 'backend/manager',
-                        'name' => 'backend.manager',
-                        'param' => []
-                    ],
+                    'uri' => 'backend/manager',
+                    'name' => 'backend.manager',
+                    'param' => []
+                ],
                 'children' => [
                     [
                         'name' => '管理员列表',
@@ -121,10 +121,10 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconUsers',
                         'url' => [
-                                'uri' => 'backend/manager',
-                                'name' => 'backend.manager',
-                                'param' => []
-                            ]
+                            'uri' => 'backend/manager',
+                            'name' => 'backend.manager',
+                            'param' => []
+                        ]
                     ],
                     [
                         'name' => '角色管理',
@@ -135,10 +135,10 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconCircles',
                         'url' => [
-                                'uri' => 'backend/role',
-                                'name' => 'backend.role',
-                                'param' => []
-                            ]
+                            'uri' => 'backend/role',
+                            'name' => 'backend.role',
+                            'param' => []
+                        ]
                     ],
                     [
                         'name' => '请求日志',
@@ -149,10 +149,68 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconLogs',
                         'url' => [
-                                'uri' => 'backend/manager/log',
-                                'name' => 'backend.manager_log',
-                                'param' => []
-                            ]
+                            'uri' => 'backend/manager/log',
+                            'name' => 'backend.manager_log',
+                            'param' => []
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'name' => '用户管理',
+                'type' => Menu::TYPE_BACKEND,
+                'is_valid' => true,
+                'is_show' => true,
+                'sort_order' => 2,
+                'can_delete' => false,
+                'icon' => 'IconUsers',
+                'url' => [
+                    'uri' => 'backend/user/user',
+                    'name' => 'backend.user.index',
+                    'param' => []
+                ],
+                'children' => [
+                    [
+                        'name' => '会员列表',
+                        'type' => Menu::TYPE_BACKEND,
+                        'is_valid' => true,
+                        'is_show' => true,
+                        'sort_order' => 3,
+                        'can_delete' => false,
+                        'icon' => 'IconUsers',
+                        'url' => [
+                            'uri' => 'backend/user/user',
+                            'name' => 'backend.user.index',
+                            'param' => []
+                        ]
+                    ],
+                    [
+                        'name' => '会员组',
+                        'type' => Menu::TYPE_BACKEND,
+                        'is_valid' => true,
+                        'is_show' => true,
+                        'sort_order' => 2,
+                        'can_delete' => false,
+                        'icon' => 'IconUsersGroup',
+                        'url' => [
+                            'uri' => 'backend/user_group/user_group',
+                            'name' => 'backend.user_group.index',
+                            'param' => []
+                        ]
+                    ],
+                    [
+                        'name' => '登录账号',
+                        'type' => Menu::TYPE_BACKEND,
+                        'is_valid' => true,
+                        'is_show' => true,
+                        'sort_order' => 1,
+                        'can_delete' => false,
+                        'icon' => 'IconUser',
+                        'url' => [
+                            'uri' => 'backend/account/account',
+                            'name' => 'backend.account.index',
+                            'param' => []
+                        ]
                     ]
                 ]
             ]

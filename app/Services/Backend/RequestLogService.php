@@ -28,7 +28,7 @@ class RequestLogService extends SimpleService
         ];
         if(array_key_exists('manager_id',$data) && $data['manager_id'])
         {
-            $sql[] = ['manager_id','=',$data['manager_id']];
+            $sql[] = ['model_id','=',$data['manager_id']];
         }
         parent::listQuery($data, $condition,$sql);
         $result = parent::list();

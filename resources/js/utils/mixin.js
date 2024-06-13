@@ -8,7 +8,7 @@ export default {
             return status[0][label]
         },
         $goTo(name, params = {}) {
-            window.location.href = this.$route(name, params)
+            this.$ajax.visit(this.$route(name, params))
         },
         $download(route, fileName = null) {
             const a = document.createElement('a');

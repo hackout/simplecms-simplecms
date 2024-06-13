@@ -1,0 +1,180 @@
+.SimpleCMS {
+    &-userDetail {
+        width: 100%;
+        height: auto;
+        min-height: 600px;
+        .el-tabs {
+            border-radius: var(--el-border-radius-base);
+            background-color: var(--el-bg-color-overlay);
+            box-shadow: var(--el-box-shadow-dark);
+            box-sizing: border-box;
+            padding: 0 16px;
+            width: 100%;
+            height: 100%;
+            --el-tabs-header-height: 70px;
+
+            :deep(.el-tabs__item) {
+                font-size: 18px !important;
+            }
+
+            :deep(.el-tabs__content) {
+                min-height: 600px;
+            }
+        }
+
+        :deep(.el-divider__text) {
+            background: var(--el-bg-color-page) !important;
+        }
+
+        :deep(.el-input.is-disabled input) {
+            background-color: var(--el-bg-color) !important;
+        }
+
+        :deep(.el-input--large .el-input__wrapper) {
+            padding: 8px 16px;
+            font-size: 16px;
+            box-sizing: border-box;
+
+            .el-input__icon {
+                font-size: 18px;
+            }
+
+            input {
+                background-color: var(--el-fill-color-blank);
+                caret-color: var(--el-text-color-primary);
+                color: var(--el-text-color-primary);
+                letter-spacing: 0.009375em;
+
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover,
+                &:-webkit-autofill:focus,
+                &:-webkit-autofill:active {
+                    transition: background-color 5000s;
+                    -webkit-text-fill-color: var(--el-text-color-primary) !important;
+                }
+            }
+        }
+
+
+        :deep(.SimpleCMS-userDetail-box) {
+            width: 100%;
+            padding: 6px 0;
+            box-sizing: border-box;
+        }
+        :deep(.SimpleCMS-userDetail-account) {
+            width: 100%;
+            height: 140px;
+            border-top-left-radius: var(--el-border-radius-base);
+            border-top-right-radius: var(--el-border-radius-base);
+            background-color: var(--el-bg-color);
+            @extend .flex;
+            flex-direction: column;
+            .SimpleCMS-userDetail-account-icon{
+                margin-top: 20px;
+                width: 60px;
+                height: 60px;
+                border-radius: 30px;
+                background-color: var(--el-bg-color);
+                color: var(--el-text-color-primary);
+                box-shadow: var(--el-box-shadow-dark);
+                @extend .flex;
+                &.success{
+                    background-color: rgba(var(--cms-color-success-rgb),var(--cms-text-opacity-25));
+                    color: var(--el-color-success);
+                }
+                &.info{
+                    background-color: rgba(var(--cms-color-info-rgb),var(--cms-text-opacity-25));
+                    color: var(--el-color-info);
+                }
+                &.primary{
+                    background-color: rgba(var(--cms-color-primary-rgb-1),var(--cms-text-opacity-25));
+                    color: var(--el-color-primary);
+                }
+                &.danger{
+                    background-color: rgba(var(--cms-color-danger-rgb),var(--cms-text-opacity-25));
+                    color: var(--el-color-danger);
+                }
+                &.dark{
+                    background-color: var(--el-bg-color-overlay);
+                    color: var(--el-text-color);
+                }
+                &.grey{
+                    background-color: rgba(var(--cms-color-danger-rgb),var(--cms-text-opacity-25));
+                    color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity-disabled));
+                }
+            }
+            .SimpleCMS-userDetail-account-text{
+                height: 30px;
+                text-align: center;
+                width: 100%;
+                margin-top: 16px;
+                font-size: 14px;
+                color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity-disabled));
+            }
+        }
+        :deep(.SimpleCMS-userDetail-accountInfo) {
+            width: 100%;
+            height: 60px;
+            border-bottom-left-radius: var(--el-border-radius-base);
+            border-bottom-right-radius: var(--el-border-radius-base);
+            background-color: var(--el-bg-color);
+            margin-bottom: 24px;
+            box-shadow: var(--el-box-shadow-dark);
+            @extend .flex;
+            flex-direction: row;
+            .SimpleCMS-userDetail-accountInfo-item{
+                flex: 1;
+                height: 100%;
+                @extend .flex;
+                color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity));
+                cursor: pointer;
+                &.disabled{
+                    color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity-25));
+                    cursor: no-drop;
+                }
+            }
+        }
+
+        :deep(.SimpleCMS-userDetail-box-avatar) {
+            width: 100%;
+            box-sizing: border-box;
+            height: 128px;
+            padding: 14px;
+            @extend .flex;
+            flex-direction: row;
+
+            .el-image {
+                width: 100px;
+                height: 100px;
+                margin-right: 24px;
+                border-radius: 6px;
+                overflow: hidden;
+            }
+        }
+
+        :deep(.SimpleCMS-userDetail-box-avatar-extra) {
+            flex: 1;
+            height: auto;
+            @extend .flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            p {
+                width: 100%;
+                color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity-disabled));
+            }
+        }
+
+        :deep(.SimpleCMS-userDetail-box-avatar-buttons) {
+            width: 100%;
+            @extend .flex;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+    }
+}
+
+.avatar {
+    border: thin var(--el-border-color) solid;
+    cursor: pointer;
+}

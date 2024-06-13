@@ -6,13 +6,10 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Services\Backend\ManagerService;
 use Inertia\Response as InertiaResponse;
-use Illuminate\Support\Facades\Validator;
 use App\Services\Backend\DashboardService;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use SimpleCMS\Framework\Attributes\ApiName;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
 /**
  * 管理员个人信息控制器
@@ -30,7 +27,7 @@ class ProfileController extends BaseBackendController
      * @param  ManagerService $service
      * @return InertiaResponse
      */
-    #[ApiName(name: '管理员个人信息')]
+    #[ApiName(name: '个人设置')]
     public function index(): InertiaResponse
     {
         return Inertia::render('Profile/Index');
@@ -44,7 +41,7 @@ class ProfileController extends BaseBackendController
      * @param  ManagerService $service
      * @return InertiaResponse
      */
-    #[ApiName(name: '管理员安全邮箱')]
+    #[ApiName(name: '安全邮箱')]
     public function email(): InertiaResponse
     {
         return Inertia::render('Profile/Email');
@@ -58,7 +55,7 @@ class ProfileController extends BaseBackendController
      * @param  ManagerService $service
      * @return InertiaResponse
      */
-    #[ApiName(name: '管理员密码安全')]
+    #[ApiName(name: '密码安全')]
     public function password(): InertiaResponse
     {
         return Inertia::render('Profile/Password');
@@ -72,7 +69,7 @@ class ProfileController extends BaseBackendController
      * @param  DashboardService                      $service
      * @return RedirectResponse|InertiaResponse
      */
-    #[ApiName(name: '管理员修改个人资料')]
+    #[ApiName(name: '修改个人资料')]
     public function update(Request $request, DashboardService $service): RedirectResponse
     {
         $rules = [
@@ -91,7 +88,7 @@ class ProfileController extends BaseBackendController
             'password.current_password' => '登录密码不正确',
         ];
         $data = $request->validate($rules, $messages);
-        $service->updateProfile($request->user(),$data);
+        $service->updateProfile($request->user(), $data);
         return back()->with('success', '保存个人资料成功');
     }
 
@@ -117,7 +114,7 @@ class ProfileController extends BaseBackendController
             'password.current_password' => '登录密码不正确',
         ];
         $data = $request->validate($rules, $messages);
-        $service->updateEmail($request->user(),$data);
+        $service->updateEmail($request->user(), $data);
         return back()->with('success', '修改密保邮箱成功,请登录邮箱进行验证');
     }
 
@@ -144,7 +141,7 @@ class ProfileController extends BaseBackendController
             'current_password.current_password' => '登录密码不正确',
         ];
         $data = $request->validate($rules, $messages);
-        $service->updatePassword($request->user(),$data);
+        $service->updatePassword($request->user(), $data);
         return back()->with('success', '修改登录密码成功');
     }
 

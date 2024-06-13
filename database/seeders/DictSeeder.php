@@ -14,8 +14,10 @@ class DictSeeder extends Seeder
     {
         $data = $this->getList();
         foreach ($data as $sql) {
-            if ($dict = Dict::create(['name' => $sql['name'], 'code' => $sql['code']])) {
-                $dict->items()->createMany($sql['children']);
+            if (!Dict::where('code', $sql['code'])->first()) {
+                if ($dict = Dict::create(['name' => $sql['name'], 'code' => $sql['code']])) {
+                    $dict->items()->createMany($sql['children']);
+                }
             }
         }
     }
@@ -48,6 +50,44 @@ class DictSeeder extends Seeder
                         [
                             'name' => '前台角色',
                             'content' => 2,
+                        ]
+                    ]
+            ],
+            [
+                'name' => '账号类型',
+                'code' => 'account_type',
+                'children' => [
+                        [
+                            'name' => 'Account',
+                            'content' => 1,
+                        ],
+                        [
+                            'name' => 'Mobile',
+                            'content' => 2,
+                        ],
+                        [
+                            'name' => 'Email',
+                            'content' => 3,
+                        ],
+                        [
+                            'name' => 'Wechat',
+                            'content' => 4,
+                        ],
+                        [
+                            'name' => 'Alipay',
+                            'content' => 5,
+                        ],
+                        [
+                            'name' => 'Github',
+                            'content' => 6,
+                        ],
+                        [
+                            'name' => 'Apple',
+                            'content' => 7,
+                        ],
+                        [
+                            'name' => 'Google',
+                            'content' => 8,
                         ]
                     ]
             ]

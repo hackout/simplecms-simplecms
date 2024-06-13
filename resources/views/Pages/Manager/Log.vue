@@ -1,7 +1,7 @@
 <template>
     <DefaultLayout>
-        <div class="SimpleCMS-dict">
-            <div class="SimpleCMS-dict-box">
+        <div class="SimpleCMS-manager-log">
+            <div class="SimpleCMS-manager-log-box">
                 <VTable action="backend.manager_log_list" :params="queryParam" @search="searchData" ref="tableRef">
                     <template #header_left>
                         <el-button :loading="cleaning" type="danger" @click="clean">清空记录</el-button>
@@ -59,7 +59,7 @@
                     <el-table-column label="操作" fixed="right" width="70" align="center">
                         <template #default="scope">
                             <v-dialog header="系统提示" :name="`removeDialogRef${scope.row.id}`"
-                                :ref="`removeDialogRef${scope.row.id}`" content="确定删除此管理员？" type="confirm"
+                                :ref="`removeDialogRef${scope.row.id}`" content="确定删除此日志？" type="confirm"
                                 @confirm="deleteItem(scope.row, `removeDialogRef${scope.row.id}`)">
                                 <template #button>
                                     <el-button circle class="el-button--dark">
@@ -137,5 +137,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '@scss/manager/index.scss';
+@import '@scss/manager/log.scss';
 </style>

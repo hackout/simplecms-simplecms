@@ -62,12 +62,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column label="名称" width="200px" prop="name" align="center"></el-table-column>
-                    <el-table-column label="路由" min-width="200px" prop="url.uri">
-                        <template #default="scope">
-                            <span>{{ scope.row.children && scope.row.children.length > 0 ? '-' : scope.row.url.uri
-                                }}</span>
-                        </template>
-                    </el-table-column>
+                    <el-table-column label="路由" min-width="200px" prop="url.uri"></el-table-column>
                     <el-table-column label="状态" width="100px" prop="is_valid" align="center">
                         <template #default="scope">
                             <el-tag v-if="!editable" type="primary" :class="{ 'el-tag--grey': !scope.row.is_valid }"

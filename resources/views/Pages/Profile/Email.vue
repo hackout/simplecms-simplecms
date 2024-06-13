@@ -1,5 +1,5 @@
 <template>
-    <DefaultLayout :breadcrumb="false">
+    <DefaultLayout>
         <div class="SimpleCMS-profile">
             <div class="SimpleCMS-profile-tab">
                 <Link :href="$route('backend.dashboard.profile')" class="SimpleCMS-profile-tab-item">

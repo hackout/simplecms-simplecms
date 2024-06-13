@@ -1,7 +1,7 @@
 <template>
     <DefaultLayout>
-        <div class="SimpleCMS-dict">
-            <div class="SimpleCMS-dict-box">
+        <div class="SimpleCMS-manager">
+            <div class="SimpleCMS-manager-box">
                 <VTable action="backend.manager_list" :params="queryParam" @search="searchData" ref="tableRef">
                     <template #header_left>
                         <el-form-item>

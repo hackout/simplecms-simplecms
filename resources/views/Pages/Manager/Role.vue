@@ -1,7 +1,7 @@
 <template>
     <DefaultLayout>
-        <div class="SimpleCMS-dict">
-            <div class="SimpleCMS-dict-box">
+        <div class="SimpleCMS-role">
+            <div class="SimpleCMS-role-box">
                 <VTable action="backend.role_list" :params="queryParam" @search="searchData" ref="tableRef">
                     <template #header_left>
                         <el-form-item>
@@ -195,5 +195,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '@scss/manager/index.scss';
+@import '@scss/manager/role.scss';
 </style>
