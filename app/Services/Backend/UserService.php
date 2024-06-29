@@ -2,11 +2,10 @@
 
 namespace App\Services\Backend;
 
-use App\Models\Account;
 use App\Models\User;
-use App\Enums\User as UserEnum;
+use App\Models\Account;
 use App\Models\UserGroup;
-use Illuminate\Support\Facades\DB;
+use App\Enums\AccountEnum;
 use Illuminate\Support\Facades\Hash;
 use SimpleCMS\Framework\Facades\SystemConfig;
 use SimpleCMS\Framework\Services\SimpleService;
@@ -67,9 +66,9 @@ class UserService extends SimpleService
                 'register_finger' => $user->register_finger,
                 'failed_count' => $user->failed_count,
                 'created_at' => $user->created_at,
-                'email' => $user->accounts->where('type', UserEnum::Email->value)->value('account'),
-                'mobile' => $user->accounts->where('type', UserEnum::Mobile->value)->value('account'),
-                'account' => $user->accounts->where('type', UserEnum::Account->value)->value('account'),
+                'email' => $user->accounts->where('type', AccountEnum::Email->value)->value('account'),
+                'mobile' => $user->accounts->where('type', AccountEnum::Mobile->value)->value('account'),
+                'account' => $user->accounts->where('type', AccountEnum::Account->value)->value('account'),
                 'groups' => $user->groups->map(function (UserGroup $userGroup) {
                     return [
                         'value' => $userGroup->id,
@@ -92,7 +91,7 @@ class UserService extends SimpleService
     public function detail(string $id): array
     {
 
-        return tap(parent::findById($id),function(User $user){
+        return tap(parent::findById($id), function (User $user) {
             return [
                 'id' => $user->id,
                 'uid' => $user->uid,
@@ -105,7 +104,7 @@ class UserService extends SimpleService
                 'register_finger' => $user->register_finger,
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
-                'accounts' => $user->accounts->map(function(Account $account){
+                'accounts' => $user->accounts->map(function (Account $account) {
                     return [
                         'account' => $account->account,
                         'type' => $account->type,

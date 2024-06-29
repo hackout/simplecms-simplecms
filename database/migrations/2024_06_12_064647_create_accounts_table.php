@@ -21,7 +21,7 @@ return new class extends Migration
             $table->ipAddress('last_ip')->nullable()->comment("最后访问IP");
             $table->json('extra')->nullable()->comment("附加信息");
             $table->timestamps();
-            $table->comment = "账号信息表";
+            $table->comment("账号信息表");
         });
     }
 

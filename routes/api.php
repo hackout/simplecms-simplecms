@@ -11,5 +11,5 @@ Route::middleware('guest')->group(function () {
 
 //登录用户
 Route::middleware('auth:sanctum')->group(function () {
-
+    load_routes('routes/frontend');
 });

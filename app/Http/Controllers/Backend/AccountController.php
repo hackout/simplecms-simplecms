@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use Inertia\Inertia;
-use App\Enums\Account;
+use App\Enums\AccountEnum;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use SimpleCMS\Framework\Facades\Dict;
 use App\Services\Backend\AccountService;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
-use SimpleCMS\Framework\Facades\Dict;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseController;
 
@@ -55,7 +55,7 @@ class AccountController extends BaseController
             'type' => [
                 'sometimes',
                 'nullable',
-                Rule::enum(Account::class)
+                Rule::enum(AccountEnum::class)
             ]
         ];
         $messages = [
@@ -65,6 +65,37 @@ class AccountController extends BaseController
         $data = $request->validate($rules, $messages);
         $result = $service->getList($data);
         return $this->success($result);
+    }
+
+    /**
+     * 变更账号
+     *
+     * @author Dennis Lui <hackout@vip.qq.com>
+     * @param  string          $id
+     * @param  int             $type
+     * @param  Request         $request
+     * @param  AccountService  $service
+     * @return JsonResponse
+     */
+    #[ApiName(name: '变更账号信息')]
+    public function update(string $id, int $type, Request $request, AccountService $service): JsonResponse
+    {
+        $rules = [
+            'id' => 'exists:accounts,account,type,' . $type,
+            'account' => 'required'
+        ];
+        $messages = [
+            'id.exists' => '账号不存在或已删除'
+        ];
+        $validator = Validator::make(array_merge([
+            'id' => $id,
+        ], $request->all()), $rules, $messages);
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->first());
+        }
+        $data = $validator->safe()->only(['account']);
+        $service->updateAccount($id, $type, $data['account']);
+        return $this->success();
     }
 
     /**

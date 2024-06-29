@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Enums\Account;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use SimpleCMS\Framework\Facades\Dict;
 use App\Services\Frontend\AuthService;
 use App\Services\Frontend\AccountService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use SimpleCMS\Framework\Attributes\ApiName;
-use SimpleCMS\Framework\Facades\Dict;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;

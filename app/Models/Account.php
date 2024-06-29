@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property ?Carbon $last_login 最后登录时间
  * @property ?string $last_ip 最后登录IP
  * @property ?array $extra 附加状态
+ * @property-read ?User $user 用户
  * @property-read ?Carbon $created_at 创建时间
  * @property-read ?Carbon $updated_at 更新时间
  */

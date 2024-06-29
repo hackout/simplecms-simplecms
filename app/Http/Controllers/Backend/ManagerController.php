@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Services\Backend\RoleService;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
-use Inertia\Response as InertiaResponse;
+use App\Services\Backend\RoleService;
 use App\Services\Backend\ManagerService;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use SimpleCMS\Framework\Http\Controllers\BackendController;
 
 class ManagerController extends BackendController

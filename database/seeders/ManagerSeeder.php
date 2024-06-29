@@ -25,7 +25,8 @@ class ManagerSeeder extends Seeder
             'email' => 'simplecms@simplecms.com',
             'email_verified_at' => null,
             'password' => Hash::make(config('cms.default_password')),
-            'is_super' => true
+            'is_super' => true,
+            'is_valid' => true
         ];
     }
 }

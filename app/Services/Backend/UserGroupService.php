@@ -3,7 +3,6 @@
 namespace App\Services\Backend;
 
 use App\Models\UserGroup;
-use App\Enums\UserGroup as UserGroupEnum;
 use SimpleCMS\Framework\Services\SimpleService;
 
 class UserGroupService extends SimpleService

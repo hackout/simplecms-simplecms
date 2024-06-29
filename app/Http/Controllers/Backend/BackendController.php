@@ -13,7 +13,7 @@ class BackendController extends BaseBackendController
 {
 
     /**
-     * ManagerController 获取列表
+     * 控制台
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  Request         $request

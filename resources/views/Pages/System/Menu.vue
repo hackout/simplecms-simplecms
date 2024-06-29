@@ -287,9 +287,12 @@ export default {
         },
         changeData(items) {
             this.quickForm = {}
-            items.forEach(n => {
-                this.convertQuick(n)
-            })
+            if(items)
+            {
+                items.forEach(n => {
+                    this.convertQuick(n)
+                })
+            }
         },
         convertQuick(item) {
             this.quickForm[item.id] = {

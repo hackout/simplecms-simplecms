@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Hash;
-use SimpleCMS\Framework\Models\Menu;
 use Illuminate\Database\Seeder;
+use SimpleCMS\Framework\Models\Menu;
 
 class MenuSeeder extends Seeder
 {
@@ -13,12 +12,28 @@ class MenuSeeder extends Seeder
      */
     public function run(): void
     {
+
         $data = $this->getList();
         foreach ($data as $sql) {
             $_sql = collect($sql);
             $children = $_sql->pull('children');
             if ($item = Menu::create($_sql->toArray())) {
-                $item->children()->createMany($children->toArray());
+                $deepChild = collect($children)->filter(fn($n) => array_key_exists('children', $n))->values();
+                if ($deepChild->count()) {
+                    $children = collect($children)->filter(fn($n) => !array_key_exists('children', $n))->values();
+                }
+                if (count($children)) {
+                    $item->children()->createMany($children);
+                }
+                if ($deepChild->count()) {
+                    $deepChild->each(function ($child) use ($item) {
+                        $_children = $child['children'];
+                        unset($child['children']);
+                        if ($_child = $item->children()->create($child)) {
+                            $_child->children()->createMany($_children);
+                        }
+                    });
+                }
             }
         }
     }
@@ -32,6 +47,7 @@ class MenuSeeder extends Seeder
                 'is_valid' => true,
                 'is_show' => true,
                 'sort_order' => 0,
+                'parent_id' => 0,
                 'can_delete' => false,
                 'icon' => 'IconSettings',
                 'url' => [
@@ -104,6 +120,7 @@ class MenuSeeder extends Seeder
                 'is_valid' => true,
                 'is_show' => true,
                 'sort_order' => 1,
+                'parent_id' => 0,
                 'can_delete' => false,
                 'icon' => 'IconUsersGroup',
                 'url' => [
@@ -162,6 +179,7 @@ class MenuSeeder extends Seeder
                 'is_valid' => true,
                 'is_show' => true,
                 'sort_order' => 2,
+                'parent_id' => 0,
                 'can_delete' => false,
                 'icon' => 'IconUsers',
                 'url' => [
@@ -179,7 +197,7 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconUsers',
                         'url' => [
-                            'uri' => 'backend/user/user',
+                            'uri' => 'backend/user',
                             'name' => 'backend.user.index',
                             'param' => []
                         ]
@@ -193,7 +211,7 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconUsersGroup',
                         'url' => [
-                            'uri' => 'backend/user_group/user_group',
+                            'uri' => 'backend/user_group',
                             'name' => 'backend.user_group.index',
                             'param' => []
                         ]
@@ -207,7 +225,7 @@ class MenuSeeder extends Seeder
                         'can_delete' => false,
                         'icon' => 'IconUser',
                         'url' => [
-                            'uri' => 'backend/account/account',
+                            'uri' => 'backend/account',
                             'name' => 'backend.account.index',
                             'param' => []
                         ]

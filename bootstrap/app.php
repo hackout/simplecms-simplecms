@@ -41,6 +41,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 return json_error($e->getMessage());
             }
         });
+        $exceptions->render(function (\BadMethodCallException $e) {
+            (new RequestLogService)->makeLog(request(), false);
+            if (request()->ajax()) {
+                return json_error($e->getMessage());
+            }
+        });
         $exceptions->render(function (ValidationException $e) {
             (new RequestLogService)->makeLog(request(), false);
             if (request()->ajax()) {

@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string("emergency_phone")->nullable()->comment("应急电话");
             $table->string("emergency_address")->nullable()->comment("应急地址");
             $table->timestamps();
-            $table->comment = "用户信息表";
+            $table->comment("用户信息表");
         });
     }
 

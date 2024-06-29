@@ -7,8 +7,8 @@ use Str;
 use Carbon\Carbon;
 use App\Models\Manager;
 use App\Mail\ManagerVerify;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use SimpleCMS\Framework\Services\SimpleService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

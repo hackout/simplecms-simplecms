@@ -7,7 +7,6 @@ use App\Services\Backend\DictItemService;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
 class DictItemController extends BaseBackendController

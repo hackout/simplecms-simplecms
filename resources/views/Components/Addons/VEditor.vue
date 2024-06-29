@@ -164,7 +164,7 @@ export default {
         },
         modelValue(newVal) {
             if (this.quill) {
-                if (newVal && newVal !== this.editContent) {
+                if (newVal) {
                     this.editContent = newVal
                     this.quill.pasteHTML(newVal)
                 } else if (!newVal) {

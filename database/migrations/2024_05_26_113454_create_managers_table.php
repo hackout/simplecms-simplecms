@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->integer('failed_count')->default(0)->comment("失败次数");
             $table->rememberToken();
             $table->timestamps();
-            $table->comment = "管理员表";
+            $table->comment("管理员表");
         });
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

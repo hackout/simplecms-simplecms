@@ -2,11 +2,10 @@
 
 namespace App\Services\Backend;
 
-use Illuminate\Support\Str;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
-use SimpleCMS\Framework\Attributes\ApiName;
 use SimpleCMS\Framework\Models\Role;
+use SimpleCMS\Framework\Attributes\ApiName;
 use SimpleCMS\Framework\Services\SimpleService;
 
 class RoleService extends SimpleService

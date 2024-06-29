@@ -18,10 +18,22 @@ composer create simplecms/simplecms simplecms #目录名
 php artisan migrate
 ```
 
+### 重置Key
+
+```bash
+php artisan key:generate
+```
+
 ### 导入默认数据
 
 ```bash
 php artisan db:seed DictSeeder
 php artisan db:seed ManagerSeeder
 php artisan db:seed MenuSeeder
+```
+
+### 后端页面开发
+
+```bash
+npm i
 ```

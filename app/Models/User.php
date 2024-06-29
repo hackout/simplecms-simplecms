@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use SimpleCMS\Framework\Traits\MediaAttributeTrait;
 use SimpleCMS\Framework\Traits\PrimaryKeyUuidTrait;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -37,7 +38,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read ?Collection<UserGroup> $groups 会员组
  * @property-read ?Collection<Account> $accounts 账号列表
  */
-class User extends Model implements HasMedia
+class User extends Authenticatable implements HasMedia
 {
     use PrimaryKeyUuidTrait, MediaAttributeTrait, HasApiTokens;
 

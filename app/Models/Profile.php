@@ -26,6 +26,9 @@ class Profile extends Model
 {
     protected $primaryKey = 'user_id';
 
+    
+    protected $keyType = 'string';
+
     public $incrementing = false;
 
     /**

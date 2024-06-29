@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use Inertia\Inertia;
-use App\Services\Backend\UserGroupService;
 use Illuminate\Http\Request;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
+use App\Services\Backend\UserGroupService;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseController;

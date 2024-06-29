@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->ipAddress('register_ip')->nullable()->comment("注册IP");
             $table->string('register_finger')->nullable()->comment("注册指纹");
             $table->timestamps();
-            $table->comment = "用户信息表";
+            $table->comment("用户信息表");
         });
     }
 
