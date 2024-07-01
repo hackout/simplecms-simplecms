@@ -64,7 +64,7 @@ class DashboardService extends SimpleService
                 'token' => $token,
                 'created_at' => $now
             ];
-            if ($already = DB::table($tableName)->where(['email' => $data['email']])->first()) {
+            if (DB::table($tableName)->where(['email' => $data['email']])->first()) {
                 DB::table($tableName)->where('email', $data['email'])->update($sql);
             } else {
                 DB::table($tableName)->insert(array_merge(['email' => $data['email']], $sql));
@@ -88,4 +88,45 @@ class DashboardService extends SimpleService
         $manager->save();
     }
 
+    /**
+     * 会员基础统计
+     *
+     * @author Dennis Lui <hackout@vip.qq.com>
+     * @return array
+     */
+    public function getUserStatic(): array
+    {
+        return [
+            'today' => (new UserService())->setQuery([['created_at', '>=', today()]])->count(),
+            'total' => (new UserService())->count(),
+        ];
+    }
+
+    /**
+     * 管理员基础统计
+     *
+     * @author Dennis Lui <hackout@vip.qq.com>
+     * @return array
+     */
+    public function getManagerStatic(): array
+    {
+        return [
+            'today' => (new ManagerService())->setQuery([['created_at', '>=', today()]])->count(),
+            'total' => (new ManagerService())->count(),
+        ];
+    }
+
+    /**
+     * 请求次数统计
+     *
+     * @author Dennis Lui <hackout@vip.qq.com>
+     * @return array
+     */
+    public function getLogStatic(): array
+    {
+        return [
+            'today' => (new RequestLogService())->setQuery([['created_at', '>=', today()]])->count(),
+            'total' => (new RequestLogService())->count(),
+        ];
+    }
 }

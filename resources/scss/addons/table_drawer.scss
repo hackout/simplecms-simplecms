@@ -1,6 +1,10 @@
-.simpleCMS-tableDrawer {
+@use "../var/var.scss";
+.SimpleCMS-tableDrawer {
     --el-drawer-padding-primary: 0 !important;
-    .simpleCMS-table{
+    &.padding{
+        --el-drawer-padding-primary: 12px 24px !important;
+    }
+    .SimpleCMS-table{
         height: 100% !important;
     }
     .el-drawer__header {

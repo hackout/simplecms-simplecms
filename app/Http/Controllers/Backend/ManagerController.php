@@ -75,6 +75,8 @@ class ManagerController extends BackendController
             'email' => 'required|unique:managers,email',
             'password' => 'required|confirmed|between:6,20',
             'is_valid' => 'sometimes|nullable|boolean',
+            'role_ids' => 'sometimes|nullable|array',
+            'role_ids.*' => 'exists:roles,id'
         ];
         $messages = [
             'name.between' => '姓名仅支持2-50个字符',
@@ -86,6 +88,8 @@ class ManagerController extends BackendController
             'password.required' => '登录密码不能为空',
             'password.between' => '登录密码仅支持6-20位字符串',
             'is_valid.boolean' => '账号状态不正确',
+            'role_ids.array' => '账号角色不正确',
+            'role_ids.*.exists' => '账号角色不正确',
         ];
         $data = $request->validate($rules, $messages);
         $service->create($data);
@@ -109,6 +113,8 @@ class ManagerController extends BackendController
             'account' => 'required|unique:managers,account,' . $id,
             'email' => 'required|unique:managers,email,' . $id,
             'is_valid' => 'sometimes|nullable|boolean',
+            'role_ids' => 'sometimes|nullable|array',
+            'role_ids.*' => 'exists:roles,id'
         ];
         $messages = [
             'id.exists' => '账号不存在',
@@ -118,6 +124,8 @@ class ManagerController extends BackendController
             'email.required' => '密保邮箱不能为空',
             'email.unique' => '密保邮箱已存在',
             'is_valid.boolean' => '账号状态不正确',
+            'role_ids.array' => '账号角色不正确',
+            'role_ids.*.exists' => '账号角色不正确',
         ];
         $validator = Validator::make(array_merge([
             'id' => $id
@@ -129,7 +137,8 @@ class ManagerController extends BackendController
             'name',
             'account',
             'email',
-            'is_valid'
+            'is_valid',
+            'role_ids'
         ]);
         $service->update($id, $data);
         return $this->success();

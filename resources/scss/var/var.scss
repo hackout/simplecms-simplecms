@@ -1,0 +1,34 @@
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.el-card {
+    --el-card-border-radius: 6px !important;
+    --el-card-padding: 16px !important;
+}
+
+.el-popper.is-light {
+    .el-popper__arrow {
+        &:before {
+            background-color: var(--el-border-color-lighter);
+            border-color: var(--el-border-color-lighter)
+        }
+
+        &:after {
+            content: '';
+            background: var(--el-bg-color-overlay);
+            width: 10px;
+            height: 20px;
+            transform: rotate(90deg);
+            position: relative;
+            display: inline-block;
+            bottom: 0;
+        }
+    }
+}

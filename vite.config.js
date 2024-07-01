@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { compression } from 'vite-plugin-compression2';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { VueAmapResolver } from '@vuemap/unplugin-resolver'
 
 export default defineConfig({
     resolve: {
@@ -38,7 +39,9 @@ export default defineConfig({
             imports: [
                 'vue',
             ],
-            resolvers: [ElementPlusResolver()],
+            resolvers: [ElementPlusResolver({
+                exclude: /^ElAmap[A-Z]*/
+            }), VueAmapResolver()],
         }),
         compression({
             threshold: 2000,
@@ -46,15 +49,20 @@ export default defineConfig({
             skipIfLargerOrEqual: true,
         }),
         Components({
-            resolvers: [ElementPlusResolver()],
+            resolvers: [ElementPlusResolver({
+                importStyle: "sass",
+                exclude: /^ElAmap[A-Z]*/
+            }), VueAmapResolver()],
         }),
-    ],
-    css: {
+    ], css: {
         preprocessorOptions: {
             scss: {
-                additionalData: '@use "/resources/scss/var/common.scss" as *;'
+                // 自动导入定制化样式文件进行样式覆盖
+                additionalData: `
+              @use "@scss/common.scss" as *;
+            `,
             }
-        },
+        }
     },
     build: {
         chunkSizeWarningLimit: 1000,

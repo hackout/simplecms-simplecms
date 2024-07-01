@@ -7,6 +7,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@vuemap/unplugin-resolver": "^2.0.0",
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0",
         "sass-loader": "^14.2.1",
@@ -22,6 +23,9 @@
         "@tabler/icons": "^3.5.0",
         "@tabler/icons-vue": "^3.5.0",
         "@vitejs/plugin-vue": "^5.0.4",
+        "@vuemap/vue-amap": "^2.1.2",
+        "@vuemap/vue-amap-extra": "^2.1.4",
+        "@vuemap/vue-amap-loca": "^2.1.2",
         "@vueuse/core": "^10.10.0",
         "@vueuse/math": "^10.10.0",
         "animate.css": "^4.1.1",
@@ -43,6 +47,7 @@
         "vue-chartjs": "^5.3.1",
         "vue-flatpickr-component": "^11.0.5",
         "vue-i18n": "^9.13.1",
+        "vue-json-pretty": "^2.4.0",
         "vue-prism-component": "^2.0.0",
         "vue-quill-editor": "^3.0.6",
         "vue3-apexcharts": "^1.5.3",

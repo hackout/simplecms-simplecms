@@ -1,3 +1,4 @@
+@use "../var/var.scss";
 .SimpleCMS {
 
     &-table {
@@ -11,6 +12,27 @@
         background-color: var(--el-bg-color-overlay);
         box-shadow: var(--el-box-shadow-dark);
         --cms-table-right-padding: 0;
+
+        &-range {
+            >.el-input-group__prepend {
+                padding: 0;
+                border-right: 0;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                >.el-input {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    border-right: 0;
+
+                    >.el-input-group__append {
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                        color: var(--el-text-color-placeholder);
+                        border-right: 0;
+                    }
+                }
+            }
+        }
 
         &.padding {
             --cms-table-right-padding: 24px;
@@ -51,6 +73,7 @@
                 width: auto;
                 margin-bottom: 0 !important;
                 margin-right: var(--el-border-radius-base) !important;
+                align-items: center;
 
                 &:last-child {
                     margin-right: 0 !important;
@@ -167,6 +190,7 @@
 
             border-right: var(--el-table-border-color) 1px solid;
             height: 100%;
+
             .el-checkbox__input {
                 --el-checkbox-input-border: var(--el-table-border);
             }

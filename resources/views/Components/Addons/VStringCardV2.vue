@@ -1,18 +1,18 @@
 <template>
-    <div class="simpleCMS-StringCard">
-        <div class="simpleCMS-StringCard-content">
+    <div class="simpleCMS-StringCardV2">
+        <div class="simpleCMS-StringCardV2-extra" :class="type">
+            <component :is="`SimpleCMS${icon}`" size="28px"></component>
+        </div>
+        <div class="simpleCMS-StringCardV2-content">
             <span :title="text">{{ text }}</span>
             <span>{{ name }}</span>
-        </div>
-        <div class="simpleCMS-StringCard-extra" :class="type">
-            <component :is="`SimpleCMS${icon}`" size="28px"></component>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'VStringCard',
+    name: 'VStringCardV2',
     props: {
         name: {
             type: String,
@@ -35,5 +35,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@scss/addons/string_card.scss';
+@import '@scss/addons/string_card_v2.scss';
 </style>

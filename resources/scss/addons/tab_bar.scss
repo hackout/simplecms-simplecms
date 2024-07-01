@@ -1,6 +1,7 @@
-.simpleCMS{
+@use "../var/var.scss";
+
+.simpleCMS {
     $color: var(--el-color-primary);
-    &-breadcrumb{
-        
-    }
+
+    &-breadcrumb {}
 }

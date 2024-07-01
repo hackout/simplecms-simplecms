@@ -47,7 +47,6 @@ export default {
     created() {
         this.$nextTick(() => {
             this.sys = this.$page.props.systemInfo
-            console.log(this.sys)
         })
     }
 }

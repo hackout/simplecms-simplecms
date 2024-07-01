@@ -1,29 +1,31 @@
 @use "../var/var.scss";
-.simpleCMS-StringCard {
+.simpleCMS-StringCardV2 {
     width: 100%;
-    height: 96px;
+    height: 156px;
     padding: 13px 16px;
     @extend .flex;
-    flex-direction: row;
+    flex-direction: column;
     border-radius: var(--el-border-radius-base);
     background-color: var(--el-bg-color-overlay);
     box-shadow: var(--el-box-shadow-dark);
     box-sizing: border-box;
+
     &-content {
-        width: calc(100% - 82px);
-        margin-right: 10px;
+        margin-top: 4px;
+        width: 100%;
         @extend .flex;
         flex-direction: column;
-        align-items: flex-start;
 
         span {
             width: 100%;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 600;
             color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity));
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            text-align: center;
+
             &:last-child {
                 font-size: 13px;
                 font-weight: 400;
@@ -34,7 +36,7 @@
     &-extra {
         width: 40px;
         height: 40px;
-        border-radius: 20px;
+        border-radius: var(--el-border-radius-base);
         @extend .flex;
         color: rgb(var(--cms-color-primary-rgb));
         background-color: rgba(var(--cms-color-primary-rgb), var(--cms-text-opacity-25));

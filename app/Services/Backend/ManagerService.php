@@ -17,16 +17,16 @@ class ManagerService extends SimpleService
      * @author Dennis Lui <hackout@vip.qq.com>
      * @return array
      */
-    public function getOptions():array
+    public function getOptions(): array
     {
         return parent::getAll([
             'id',
             'name',
             'account'
-        ])->map(fn($n) => ['value' => $n['id'],'name' => $n['name'] ?: $n['account']])
-          ->values()->toArray();
+        ])->map(fn($n) => ['value' => $n['id'], 'name' => $n['name'] ?: $n['account']])
+            ->values()->toArray();
     }
-    
+
     /**
      * 获取列表
      *
@@ -34,17 +34,17 @@ class ManagerService extends SimpleService
      * @param  array $data
      * @return array
      */
-    public function getList(array $data):array
+    public function getList(array $data): array
     {
         $condition = [
-            'keyword' => ['search', ['id','name','account','email']],
-            'date' => ['datetime_range','created_at']
+            'keyword' => ['search', ['id', 'name', 'account', 'email']],
+            'date' => ['datetime_range', 'created_at']
         ];
         parent::listQuery($data, $condition);
         $result = parent::list();
         return $result;
     }
-    
+
     /**
      * 创建账号
      *
@@ -53,10 +53,57 @@ class ManagerService extends SimpleService
      * @param  array   $mediaFields
      * @return boolean
      */
-    public function create(array $data,array $mediaFields = []):bool
+    public function create(array $data, array $mediaFields = []): bool
     {
+        $result = false;
         $data['password'] = Hash::make($data['password']);
-        return parent::create($data,$mediaFields);
+        $role_ids = array_key_exists('role_ids', $data) ? $data['role_ids'] : [];
+        unset($data['role_ids']);
+        tap(parent::create($data, $mediaFields), function (bool $status) use (&$result, $role_ids) {
+            $result = $status;
+            if ($result) {
+                if($role_ids)
+                {
+                    $roleIdList = [];
+                    foreach($role_ids as $role_id)
+                    {
+                        $roleIdList[$role_id] = ['model_type'=>Manager::class];
+                    }
+                    $this->item->roles()->sync($roleIdList);
+                }
+            }
+        });
+        return $result;
+    }
+
+    /**
+     * 更新账号资料
+     *
+     * @author Dennis Lui <hackout@vip.qq.com>
+     * @param  array   $data
+     * @param  array   $mediaFields
+     * @return boolean
+     */
+    public function update(string|int $id, array $data, array $mediaFields = []): bool
+    {
+        $result = false;
+        $role_ids = array_key_exists('role_ids', $data) ? $data['role_ids'] : [];
+        unset($data['role_ids']);
+        tap(parent::update($id, $data, $mediaFields), function (bool $status) use (&$result, $role_ids) {
+            $result = $status;
+            if ($result) {
+                if($role_ids)
+                {
+                    $roleIdList = [];
+                    foreach($role_ids as $role_id)
+                    {
+                        $roleIdList[$role_id] = ['model_type'=>Manager::class];
+                    }
+                    $this->item->roles()->sync($roleIdList);
+                }
+            }
+        });
+        return $result;
     }
 
     /**
@@ -67,10 +114,10 @@ class ManagerService extends SimpleService
      * @param  string         $password
      * @return void
      */
-    public function password(string|int $id,string $password):void
+    public function password(string|int $id, string $password): void
     {
         $password = Hash::make($password);
-        parent::setValue($id,'password',$password);
+        parent::setValue($id, 'password', $password);
     }
 
     /**
@@ -80,12 +127,12 @@ class ManagerService extends SimpleService
      * @param  string|integer $id
      * @return void
      */
-    public function login(string|int $id):void
+    public function login(string|int $id): void
     {
         $sql = [
             'last_ip' => request()->getClientIp(),
             'last_login' => now()
         ];
-        parent::update($id,$sql);
+        parent::update($id, $sql);
     }
 }

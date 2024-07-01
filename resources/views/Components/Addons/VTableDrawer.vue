@@ -1,5 +1,5 @@
 <template>
-    <el-drawer v-model="visit" class="simpleCMS-tableDrawer" size="950px" :title="drawerTitle"
+    <el-drawer v-model="visit" class="SimpleCMS-tableDrawer" size="950px" :title="drawerTitle"
         @closed="$emit('closed')">
         <VTable :action="queryAction" :round="false" @change="$emit('change',$event)" :params="queryParam" ref="tableRef" @search="$emit('search')"
             @selection-change="$emit('selection-change', $event)">

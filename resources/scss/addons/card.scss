@@ -1,3 +1,4 @@
+@use "../var/var.scss";
 .SimpleCMS-card {
     width: 100%;
     height: auto;
@@ -15,6 +16,7 @@
         box-sizing: border-box;
         padding: 13px 16px;
         box-sizing: border-box;
+        color: var(--el-text-color-primary);
     }
 
     &-footer {
@@ -23,6 +25,7 @@
         box-sizing: border-box;
         padding: 13px 16px;
         box-sizing: border-box;
+        color: var(--el-text-color-primary);
     }
 
     &-body {

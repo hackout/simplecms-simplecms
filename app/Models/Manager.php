@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use SimpleCMS\Framework\Contracts\RolePermission;
-use SimpleCMS\Framework\Traits\RolePermissionTrait;
+use SimpleCMS\Framework\Models\Role;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Notifications\Notifiable;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Collection;
 use SimpleCMS\Framework\Traits\RequestLogTrait;
+use SimpleCMS\Framework\Contracts\RolePermission;
+use SimpleCMS\Framework\Traits\MediaAttributeTrait;
 use SimpleCMS\Framework\Traits\PrimaryKeyUuidTrait;
+use SimpleCMS\Framework\Traits\RolePermissionTrait;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -32,11 +33,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property ?string $last_ip 注册时间
  * @property int $failed_count 失败次数
  * @property-read ?Collection<Media> $media 附件
+ * @property-read ?Collection<Role> $roles 角色
  * @property-read ?string $avatar 用户头像
  */
 class Manager extends Authenticatable implements HasMedia, RolePermission
 {
-    use PrimaryKeyUuidTrait, InteractsWithMedia, Notifiable, RolePermissionTrait, RequestLogTrait;
+    use PrimaryKeyUuidTrait, MediaAttributeTrait, Notifiable, RolePermissionTrait, RequestLogTrait;
 
     /**
      * Media Key
@@ -82,7 +84,7 @@ class Manager extends Authenticatable implements HasMedia, RolePermission
     /**
      * 追加字段
      */
-    public $appends = ['avatar'];
+    public $appends = ['avatar', 'role_ids'];
 
 
     /**
@@ -106,5 +108,10 @@ class Manager extends Authenticatable implements HasMedia, RolePermission
             return json_permission();
         }
         return abort(403);
+    }
+
+    public function getRoleIdsAttribute(): array
+    {
+        return $this->roles->pluck('id')->toArray();
     }
 }

@@ -91,12 +91,14 @@
 </template>
 <script>
 export default {
-    components: {
-    },
     props: {
         query: {
             type: Object,
             default: {}
+        },
+        roles: {
+            type: Array,
+            default: []
         }
     },
     data() {
@@ -109,7 +111,6 @@ export default {
         formItem(mode, item) {
             let result = []
             if (mode == 'create' || mode == 'update') {
-
                 result.push({
                     name: '姓名',
                     key: 'name',
@@ -121,34 +122,41 @@ export default {
                     maxlength: 50,
                     value: mode == 'update' && item ? item.name : ''
                 },
-                    {
-                        name: '登录账号',
-                        key: 'account',
-                        placeholder: '请输入登录账号',
-                        rules: [
-                            { required: true, message: '登录账号不能为空', trigger: 'blur' }
-                        ],
-                        clearable: true,
-                        value: mode == 'update' && item ? item.account : ''
-                    },
-                    {
-                        name: '密保邮箱',
-                        key: 'email',
-                        placeholder: '请输入密保邮箱',
-                        rules: [
-                            { required: true, message: '密保邮箱不能为空', trigger: 'blur' },
-                            { validator: this.$validation.email }
-                        ],
-                        clearable: true,
-                        value: mode == 'update' && item ? item.email : ''
-                    },
-                    {
-                        name: '账号状态',
-                        element: 'switch',
-                        key: 'is_valid',
-                        value: mode == 'update' && item ? item.is_valid : 1
-                    }
-                );
+                {
+                    name: '登录账号',
+                    key: 'account',
+                    placeholder: '请输入登录账号',
+                    rules: [
+                        { required: true, message: '登录账号不能为空', trigger: 'blur' }
+                    ],
+                    clearable: true,
+                    value: mode == 'update' && item ? item.account : ''
+                },
+                {
+                    name: '密保邮箱',
+                    key: 'email',
+                    placeholder: '请输入密保邮箱',
+                    rules: [
+                        { required: true, message: '密保邮箱不能为空', trigger: 'blur' },
+                        { validator: this.$validation.email }
+                    ],
+                    clearable: true,
+                    value: mode == 'update' && item ? item.email : ''
+                },
+                {
+                    name: '角色管理',
+                    element: 'checkbox',
+                    key: 'role_ids',
+                    value: mode == 'update' && item ? item.role_ids : [],
+                    option: this.$page.props.roles
+                },
+                {
+                    name: '账号状态',
+                    element: 'switch',
+                    key: 'is_valid',
+                    value: mode == 'update' && item ? (item.is_valid ? 1 : 0) : 1
+                }
+            );
             }
             if (mode == 'create' || mode == 'password') {
                 result.push({

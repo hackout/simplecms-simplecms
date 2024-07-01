@@ -15,7 +15,7 @@ class RoleService extends SimpleService
     public function getRoleOptions(): array
     {
         return parent::getAll([
-            'id',
+            'id as value',
             'name'
         ])->toArray();
     }
