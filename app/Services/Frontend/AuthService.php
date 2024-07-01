@@ -2,13 +2,12 @@
 
 namespace App\Services\Frontend;
 
-use App\Models\Account;
-use App\Enums\Account as AccountEnum;
 use App\Models\User;
+use App\Models\Account;
+use App\Enums\AccountEnum;
+use Illuminate\Support\Str;
 use App\Packages\Finger\Finger;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use SimpleCMS\Framework\Facades\Dict;
 use SimpleCMS\Framework\Facades\SystemConfig;
 use SimpleCMS\Framework\Services\SimpleService;
 
@@ -17,8 +16,35 @@ class AuthService extends SimpleService
 
     public ?string $className = Account::class;
 
+    /**
+     * OpenId自动登录
+     *
+     * @author Dennis Lui <hackout@vip.qq.com>
+     * @param  string        $openId
+     * @return boolean|array
+     */
+    public function autoLogin(string $openId): bool|array
+    {
+        $finger = Finger::getFinger();
+        if (!$item = Account::find($openId)) {
+            $item = $this->register([
+                'account' => $openId,
+                'type' => AccountEnum::Wechat->value,
+                'oauth_id' => $openId
+            ]);
+            return (new UserService())->getUserInfo($item, $finger);
+        }
+        return (new UserService())->getUserInfo($item->user()->first(), $finger);
+    }
 
-    public function register(array $data): array
+    /**
+     * 注册账号
+     *
+     * @author Dennis Lui <hackout@vip.qq.com>
+     * @param  array $data
+     * @return mixed
+     */
+    public function register(array $data): mixed
     {
         extract(array_merge([
             'account' => null,
@@ -48,21 +74,15 @@ class AuthService extends SimpleService
             'last_ip' => $this->item->last_ip,
             'failed_count' => 0,
             'register_ip' => $this->item->last_ip,
-            'register_finger' => Finger::getFinger(),
+            'register_finger' => Finger::getFinger()
         ];
         $userService = new UserService();
-        $userService->create($userSql);
-        if($extra && array_key_exists('avatar',$extra) && $extra['avatar'])
-        {
-            $userService->item->addMedia($extra['avatar'])->toMediaCollection(User::MEDIA_FILE);
+        if ($userService->create($userSql)) {
+            $avatar = image_to_base64(public_path('/assets/avatars/avatar-' . rand(1, 24) . '.png'));
+            $userService->item->addMediaFromBase64($avatar)->toMediaCollection(User::MEDIA_FILE);
         }
-        Account::where('account',$account)->update(['user_id'=>$userService->item->id]);
-        $token = $userService->item->createToken('frontend');
-
-        return [
-            'finger' => $userSql['register_finger'],
-            'token' => $token->plainTextToken
-        ];
+        Account::where('account', $account)->update(['user_id' => $userService->item->id]);
+        return $userService->item;
     }
 
     /**

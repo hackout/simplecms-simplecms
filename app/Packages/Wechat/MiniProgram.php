@@ -9,22 +9,28 @@ use EasyWeChat\MiniApp\Application;
 class MiniProgram
 {
 
-    protected $config = [
-        'app_id' => 'wx5b3664566333a336',
-        'secret' => '2ef85973683dc68643da9a6440685122',
-        'http' => [
-            'throw' => false,
-            'timeout' => 5.0,
-
-            'retry' => true,
-        ],
-    ];
+    protected $config;
 
     protected $app;
 
     public function __construct()
     {
+        $this->initConfig();
         $this->app = new Application($this->config);
+    }
+
+    protected function initConfig(): void
+    {
+        $this->config = [
+            'app_id' => config('wechat.program.appid'),
+            'secret' => config('wechat.program.secret'),
+            'http' => [
+                'throw' => false,
+                'timeout' => 5.0,
+
+                'retry' => true,
+            ],
+        ];
     }
 
     /**
