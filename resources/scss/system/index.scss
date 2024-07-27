@@ -5,6 +5,9 @@
         height: auto;
         @extend .flex;
         flex-direction: column;
+        &-footer{
+            padding-left: 200px;
+        }
 
         .el-divider__text {
             background: var(--el-bg-color-page) !important;

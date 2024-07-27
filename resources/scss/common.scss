@@ -728,3 +728,23 @@ code {
 .el-textarea.is-disabled .el-textarea__inner {
   background-color: var(--el-bg-color) !important;
 }
+
+
+.el-switch {
+  height: 20px;
+  line-height: 20px;
+
+  .el-switch__core {
+    background-color: var(--el-bg-color);
+    border-color: var(--el-bg-color-page);
+
+    .el-switch__action {
+      background-color: var(--el-bg-color-page);
+    }
+
+    .el-switch__inner .is-icon,
+    .el-switch__inner .is-text {
+      color: var(--cms-text-regular);
+    }
+  }
+}

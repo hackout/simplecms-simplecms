@@ -108,6 +108,5 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '@scss/common.scss';
 @import '@scss/default.scss';
 </style>

@@ -9,7 +9,7 @@
                     <SimpleCMSIconHome size="18px"></SimpleCMSIconHome>
                 </el-breadcrumb-item>
                 <el-breadcrumb-item :class="{ 'SimpleCMS-breadcrumb-main-link': index + 1 < breadcrumb.length }"
-                    @click="index + 1 < breadcrumb.length ? $ajax.visit($route('backend.dashboard')) : $ajax.visit($route(item.url.name))"
+                    @click="index + 1 < breadcrumb.length ? $ajax.visit($route(item.url.name)) : $ajax.visit($route('backend.dashboard'))"
                     v-for="(item, index) in breadcrumb" :key="index">{{ item.name }}</el-breadcrumb-item>
             </el-breadcrumb>
         </div>

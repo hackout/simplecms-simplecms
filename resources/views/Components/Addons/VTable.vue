@@ -9,9 +9,9 @@
                 <slot name="header_right"></slot>
             </div>
         </el-form>
-        <div class="SimpleCMS-table-body" :style="{height:maxStyle + 'px'}">
-            <el-table :data="items" @selection-change="$emit('selection-change', $event)" :indent="6" v-loading="loading"
-                :row-key="rowKey" :tree-props="treeProps" :default-expand-all="defaultExpandAll"
+        <div class="SimpleCMS-table-body" :style="{ height: maxStyle + 'px' }">
+            <el-table :data="items" @selection-change="$emit('selection-change', $event)" :indent="6"
+                v-loading="loading" :row-key="rowKey" :tree-props="treeProps" :default-expand-all="defaultExpandAll"
                 @sort-change="changeSort" :highlight-current-row="false" :height="tableHeight" border
                 style="width: calc(100% - 2px)">
                 <slot></slot>
@@ -117,7 +117,8 @@ export default {
             emptyText: '暂无数据',
             emptyIcon: '/assets/images/no_data.png',
             pageIndex: 0,
-            maxStyle: {}
+            maxStyle: {},
+            pagePosition: []
         }
     },
     watch: {
@@ -191,8 +192,7 @@ export default {
             let f = fRef && fRef.$el ? fRef.$el.clientHeight : 0;
             let mx = t - (h + f + 50)
             this.maxStyle = mx
-            if(this.tableHeight == '100%')
-            {
+            if (this.tableHeight == '100%') {
                 this.tableHeight = mx + 'px'
             }
         },
@@ -206,12 +206,14 @@ export default {
         prevPage() {
             if (this.prevDisabled) {
                 this.query.page--
+                this.pageIndex = this.showPages.indexOf(this.query.page)
                 this.getData()
             }
         },
         nextPage() {
-            if (this.prevDisabled) {
+            if (this.nextDisabled) {
                 this.query.page++
+                this.pageIndex = this.showPages.indexOf(this.query.page)
                 this.getData()
             }
         },
@@ -221,6 +223,7 @@ export default {
         },
         refreshData() {
             this.query = Object.assign(this.query, this.params)
+            this.pageIndex = this.showPages.indexOf(this.query.page)
             this.getData()
         },
         changeSort({ prop, order }) {
@@ -231,13 +234,18 @@ export default {
         async getData() {
             if (!this.loading) {
                 this.loading = true
-                this.emptyText = '暂无数据'
-                this.emptyIcon = '/assets/images/no_data.png'
+                this.emptyText = '加载中'
+                this.emptyIcon = '/assets/images/coming.png'
+                this.items = []
                 let res = await this.$axios.get(this.$route(this.queryName, this.query))
                 this.loading = false
                 if (res.code == this.$config.successCode) {
                     this.total = res.data.total
-                    this.items = res.data.items.length > 0 ? res.data.items : null
+                    this.items = res.data.items.length > 0 ? res.data.items : []
+                    if (this.items.length == 0) {
+                        this.emptyText = '暂无数据'
+                        this.emptyIcon = '/assets/images/no_data.png'
+                    }
                 } else {
                     this.items = []
                     this.emptyText = res.message

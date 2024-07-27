@@ -2,7 +2,6 @@
 import { Ziggy } from '@/ziggy'
 import { createApp, h } from 'vue'
 import 'animate.css'
-import 'element-plus/theme-chalk/src/index.scss'
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import { createInertiaApp, Head, Link, router } from '@inertiajs/vue3'
@@ -23,14 +22,25 @@ import tool from '@/utils/tool.js'
 import validation from '@/utils/validation.js'
 import config from '@/config'
 import { icons as TablerIcons } from '@tabler/icons-vue';
+import VueApexCharts from "vue3-apexcharts";
+import VueAMap, { initAMapApiLoader } from '@vuemap/vue-amap';
+import '@vuemap/vue-amap/dist/style.css'
+import 'element-plus/theme-chalk/el-message.css'
+import 'element-plus/theme-chalk/el-message-box.css'
 
-
+initAMapApiLoader({
+    key: 'ecb8338edd5f01d1e95dc7cd1f910377',
+    securityJsCode: 'ad0edde6d062b0e85bf07523a51e256a',
+    plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
+});
 const ZiggyFunc = (name, params, absolute, config = Ziggy) => ZiggyJs(name, params, absolute, config);
 createInertiaApp({
     resolve: (name) => resolvePageComponent(`../views/Pages/${name}.vue`, import.meta.glob('../views/Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(VueApexCharts)
+            .use(VueAMap)
             .use(ElementPlus, { locale: zhCn });
 
         app.component('Head', Head)

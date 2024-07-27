@@ -3,28 +3,28 @@
         <div class="quill-editor">
             <div :id="`toolbar-${elementId}`">
                 <template v-for="(opt, index) in options" :key="index">
-                    <select class="ql-size" v-if="opt == 'size'">
+                    <select v-if="opt === 'size'" class="ql-size">
                         <option value="small"></option>
                         <option selected></option>
                         <option value="large"></option>
                         <option value="huge"></option>
                     </select>
-                    <button class="ql-bold" v-if="opt == 'bold'"></button>
-                    <button class="ql-italic" v-if="opt == 'italic'"></button>
-                    <button class="ql-underline" v-if="opt == 'underline'"></button>
-                    <button class="ql-script" value="sub" v-if="opt == 'sub'"></button>
-                    <button class="ql-script" value="super" v-if="opt == 'super'"></button>
-                    <button class="ql-link" v-if="opt == 'link'"></button>
-                    <button class="ql-image" v-if="opt == 'image'"></button>
-                    <button class="ql-blockquote" v-if="opt == 'blockquote'"></button>
-                    <button class="ql-video" v-if="opt == 'video'"></button>
-                    <button class="ql-code-block" v-if="opt == 'code-block'"></button>
-                    <button class="ql-formula" v-if="opt == 'formula'"></button>
-                    <button class="ql-clean" v-if="opt == 'clean'"></button>
-                    <button class="ql-list" value="ordered" v-if="opt == 'ordered'"></button>
-                    <button class="ql-list" value="bullet" v-if="opt == 'bullet'"></button>
-                    <button class="ql-list" value="check" v-if="opt == 'check'"></button>
-                    <select class="ql-header" v-if="opt == 'header'">
+                    <button v-if="opt === 'bold'" class="ql-bold"></button>
+                    <button v-if="opt === 'italic'" class="ql-italic"></button>
+                    <button v-if="opt === 'underline'" class="ql-underline"></button>
+                    <button v-if="opt === 'sub'" class="ql-script" value="sub"></button>
+                    <button v-if="opt === 'super'" class="ql-script" value="super"></button>
+                    <button v-if="opt === 'link'" class="ql-link"></button>
+                    <button v-if="opt === 'image'" class="ql-image"></button>
+                    <button v-if="opt === 'blockquote'" class="ql-blockquote"></button>
+                    <button v-if="opt === 'video'" class="ql-video"></button>
+                    <button v-if="opt === 'code-block'" class="ql-code-block"></button>
+                    <button v-if="opt === 'formula'" class="ql-formula"></button>
+                    <button v-if="opt === 'clean'" class="ql-clean"></button>
+                    <button v-if="opt === 'ordered'" class="ql-list" value="ordered"></button>
+                    <button v-if="opt === 'bullet'" class="ql-list" value="bullet"></button>
+                    <button v-if="opt === 'check'" class="ql-list" value="check"></button>
+                    <select v-if="opt === 'header'" class="ql-header">
                         <option value="1"></option>
                         <option value="2"></option>
                         <option value="3"></option>
@@ -33,16 +33,16 @@
                         <option value="6"></option>
                         <option selected></option>
                     </select>
-                    <button class="ql-indent" value="-1" v-if="opt == 'indent-out'"></button>
-                    <button class="ql-indent" value="+1" v-if="opt == 'indent-in'"></button>
-                    <select class="ql-color" v-if="opt == 'color'">
+                    <button v-if="opt === 'indent-out'" class="ql-indent" value="-1"></button>
+                    <button v-if="opt === 'indent-in'" class="ql-indent" value="+1"></button>
+                    <select v-if="opt === 'color'" class="ql-color">
                         <option :value="color" v-for="(color, index2) in $config.defaultColors" :key="index2"></option>
                     </select>
-                    <select class="ql-background" v-if="opt == 'background'">
+                    <select v-if="opt === 'background'" class="ql-background">
                         <option :value="color" v-for="(color, index2) in $config.defaultColors" :key="index2"></option>
                     </select>
-                    <button class="ql-strike" v-if="opt == 'strike'"></button>
-                    <select class="ql-font" v-if="opt == 'font'">
+                    <button v-if="opt === 'strike'" class="ql-strike"></button>
+                    <select v-if="opt === 'font'" class="ql-font">
                         <option value="HarmonyOS"></option>
                         <option value="AdobeClean"></option>
                         <option value="Helvetica"></option>
@@ -56,25 +56,23 @@
                         <option value="KaiTi"></option>
                         <option value="FangSong"></option>
                     </select>
-                    <select class="ql-align" v-if="opt == 'align'">
+                    <select v-if="opt === 'align'" class="ql-align">
                         <option value="justify"></option>
                         <option value="right"></option>
                         <option value="center"></option>
                         <option selected></option>
                     </select>
-                    <button class="SimpleCMS-editor-custom-button" style="width:auto" @click="aiButton"
-                        v-if="opt == 'ai'"><span>AI</span></button>
+                    <button v-if="opt === 'ai'" class="SimpleCMS-editor-custom-button" style="width:auto" @click="aiButton"><span>AI</span></button>
                 </template>
             </div>
             <div ref="editor"></div>
         </div>
     </div>
 </template>
+
 <script>
 import _Quill from 'quill'
-
 const Quill = window.Quill || _Quill
-
 export default {
     name: 'VEditor',
     props: {
@@ -141,12 +139,13 @@ export default {
                 readOnly: this.readonly,
                 theme: 'snow',
                 modules: {
-                    toolbar: '#toolbar',
+                    toolbar: `#toolbar-${this.elementId}`,
                 },
             },
             elementId: (new Date).getTime() + '-' + (Math.floor(Math.random() * 1000) + 1),
             quill: null,
-            options: this.toolbar
+            options: this.toolbar,
+            editor: {},
         }
     },
     watch: {
@@ -166,10 +165,15 @@ export default {
             if (this.quill) {
                 if (newVal) {
                     this.editContent = newVal
-                    this.quill.pasteHTML(newVal)
+                    this.quill.root.innerHTML = newVal
                 } else if (!newVal) {
                     this.quill.setText('')
                 }
+            }
+        },
+        disabled(newVal) {
+            if (this.quill) {
+                this.quill.enable(!newVal)
             }
         }
     },
@@ -181,30 +185,20 @@ export default {
             set(val) {
                 this.$emit('update:modelValue', val)
             }
-        },
-        disabled(newVal) {
-            if (this.quill) {
-                this.quill.enable(!newVal)
-            }
         }
     },
     methods: {
         initialize() {
-            this.editorOption.modules.toolbar = `#toolbar-${this.elementId}`
+            this.editorOption.modules.toolbar = `#toolbar-${this.elementId}` 
             if (this.$el) {
-
                 this.quill = new Quill(this.$refs.editor, this.editorOption)
-
                 this.quill.enable(false)
-
                 if (this.editContent) {
-                    this.quill.pasteHTML(this.editContent)
+                    this.quill.root.innerHTML = this.editContent
                 }
-
                 if (!this.disabled) {
                     this.quill.enable(true)
                 }
-
                 this.quill.on('selection-change', range => {
                     if (!range) {
                         this.$emit('blur', this.quill)
@@ -212,17 +206,13 @@ export default {
                         this.$emit('focus', this.quill)
                     }
                 })
-
                 this.quill.on('text-change', (delta, oldDelta, source) => {
-                    let html = this.$refs.editor.children[0].innerHTML
-                    const quill = this.quill
+                    this.$emit('text-change', this._content, delta, source)
+                    this.$emit('input', this.output !== 'delta' ? this.quill.root.innerHTML : this.quill.getContents())
+                    const html = this.quill.root.innerHTML
                     const text = this.quill.getText()
-                    if (html === '<p><br></p>') html = ''
-                    this.editContent = html
-                    this.$emit('input', this._content)
-                    this.$emit('change', { html, text, quill })
+                    this.$emit('change', { html, text, quill: this.quill })
                 })
-
                 this.$emit('ready', this.quill)
             }
         },
@@ -232,6 +222,7 @@ export default {
     }
 }
 </script>
+
 <style lang="scss">
 @import '@scss/addons/editor.scss';
 </style>

@@ -61,6 +61,8 @@
 
             &-left {
                 margin-right: var(--el-border-radius-base);
+                display: flex;
+                justify-content: flex-start;
             }
 
             &-right {

@@ -29,6 +29,7 @@
         "@vueuse/core": "^10.10.0",
         "@vueuse/math": "^10.10.0",
         "animate.css": "^4.1.1",
+        "apexcharts": "^3.50.0",
         "chart.js": "^4.4.3",
         "dayjs": "^1.11.11",
         "element-plus": "^2.7.3",

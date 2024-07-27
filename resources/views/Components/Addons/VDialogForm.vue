@@ -12,7 +12,8 @@
             </el-skeleton>
             <el-row :gutter="10" v-else>
                 <template v-for="(col, index) in items" :key="index">
-                    <el-col v-if="col.element != 'hidden'" :data-key="index" :span="col.span">
+                    <el-col v-if="col.element != 'hidden'" :data-key="index"
+                        :span="col.span">
                         <el-form-item :prop="col.key">
                             <template #label>
                                 <div class="SimpleCMS-dialog-form-label">
@@ -87,8 +88,9 @@
                                 <el-option v-for="(column, index2) in option[col.key]" :tabindex="col.tabindex"
                                     :key="index2" :label="column.name" :value="column.value"></el-option>
                             </el-select>
-                            <VUploadFile v-if="col.element == 'image'" v-model="form[col.key]"
-                                :placeholder="col.placeholder" :src="col.preview"></VUploadFile>
+                            <VUploadFile v-if="col.element == 'image'" :multiple="col.multiple"
+                                :multiple-limit="col.limit" v-model="form[col.key]" :placeholder="col.placeholder"
+                                :src="col.preview"></VUploadFile>
                             <VEditor v-if="col.element == 'editor'" v-model="form[col.key]"
                                 :placeholder="col.placeholder" :readonly="col.readonly" :disabled="col.disabled"
                                 :toolbar="editor[col.key]" @change="onChange(col.key, col.change)"></VEditor>
@@ -100,6 +102,7 @@
     </v-dialog>
 </template>
 <script>
+import { ElMessage } from 'element-plus'
 export default {
     props: {
         /**
@@ -183,7 +186,7 @@ export default {
             optionList: this.options,
             option: {},
             itemData: this.item,
-            items: {},
+            items: [],
             builded: false
         }
     },
@@ -226,6 +229,8 @@ export default {
     methods: {
         convertOptions() {
             this.builded = false
+            this.optionList = this.options
+            this.itemData = this.item
             this.rules = {}
             this.form = {}
             this.extra = {}
@@ -289,7 +294,6 @@ export default {
             })
             this.builded = true
             this.$nextTick(() => {
-
                 this.$refs.dialogFormRefForm.resetFields()
             })
         },
@@ -307,23 +311,34 @@ export default {
             if (!this.saving) {
                 this.saving = true
                 this.$refs[refName + 'Form'].validate().then(async () => {
-                    let form = this.form
+                    let form = this.form, _d, z;
                     if (this.actionMethod == 'post') {
                         form = new FormData()
                         Object.keys(this.form).forEach(key => {
                             if (this.form[key] !== undefined) {
-                                form.append(key, this.form[key] ?? '')
+                                _d = this.items.filter(x => x.key == key)
+                                if (_d.length > 0) {
+                                    if (_d[0].multiple) {
+                                        for (z = 0; z < _d[0].limit; z++) {
+                                            if (this.form[key][z] !== undefined) {
+                                                form.append(`${key}[${z}]`, this.form[key][z])
+                                            }
+                                        }
+                                    } else {
+                                        form.append(key, this.form[key] !== undefined ? this.form[key] : '')
+                                    }
+                                }
                             }
                         })
                     }
                     let res = await this.$axios[this.actionMethod](this.actionUrl, form)
                     this.saving = false
                     if (res.code == this.$config.successCode) {
-                        this.$message.success(this.successText)
+                        ElMessage.success(this.successText)
                         this.$closeDialog(refName)
                         this.$emit('saved')
                     } else {
-                        this.$message.error(res.message)
+                        ElMessage.error(res.message)
                     }
                 }).catch(() => {
                     this.saving = false

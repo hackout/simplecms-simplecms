@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "958e653bc3fc5e6a0ade5310e9721977",
+    "content-hash": "095ea5765833670d43b340d87a7c738c",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -5050,21 +5050,22 @@
         },
         {
             "name": "simplecms/framework",
-            "version": "1.0.6",
+            "version": "1.0.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hackout/simplecms-framework.git",
-                "reference": "c51f34573fe07af4a13f09d98a8beec7b1fcc503"
+                "reference": "5e278826391bf56cedeea12d6a2582050519441d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hackout/simplecms-framework/zipball/c51f34573fe07af4a13f09d98a8beec7b1fcc503",
-                "reference": "c51f34573fe07af4a13f09d98a8beec7b1fcc503",
+                "url": "https://api.github.com/repos/hackout/simplecms-framework/zipball/5e278826391bf56cedeea12d6a2582050519441d",
+                "reference": "5e278826391bf56cedeea12d6a2582050519441d",
                 "shasum": ""
             },
             "require": {
                 "alibabacloud/dysmsapi-20170525": "^2.0",
                 "intervention/image": "^3.6",
+                "jenssegers/agent": "^2.6",
                 "laravel/framework": "^11.0",
                 "laravel/tinker": "^2.9",
                 "maatwebsite/excel": "^3.1",
@@ -5085,7 +5086,8 @@
                         "ExcelDrawing": "SimpleCMS\\Framework\\Facades\\ExcelDrawing",
                         "Captcha": "SimpleCMS\\Framework\\Facades\\Captcha",
                         "Dict": "SimpleCMS\\Framework\\Facades\\Dict",
-                        "Menu": "SimpleCMS\\Framework\\Facades\\Menu"
+                        "Menu": "SimpleCMS\\Framework\\Facades\\Menu",
+                        "Finger": "SimpleCMS\\Framework\\Facades\\Finger"
                     }
                 }
             },
@@ -5112,9 +5114,64 @@
             ],
             "support": {
                 "issues": "https://github.com/hackout/simplecms-framework/issues",
-                "source": "https://github.com/hackout/simplecms-framework/tree/v1.0.6"
+                "source": "https://github.com/hackout/simplecms-framework/tree/v1.0.34"
             },
-            "time": "2024-06-29T16:17:14+00:00"
+            "time": "2024-07-20T01:50:55+00:00"
+        },
+        {
+            "name": "simplecms/wechat",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hackout/simplecms-wechat.git",
+                "reference": "86057b2e876bf90d5c705fc3529a5a782db1f321"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hackout/simplecms-wechat/zipball/86057b2e876bf90d5c705fc3529a5a782db1f321",
+                "reference": "86057b2e876bf90d5c705fc3529a5a782db1f321",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SimpleCMS\\Wechat\\WechatServiceProvider"
+                    ],
+                    "aliases": {
+                        "MiniProgram": "SimpleCMS\\Wechat\\Facades\\MiniProgram"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SimpleCMS\\Wechat\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hackout",
+                    "email": "hackout@vip.qq.com"
+                }
+            ],
+            "description": "微信小程序",
+            "keywords": [
+                "SimpleCMS",
+                "laravel",
+                "wechat"
+            ],
+            "support": {
+                "issues": "https://github.com/hackout/simplecms-wechat/issues",
+                "source": "https://github.com/hackout/simplecms-wechat/tree/1.0.1"
+            },
+            "time": "2024-07-06T16:09:22+00:00"
         },
         {
             "name": "spatie/image",

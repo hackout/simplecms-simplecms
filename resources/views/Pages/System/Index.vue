@@ -67,11 +67,13 @@
                             description="暂无系统设置参数" :image-size="168">
                             <el-button type="primary" @click="tab = 'list'">去参数列表添加</el-button>
                         </el-empty>
-                        <el-form class="SimpleCMS-system-form" :model="sysForm" :rules="sysRules" label-width="100px"
+                        <el-form class="SimpleCMS-system-form" :model="sysForm" :rules="sysRules" label-width="150px"
                             label-position="right" ref="systemFormRef">
                             <el-form-item class="SimpleCMS-system-form-item" v-for="(el, index) in sys" :key="index"
                                 :prop="el.code">
-                                <el-input size="large" v-if="el.type == 'input' || el.type == 'textarea'"
+                                <el-input size="large" v-if="el.type == 'input'"
+                                    :placeholder="`请输入${el.name}`" clearable v-model="sysForm[el.code]"></el-input>
+                                <el-input size="large" type="textarea" maxlength="250" show-word-limit v-if="el.type == 'textarea'"
                                     :placeholder="`请输入${el.name}`" clearable v-model="sysForm[el.code]"></el-input>
                                 <el-switch v-if="el.type == 'switch'" class="SimpleCMS-dialog-switch"
                                     v-model="sysForm[el.code]" size="large" :active-value="1" :inactive-value="0">
