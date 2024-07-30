@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Services\Backend\RoleService;
 use App\Services\Backend\ManagerService;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use SimpleCMS\Framework\Http\Requests\SimpleRequest;
 use SimpleCMS\Framework\Http\Controllers\BackendController;
 
 class ManagerController extends BackendController
@@ -19,12 +19,12 @@ class ManagerController extends BackendController
      * 管理员列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ManagerService $service
      * @return JsonResponse
      */
     #[ApiName(name: '管理员列表')]
-    public function index(Request $request, ManagerService $service): InertiaResponse
+    public function index(SimpleRequest $request, ManagerService $service): InertiaResponse
     {
         return Inertia::render('Manager/Index', [
             'query' => [
@@ -40,12 +40,12 @@ class ManagerController extends BackendController
      * 获取管理员列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ManagerService $service
      * @return JsonResponse
      */
     #[ApiName(name: '获取管理员列表')]
-    public function list(Request $request, ManagerService $service): JsonResponse
+    public function list(SimpleRequest $request, ManagerService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -62,12 +62,12 @@ class ManagerController extends BackendController
      * 添加管理员
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ManagerService  $service
      * @return JsonResponse
      */
     #[ApiName(name: '添加管理员')]
-    public function create(Request $request, ManagerService $service): JsonResponse
+    public function create(SimpleRequest $request, ManagerService $service): JsonResponse
     {
         $rules = [
             'name' => 'sometimes|nullable|between:2,50',
@@ -100,12 +100,12 @@ class ManagerController extends BackendController
      * 编辑管理员
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ManagerService  $service
      * @return JsonResponse
      */
     #[ApiName(name: '编辑管理员')]
-    public function update(string $id, Request $request, ManagerService $service): JsonResponse
+    public function update(string $id, SimpleRequest $request, ManagerService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:managers,id',
@@ -148,12 +148,12 @@ class ManagerController extends BackendController
      * 修改管理员密码
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ManagerService  $service
      * @return JsonResponse
      */
     #[ApiName(name: '修改管理员密码')]
-    public function password(string $id, Request $request, ManagerService $service): JsonResponse
+    public function password(string $id, SimpleRequest $request, ManagerService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:managers,id',
@@ -182,12 +182,12 @@ class ManagerController extends BackendController
      * 删除管理员
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ManagerService $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除管理员')]
-    public function delete(int $id, Request $request, ManagerService $service): JsonResponse
+    public function delete(int $id, SimpleRequest $request, ManagerService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:managers,id',

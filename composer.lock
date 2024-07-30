@@ -5050,16 +5050,16 @@
         },
         {
             "name": "simplecms/framework",
-            "version": "1.0.35",
+            "version": "1.0.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hackout/simplecms-framework.git",
-                "reference": "5865134875183d74741b94f9cc840c633b9f2af1"
+                "reference": "f14abe44a6f5b36ed5996f68c2508f401cd1baaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hackout/simplecms-framework/zipball/5865134875183d74741b94f9cc840c633b9f2af1",
-                "reference": "5865134875183d74741b94f9cc840c633b9f2af1",
+                "url": "https://api.github.com/repos/hackout/simplecms-framework/zipball/f14abe44a6f5b36ed5996f68c2508f401cd1baaa",
+                "reference": "f14abe44a6f5b36ed5996f68c2508f401cd1baaa",
                 "shasum": ""
             },
             "require": {
@@ -5114,9 +5114,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hackout/simplecms-framework/issues",
-                "source": "https://github.com/hackout/simplecms-framework/tree/v1.0.35"
+                "source": "https://github.com/hackout/simplecms-framework/tree/v1.0.36"
             },
-            "time": "2024-07-27T06:53:34+00:00"
+            "time": "2024-07-30T08:08:00+00:00"
         },
         {
             "name": "simplecms/nickname",

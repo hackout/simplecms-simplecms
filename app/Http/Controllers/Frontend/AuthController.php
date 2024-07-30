@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Enums\Account;
-use Illuminate\Http\Request;
+use App\Enums\AccountEnum;
 use Illuminate\Validation\Rule;
-use SimpleCMS\Framework\Facades\Dict;
 use App\Services\Frontend\AuthService;
 use App\Services\Frontend\AccountService;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use SimpleCMS\Framework\Http\Requests\SimpleRequest;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
 class AuthController extends BaseController
@@ -21,18 +19,18 @@ class AuthController extends BaseController
      * 会员注册
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  AuthService $service
      * @return JsonResponse
      */
     #[ApiName(name: '会员注册')]
-    public function register(Request $request, AuthService $service): JsonResponse
+    public function register(SimpleRequest $request, AuthService $service): JsonResponse
     {
         $rules = [
             'account' => 'required|unique:accounts,account',
             'type' => [
                 'required',
-                Rule::enum(Account::class)
+                Rule::enum(AccountEnum::class)
             ],
             'password' => 'required_if:type,1|required_if:type,2|required_if:type,3',
             'oauth_id' => 'sometimes|nullable',
@@ -55,12 +53,12 @@ class AuthController extends BaseController
      * 通过IP设备引擎等自动注册
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  AccountService $service
      * @return JsonResponse
      */
     #[ApiName(name: '自动注册会员')]
-    public function create(Request $request, AccountService $service): JsonResponse
+    public function create(SimpleRequest $request, AccountService $service): JsonResponse
     {
         $rules = [
             //
@@ -78,12 +76,12 @@ class AuthController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  AccountService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'AccountController-编辑信息')]
-    public function update(string $id, Request $request, AccountService $service): JsonResponse
+    public function update(string $id, SimpleRequest $request, AccountService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:accounts,id'
@@ -109,12 +107,12 @@ class AuthController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  AccountService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'AccountController-信息详情')]
-    public function detail(string $id, Request $request, AccountService $service): JsonResponse
+    public function detail(string $id, SimpleRequest $request, AccountService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:accounts,id'
@@ -138,12 +136,12 @@ class AuthController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
-     * @param  Request         $request
-     * @param  CommitInlineService $commitInlineService
+     * @param  SimpleRequest $request
+     * @param  AccountService $commitInlineService
      * @return JsonResponse
      */
     #[ApiName(name: 'AccountController-删除信息')]
-    public function delete(string $id, Request $request, AccountService $service): JsonResponse
+    public function delete(string $id, SimpleRequest $request, AccountService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:accounts,id'

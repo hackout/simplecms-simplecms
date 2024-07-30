@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Services\Backend\MenuService;
 use SimpleCMS\Framework\Facades\Dict;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use SimpleCMS\Framework\Http\Requests\SimpleRequest;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
 class MenuController extends BaseBackendController
@@ -19,12 +19,12 @@ class MenuController extends BaseBackendController
      * 导航菜单设置
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  MenuService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '导航菜单设置')]
-    public function index(Request $request, MenuService $service): InertiaResponse
+    public function index(SimpleRequest $request, MenuService $service): InertiaResponse
     {
         return Inertia::render('System/Menu', [
             'query' => [
@@ -42,12 +42,12 @@ class MenuController extends BaseBackendController
      * 导航菜单列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  MenuService $service
      * @return JsonResponse
      */
     #[ApiName(name: '导航菜单列表')]
-    public function list(Request $request, MenuService $service): JsonResponse
+    public function list(SimpleRequest $request, MenuService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250',
@@ -66,12 +66,12 @@ class MenuController extends BaseBackendController
      * 添加导航菜单
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  MenuService $service
      * @return JsonResponse
      */
     #[ApiName(name: '添加导航菜单')]
-    public function create(Request $request, MenuService $service): JsonResponse
+    public function create(SimpleRequest $request, MenuService $service): JsonResponse
     {
         $rules = [
             'name' => 'required|between:2,50',
@@ -103,12 +103,12 @@ class MenuController extends BaseBackendController
      * 编辑导航菜单
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  MenuService $service
      * @return JsonResponse
      */
     #[ApiName(name: '编辑导航菜单')]
-    public function update(int $id, Request $request, MenuService $service): JsonResponse
+    public function update(int $id, SimpleRequest $request, MenuService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:menus,id',
@@ -157,12 +157,12 @@ class MenuController extends BaseBackendController
      * 删除导航菜单
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  MenuService $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除导航菜单')]
-    public function delete(int $id, Request $request, MenuService $service): JsonResponse
+    public function delete(int $id, SimpleRequest $request, MenuService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:menus,id',
@@ -184,12 +184,12 @@ class MenuController extends BaseBackendController
      * 快速编辑菜单
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  MenuService $service
      * @return JsonResponse
      */
     #[ApiName(name: '快速编辑菜单')]
-    public function quick(Request $request,MenuService $service):JsonResponse
+    public function quick(SimpleRequest $request, MenuService $service): JsonResponse
     {
         $rules = [
             'items' => 'required|min:1|array',
@@ -219,12 +219,12 @@ class MenuController extends BaseBackendController
      * 批量删除菜单
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  MenuService $service
      * @return JsonResponse
      */
     #[ApiName(name: '批量删除菜单')]
-    public function batchDelete(Request $request,MenuService $service):JsonResponse
+    public function batchDelete(SimpleRequest $request, MenuService $service): JsonResponse
     {
         $rules = [
             'items' => 'required|min:1|array',

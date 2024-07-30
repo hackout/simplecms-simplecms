@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Services\Frontend\UserGroupService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Services\Frontend\UserGroupService;
+use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use SimpleCMS\Framework\Http\Requests\SimpleRequest;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
 class UserGroupController extends BaseController
@@ -16,12 +16,12 @@ class UserGroupController extends BaseController
      * UserGroupController 获取列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserGroupController-获取列表')]
-    public function index(Request $request,UserGroupService $service):JsonResponse
+    #[ApiName(name: 'UserGroupController-获取列表')]
+    public function index(SimpleRequest $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -29,7 +29,7 @@ class UserGroupController extends BaseController
         $messages = [
             'keyword.max' => '关键词最大支持250个字符'
         ];
-        $data = $request->validate($rules,$messages);
+        $data = $request->validate($rules, $messages);
         $result = $service->getList($data);
         return $this->success($result);
     }
@@ -38,12 +38,12 @@ class UserGroupController extends BaseController
      * UserGroupController 添加信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserGroupController-添加信息')]
-    public function create(Request $request,UserGroupService $service):JsonResponse
+    #[ApiName(name: 'UserGroupController-添加信息')]
+    public function create(SimpleRequest $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             //
@@ -51,7 +51,7 @@ class UserGroupController extends BaseController
         $messages = [
             //
         ];
-        $data = $request->validate($rules,$messages);
+        $data = $request->validate($rules, $messages);
         $service->create($data);
         return $this->success();
     }
@@ -61,12 +61,12 @@ class UserGroupController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserGroupController-编辑信息')]
-    public function update(string $id,Request $request,UserGroupService $service):JsonResponse
+    #[ApiName(name: 'UserGroupController-编辑信息')]
+    public function update(string $id, SimpleRequest $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:user_groups,id'
@@ -83,7 +83,7 @@ class UserGroupController extends BaseController
         $data = $validator->safe()->only([
             //Todo..
         ]);
-        $service->update($id,$data);
+        $service->update($id, $data);
         return $this->success();
     }
 
@@ -92,12 +92,12 @@ class UserGroupController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserGroupController-信息详情')]
-    public function detail(string $id,Request $request,UserGroupService $service):JsonResponse
+    #[ApiName(name: 'UserGroupController-信息详情')]
+    public function detail(string $id, SimpleRequest $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:user_groups,id'
@@ -115,18 +115,18 @@ class UserGroupController extends BaseController
         return $this->success($result);
     }
 
-    
+
     /**
      * UserGroupController 删除信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
-     * @param  Request         $request
-     * @param  CommitInlineService $commitInlineService
+     * @param  SimpleRequest $request
+     * @param  UserGroupService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserGroupController-删除信息')]
-    public function delete(string $id,Request $request,UserGroupService $service): JsonResponse
+    #[ApiName(name: 'UserGroupController-删除信息')]
+    public function delete(string $id, SimpleRequest $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:user_groups,id'
@@ -143,9 +143,9 @@ class UserGroupController extends BaseController
         $data = $validator->safe()->only([
             //Todo..
         ]);
-        $service->delete($id,$data);
+        $service->delete($id, $data);
         return $this->success();
     }
-    
+
 
 }

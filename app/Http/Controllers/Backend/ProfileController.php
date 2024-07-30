@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
-use App\Services\Backend\ManagerService;
 use Inertia\Response as InertiaResponse;
 use App\Services\Backend\DashboardService;
 use SimpleCMS\Framework\Attributes\ApiName;
+use SimpleCMS\Framework\Http\Requests\SimpleRequest;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
@@ -23,8 +22,6 @@ class ProfileController extends BaseBackendController
      * 管理员个人信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
-     * @param  ManagerService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '个人设置')]
@@ -37,8 +34,6 @@ class ProfileController extends BaseBackendController
      * 管理员安全邮箱
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
-     * @param  ManagerService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '安全邮箱')]
@@ -51,8 +46,6 @@ class ProfileController extends BaseBackendController
      * 管理员密码安全
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
-     * @param  ManagerService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '密码安全')]
@@ -65,12 +58,12 @@ class ProfileController extends BaseBackendController
      * 管理员修改个人资料
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request                          $request
-     * @param  DashboardService                      $service
+     * @param  SimpleRequest     $request
+     * @param  DashboardService  $service
      * @return RedirectResponse|InertiaResponse
      */
     #[ApiName(name: '修改个人资料')]
-    public function update(Request $request, DashboardService $service): RedirectResponse
+    public function update(SimpleRequest $request, DashboardService $service): RedirectResponse
     {
         $rules = [
             'account' => 'required|unique:managers,account,' . $request->user()->id . ',id',
@@ -96,12 +89,12 @@ class ProfileController extends BaseBackendController
      * 修改密保邮箱
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request                          $request
+     * @param  SimpleRequest                          $request
      * @param  DashboardService                      $service
      * @return RedirectResponse|InertiaResponse
      */
     #[ApiName(name: '修改密保邮箱')]
-    public function updateEmail(Request $request, DashboardService $service): RedirectResponse
+    public function updateEmail(SimpleRequest $request, DashboardService $service): RedirectResponse
     {
         $rules = [
             'email' => 'required|unique:managers,email,' . $request->user()->id . ',id',
@@ -122,12 +115,12 @@ class ProfileController extends BaseBackendController
      * 修改登录密码
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request                          $request
+     * @param  SimpleRequest                          $request
      * @param  DashboardService                      $service
      * @return RedirectResponse|InertiaResponse
      */
     #[ApiName(name: '修改登录密码')]
-    public function updatePassword(Request $request, DashboardService $service): RedirectResponse
+    public function updatePassword(SimpleRequest $request, DashboardService $service): RedirectResponse
     {
         $rules = [
             'current_password' => 'required|current_password:web',

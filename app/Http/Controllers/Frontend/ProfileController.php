@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Services\Frontend\ProfileService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use SimpleCMS\Framework\Http\Requests\SimpleRequest;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
 class ProfileController extends BaseController
@@ -16,12 +16,12 @@ class ProfileController extends BaseController
      * ProfileController 获取列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'ProfileController-获取列表')]
-    public function index(Request $request,ProfileService $service):JsonResponse
+    #[ApiName(name: 'ProfileController-获取列表')]
+    public function index(SimpleRequest $request, ProfileService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -29,7 +29,7 @@ class ProfileController extends BaseController
         $messages = [
             'keyword.max' => '关键词最大支持250个字符'
         ];
-        $data = $request->validate($rules,$messages);
+        $data = $request->validate($rules, $messages);
         $result = $service->getList($data);
         return $this->success($result);
     }
@@ -38,12 +38,12 @@ class ProfileController extends BaseController
      * ProfileController 添加信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'ProfileController-添加信息')]
-    public function create(Request $request,ProfileService $service):JsonResponse
+    #[ApiName(name: 'ProfileController-添加信息')]
+    public function create(SimpleRequest $request, ProfileService $service): JsonResponse
     {
         $rules = [
             //
@@ -51,7 +51,7 @@ class ProfileController extends BaseController
         $messages = [
             //
         ];
-        $data = $request->validate($rules,$messages);
+        $data = $request->validate($rules, $messages);
         $service->create($data);
         return $this->success();
     }
@@ -61,12 +61,12 @@ class ProfileController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'ProfileController-编辑信息')]
-    public function update(string $id,Request $request,ProfileService $service):JsonResponse
+    #[ApiName(name: 'ProfileController-编辑信息')]
+    public function update(string $id, SimpleRequest $request, ProfileService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:profiles,id'
@@ -83,7 +83,7 @@ class ProfileController extends BaseController
         $data = $validator->safe()->only([
             //Todo..
         ]);
-        $service->update($id,$data);
+        $service->update($id, $data);
         return $this->success();
     }
 
@@ -92,12 +92,12 @@ class ProfileController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'ProfileController-信息详情')]
-    public function detail(string $id,Request $request,ProfileService $service):JsonResponse
+    #[ApiName(name: 'ProfileController-信息详情')]
+    public function detail(string $id, SimpleRequest $request, ProfileService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:profiles,id'
@@ -115,18 +115,18 @@ class ProfileController extends BaseController
         return $this->success($result);
     }
 
-    
+
     /**
      * ProfileController 删除信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
-     * @param  Request         $request
-     * @param  CommitInlineService $commitInlineService
+     * @param  SimpleRequest $request
+     * @param  ProfileService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'ProfileController-删除信息')]
-    public function delete(string $id,Request $request,ProfileService $service): JsonResponse
+    #[ApiName(name: 'ProfileController-删除信息')]
+    public function delete(string $id, SimpleRequest $request, ProfileService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:profiles,id'
@@ -143,9 +143,9 @@ class ProfileController extends BaseController
         $data = $validator->safe()->only([
             //Todo..
         ]);
-        $service->delete($id,$data);
+        $service->delete($id, $data);
         return $this->success();
     }
-    
+
 
 }

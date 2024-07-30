@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use App\Services\Backend\UserGroupService;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use SimpleCMS\Framework\Http\Requests\SimpleRequest;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseController;
 
 class UserGroupController extends BaseController
@@ -18,12 +18,12 @@ class UserGroupController extends BaseController
      * 会员组
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  UserGroupService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '会员组管理')]
-    public function index(Request $request, UserGroupService $service): InertiaResponse
+    public function index(SimpleRequest $request, UserGroupService $service): InertiaResponse
     {
         return Inertia::render('User/Group', [
             'query' => [
@@ -38,12 +38,12 @@ class UserGroupController extends BaseController
      * 会员组列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
     #[ApiName(name: '会员组列表')]
-    public function list(Request $request, UserGroupService $service): JsonResponse
+    public function list(SimpleRequest $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -60,12 +60,12 @@ class UserGroupController extends BaseController
      * 添加会员组
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
     #[ApiName(name: '添加会员组')]
-    public function create(Request $request, UserGroupService $service): JsonResponse
+    public function create(SimpleRequest $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'name' => 'required|between:2,50',
@@ -90,12 +90,12 @@ class UserGroupController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
     #[ApiName(name: '编辑会员组')]
-    public function update(string $id, Request $request, UserGroupService $service): JsonResponse
+    public function update(string $id, SimpleRequest $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:user_groups,id',
@@ -133,12 +133,12 @@ class UserGroupController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string           $id
-     * @param  Request          $request
+     * @param  SimpleRequest          $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除会员组')]
-    public function delete(string $id, Request $request, UserGroupService $service): JsonResponse
+    public function delete(string $id, SimpleRequest $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:user_groups,id'

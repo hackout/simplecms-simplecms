@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use Inertia\Inertia;
 use App\Enums\AccountEnum;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use SimpleCMS\Framework\Facades\Dict;
 use App\Services\Backend\AccountService;
@@ -12,6 +11,7 @@ use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use SimpleCMS\Framework\Http\Requests\SimpleRequest;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseController;
 
 class AccountController extends BaseController
@@ -21,12 +21,12 @@ class AccountController extends BaseController
      * 账号列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  AccountService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '账号管理')]
-    public function index(Request $request, AccountService $service): InertiaResponse
+    public function index(SimpleRequest $request, AccountService $service): InertiaResponse
     {
         return Inertia::render('User/Account', [
             'query' => [
@@ -43,12 +43,12 @@ class AccountController extends BaseController
      * 会员账号列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  AccountService $service
      * @return JsonResponse
      */
     #[ApiName(name: '会员账号列表')]
-    public function list(Request $request, AccountService $service): JsonResponse
+    public function list(SimpleRequest $request, AccountService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250',
@@ -73,12 +73,12 @@ class AccountController extends BaseController
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string          $id
      * @param  int             $type
-     * @param  Request         $request
+     * @param  SimpleRequest $request
      * @param  AccountService  $service
      * @return JsonResponse
      */
     #[ApiName(name: '变更账号信息')]
-    public function update(string $id, int $type, Request $request, AccountService $service): JsonResponse
+    public function update(string $id, int $type, SimpleRequest $request, AccountService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:accounts,account,type,' . $type,
@@ -103,7 +103,7 @@ class AccountController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string          $id
-     * @param  Request         $request
+     * @param  int $type
      * @param  AccountService  $service
      * @return JsonResponse
      */
