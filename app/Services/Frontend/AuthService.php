@@ -5,9 +5,9 @@ namespace App\Services\Frontend;
 use App\Models\User;
 use App\Models\Account;
 use App\Enums\AccountEnum;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use SimpleCMS\Framework\Facades\Finger;
+use SimpleCMS\Nickname\Facades\Nickname;
 use SimpleCMS\Framework\Facades\SystemConfig;
 use SimpleCMS\Framework\Services\SimpleService;
 
@@ -67,7 +67,7 @@ class AuthService extends SimpleService
         $defaultPassword = SystemConfig::getDefaultPassword() ?? env('DEFAULT_PASSWORD', '123456');
         $userSql = [
             'uid' => $this->getNewUid(),
-            'nickname' => $extra && array_key_exists('nickname', $extra) ? $extra['nickname'] : Str::random(4) . rand(1000, 9999),
+            'nickname' => $extra && array_key_exists('nickname', $extra) ? $extra['nickname'] : Nickname::generate(),
             'password' => Hash::make($password ?? $defaultPassword),
             'is_valid' => true,
             'last_login' => $this->item->last_login,

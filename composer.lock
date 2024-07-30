@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "095ea5765833670d43b340d87a7c738c",
+    "content-hash": "b45e45018fcc823ad46ad113f42ef717",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -5050,16 +5050,16 @@
         },
         {
             "name": "simplecms/framework",
-            "version": "1.0.34",
+            "version": "1.0.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hackout/simplecms-framework.git",
-                "reference": "5e278826391bf56cedeea12d6a2582050519441d"
+                "reference": "5865134875183d74741b94f9cc840c633b9f2af1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hackout/simplecms-framework/zipball/5e278826391bf56cedeea12d6a2582050519441d",
-                "reference": "5e278826391bf56cedeea12d6a2582050519441d",
+                "url": "https://api.github.com/repos/hackout/simplecms-framework/zipball/5865134875183d74741b94f9cc840c633b9f2af1",
+                "reference": "5865134875183d74741b94f9cc840c633b9f2af1",
                 "shasum": ""
             },
             "require": {
@@ -5114,9 +5114,65 @@
             ],
             "support": {
                 "issues": "https://github.com/hackout/simplecms-framework/issues",
-                "source": "https://github.com/hackout/simplecms-framework/tree/v1.0.34"
+                "source": "https://github.com/hackout/simplecms-framework/tree/v1.0.35"
             },
-            "time": "2024-07-20T01:50:55+00:00"
+            "time": "2024-07-27T06:53:34+00:00"
+        },
+        {
+            "name": "simplecms/nickname",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hackout/simplecms-nickname.git",
+                "reference": "5248bce08d897512fa1cb71bba731d26fe3eb4b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hackout/simplecms-nickname/zipball/5248bce08d897512fa1cb71bba731d26fe3eb4b9",
+                "reference": "5248bce08d897512fa1cb71bba731d26fe3eb4b9",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=11.0",
+                "php": ">=8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SimpleCMS\\Nickname\\NicknameServiceProvider"
+                    ],
+                    "aliases": {
+                        "Nickname": "SimpleCMS\\Nickname\\Facades\\Nickname"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SimpleCMS\\Nickname\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hackout",
+                    "email": "hackout@vip.qq.com"
+                }
+            ],
+            "description": "用户昵称",
+            "keywords": [
+                "SimpleCMS",
+                "laravel",
+                "nickname"
+            ],
+            "support": {
+                "issues": "https://github.com/hackout/simplecms-nickname/issues",
+                "source": "https://github.com/hackout/simplecms-nickname/tree/v1.0.1"
+            },
+            "time": "2024-07-20T06:35:51+00:00"
         },
         {
             "name": "simplecms/wechat",
@@ -5124,16 +5180,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hackout/simplecms-wechat.git",
-                "reference": "86057b2e876bf90d5c705fc3529a5a782db1f321"
+                "reference": "8a3eedf40fdf4e1a496588da19d1b9256ade4e95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hackout/simplecms-wechat/zipball/86057b2e876bf90d5c705fc3529a5a782db1f321",
-                "reference": "86057b2e876bf90d5c705fc3529a5a782db1f321",
+                "url": "https://api.github.com/repos/hackout/simplecms-wechat/zipball/8a3eedf40fdf4e1a496588da19d1b9256ade4e95",
+                "reference": "8a3eedf40fdf4e1a496588da19d1b9256ade4e95",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0"
+                "php": ">=8.0",
+                "w7corp/easywechat": ">=6.7"
             },
             "type": "library",
             "extra": {
@@ -5169,9 +5226,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hackout/simplecms-wechat/issues",
-                "source": "https://github.com/hackout/simplecms-wechat/tree/1.0.1"
+                "source": "https://github.com/hackout/simplecms-wechat/tree/v1.0.1"
             },
-            "time": "2024-07-06T16:09:22+00:00"
+            "time": "2024-07-27T07:01:47+00:00"
         },
         {
             "name": "spatie/image",
