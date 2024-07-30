@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Services\Backend\RequestLogService;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
 class ManagerLogController extends BaseBackendController
@@ -19,12 +19,12 @@ class ManagerLogController extends BaseBackendController
      * 导航菜单设置
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  RequestLogService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '导航菜单设置')]
-    public function index(SimpleRequest $request, RequestLogService $service): InertiaResponse
+    public function index(Request $request, RequestLogService $service): InertiaResponse
     {
         return Inertia::render('Manager/Log', [
             'query' => [
@@ -41,12 +41,12 @@ class ManagerLogController extends BaseBackendController
      * 导航菜单列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  RequestLogService $service
      * @return JsonResponse
      */
     #[ApiName(name: '导航菜单列表')]
-    public function list(SimpleRequest $request, RequestLogService $service): JsonResponse
+    public function list(Request $request, RequestLogService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250',
@@ -66,12 +66,12 @@ class ManagerLogController extends BaseBackendController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string            $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  RequestLogService $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除操作记录')]
-    public function delete(string $id, SimpleRequest $request, RequestLogService $service): JsonResponse
+    public function delete(string $id, Request $request, RequestLogService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:request_logs,id',

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b45e45018fcc823ad46ad113f42ef717",
+    "content-hash": "6af4011b9b9da056644283dfe004bceb",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -5050,16 +5050,16 @@
         },
         {
             "name": "simplecms/framework",
-            "version": "1.0.36",
+            "version": "1.0.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hackout/simplecms-framework.git",
-                "reference": "f14abe44a6f5b36ed5996f68c2508f401cd1baaa"
+                "reference": "050f61ecdf6a48a185c896c7a237314c2e9e5901"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hackout/simplecms-framework/zipball/f14abe44a6f5b36ed5996f68c2508f401cd1baaa",
-                "reference": "f14abe44a6f5b36ed5996f68c2508f401cd1baaa",
+                "url": "https://api.github.com/repos/hackout/simplecms-framework/zipball/050f61ecdf6a48a185c896c7a237314c2e9e5901",
+                "reference": "050f61ecdf6a48a185c896c7a237314c2e9e5901",
                 "shasum": ""
             },
             "require": {
@@ -5114,9 +5114,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hackout/simplecms-framework/issues",
-                "source": "https://github.com/hackout/simplecms-framework/tree/v1.0.36"
+                "source": "https://github.com/hackout/simplecms-framework/tree/v1.0.37"
             },
-            "time": "2024-07-30T08:08:00+00:00"
+            "time": "2024-07-30T08:39:50+00:00"
         },
         {
             "name": "simplecms/nickname",

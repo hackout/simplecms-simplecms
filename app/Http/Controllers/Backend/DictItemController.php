@@ -6,7 +6,7 @@ use App\Services\Backend\DictItemService;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
 class DictItemController extends BaseBackendController
@@ -16,12 +16,12 @@ class DictItemController extends BaseBackendController
      * 字典项列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  DictItemService $service
      * @return JsonResponse
      */
     #[ApiName(name: '字典项列表')]
-    public function list(SimpleRequest $request, DictItemService $service): JsonResponse
+    public function list(Request $request, DictItemService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250',
@@ -41,12 +41,12 @@ class DictItemController extends BaseBackendController
      * 添加字典项
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  DictItemService $service
      * @return JsonResponse
      */
     #[ApiName(name: '添加字典项')]
-    public function create(SimpleRequest $request, DictItemService $service): JsonResponse
+    public function create(Request $request, DictItemService $service): JsonResponse
     {
         $rules = [
             'name' => 'required',
@@ -75,12 +75,12 @@ class DictItemController extends BaseBackendController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  int $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  DictItemService $service
      * @return JsonResponse
      */
     #[ApiName(name: '编辑字典项')]
-    public function update(int $id, SimpleRequest $request, DictItemService $service): JsonResponse
+    public function update(int $id, Request $request, DictItemService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:dict_items,id',
@@ -123,12 +123,12 @@ class DictItemController extends BaseBackendController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  int $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  DictItemService $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除字典项')]
-    public function delete(int $id, SimpleRequest $request, DictItemService $service): JsonResponse
+    public function delete(int $id, Request $request, DictItemService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:dict_items,id',

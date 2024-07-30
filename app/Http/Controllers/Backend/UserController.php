@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Services\Backend\UserGroupService;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseController;
 
 class UserController extends BaseController
@@ -20,12 +20,12 @@ class UserController extends BaseController
      * 会员列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '会员列表')]
-    public function index(SimpleRequest $request, UserService $service): InertiaResponse
+    public function index(Request $request, UserService $service): InertiaResponse
     {
         return Inertia::render('User/Index', [
             'query' => [
@@ -44,12 +44,12 @@ class UserController extends BaseController
      * 获取会员列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
     #[ApiName(name: '获取会员列表')]
-    public function list(SimpleRequest $request, UserService $service): JsonResponse
+    public function list(Request $request, UserService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250',
@@ -71,12 +71,12 @@ class UserController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
     #[ApiName(name: '修改用户密码')]
-    public function password(string $id, SimpleRequest $request, UserService $service): JsonResponse
+    public function password(string $id, Request $request, UserService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id',
@@ -106,12 +106,12 @@ class UserController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
     #[ApiName(name: '修改用户基础资料')]
-    public function update(string $id, SimpleRequest $request, UserService $service): JsonResponse
+    public function update(string $id, Request $request, UserService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id',
@@ -144,12 +144,12 @@ class UserController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
     #[ApiName(name: '修改个人资料')]
-    public function profile(string $id, SimpleRequest $request, ProfileService $service): JsonResponse
+    public function profile(string $id, Request $request, ProfileService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id',
@@ -189,12 +189,12 @@ class UserController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return InertiaResponse|
      */
     #[ApiName(name: '查看会员详情')]
-    public function detail(string $id, SimpleRequest $request, UserService $service): InertiaResponse
+    public function detail(string $id, Request $request, UserService $service): InertiaResponse
     {
         $rules = [
             'id' => 'exists:users,id'
@@ -219,12 +219,12 @@ class UserController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string          $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService     $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除会员信息')]
-    public function delete(string $id, SimpleRequest $request, UserService $service): JsonResponse
+    public function delete(string $id, Request $request, UserService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id'

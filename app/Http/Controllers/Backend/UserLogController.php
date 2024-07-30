@@ -6,7 +6,7 @@ use App\Services\Backend\UserLogService;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseController;
 
 class UserLogController extends BaseController
@@ -17,12 +17,12 @@ class UserLogController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string          $id
-     * @param  SimpleRequest   $request
+     * @param  Request   $request
      * @param  UserLogService  $service
      * @return JsonResponse
      */
     #[ApiName(name: '获取会员日志')]
-    public function list(string $id, SimpleRequest $request, UserLogService $service): JsonResponse
+    public function list(string $id, Request $request, UserLogService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id',
@@ -53,12 +53,12 @@ class UserLogController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string          $id
-     * @param  SimpleRequest   $request
+     * @param  Request   $request
      * @param  UserLogService  $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除会员信息')]
-    public function delete(string $id, string $log_id, SimpleRequest $request, UserLogService $service): JsonResponse
+    public function delete(string $id, string $log_id, Request $request, UserLogService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id',

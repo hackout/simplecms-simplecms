@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use App\Services\Backend\SystemConfigService;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
 class SystemController extends BaseBackendController
@@ -18,12 +18,12 @@ class SystemController extends BaseBackendController
      * 系统设置页面
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  SystemConfigService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '系统设置')]
-    public function index(SimpleRequest $request, SystemConfigService $service): InertiaResponse
+    public function index(Request $request, SystemConfigService $service): InertiaResponse
     {
         return Inertia::render('System/Index', [
             'systemConfig' => $service->getSystemConfig()
@@ -34,12 +34,12 @@ class SystemController extends BaseBackendController
      * 获取系统参数列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  SystemConfigService $service
      * @return JsonResponse
      */
     #[ApiName(name: '获取系统参数列表')]
-    public function list(SimpleRequest $request, SystemConfigService $service): JsonResponse
+    public function list(Request $request, SystemConfigService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250',
@@ -59,12 +59,12 @@ class SystemController extends BaseBackendController
      * 系统缓存管理
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest             $request
+     * @param  Request             $request
      * @param  SystemConfigService $service
      * @return InertiaResponse
      */
     #[ApiName(name: '系统缓存管理')]
-    public function cache(SimpleRequest $request, SystemConfigService $service): InertiaResponse
+    public function cache(Request $request, SystemConfigService $service): InertiaResponse
     {
         return Inertia::render('System/Cache', [
             'cache' => $service->getCacheSize()
@@ -89,12 +89,12 @@ class SystemController extends BaseBackendController
      * 创建系统参数
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  SystemConfigService $service
      * @return JsonResponse
      */
     #[ApiName(name: '创建系统参数')]
-    public function create(SimpleRequest $request, SystemConfigService $service): JsonResponse
+    public function create(Request $request, SystemConfigService $service): JsonResponse
     {
         $rules = [
             'name' => 'required|between:2,50',
@@ -124,12 +124,12 @@ class SystemController extends BaseBackendController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string              $slug
-     * @param  SimpleRequest             $request
+     * @param  Request             $request
      * @param  SystemConfigService $service
      * @return JsonResponse
      */
     #[ApiName(name: '修改系统参数')]
-    public function update(string $slug, SimpleRequest $request, SystemConfigService $service): JsonResponse
+    public function update(string $slug, Request $request, SystemConfigService $service): JsonResponse
     {
         $rules = [
             'name' => 'required|between:2,50',
@@ -159,12 +159,12 @@ class SystemController extends BaseBackendController
      * 删除系统参数
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest             $request
+     * @param  Request             $request
      * @param  SystemConfigService $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除系统参数')]
-    public function delete(string $slug, SimpleRequest $request, SystemConfigService $service): JsonResponse
+    public function delete(string $slug, Request $request, SystemConfigService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:system_configs,id',
@@ -186,12 +186,12 @@ class SystemController extends BaseBackendController
      * 修改系统参数
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest             $request
+     * @param  Request             $request
      * @param  SystemConfigService $service
      * @return JsonResponse
      */
     #[ApiName(name: '修改系统参数')]
-    public function save(SimpleRequest $request, SystemConfigService $service): JsonResponse
+    public function save(Request $request, SystemConfigService $service): JsonResponse
     {
         list($rules, $messages) = $service->getValidation();
         $data = $request->validate($rules, $messages);

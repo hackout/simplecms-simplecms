@@ -9,7 +9,7 @@ use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController;
 
 class RoleController extends BackendController
@@ -19,12 +19,12 @@ class RoleController extends BackendController
      * 角色管理
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  RoleService $service
      * @return JsonResponse
      */
     #[ApiName(name: '角色管理')]
-    public function index(SimpleRequest $request, RoleService $service): InertiaResponse
+    public function index(Request $request, RoleService $service): InertiaResponse
     {
         return Inertia::render('Manager/Role', [
             'query' => [
@@ -42,12 +42,12 @@ class RoleController extends BackendController
      * 获取角色列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  RoleService $service
      * @return JsonResponse
      */
     #[ApiName(name: '获取角色列表')]
-    public function list(SimpleRequest $request, RoleService $service): JsonResponse
+    public function list(Request $request, RoleService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250',
@@ -66,12 +66,12 @@ class RoleController extends BackendController
      * 添加角色
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  RoleService  $service
      * @return JsonResponse
      */
     #[ApiName(name: '添加角色')]
-    public function create(SimpleRequest $request, RoleService $service): JsonResponse
+    public function create(Request $request, RoleService $service): JsonResponse
     {
         $rules = [
             'name' => 'required|between:2,50',
@@ -98,12 +98,12 @@ class RoleController extends BackendController
      * 编辑角色
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  RoleService  $service
      * @return JsonResponse
      */
     #[ApiName(name: '编辑角色')]
-    public function update(string $id, SimpleRequest $request, RoleService $service): JsonResponse
+    public function update(string $id, Request $request, RoleService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:roles,id',
@@ -144,12 +144,12 @@ class RoleController extends BackendController
      * 删除角色
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  RoleService $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除角色')]
-    public function delete(int $id, SimpleRequest $request, RoleService $service): JsonResponse
+    public function delete(int $id, Request $request, RoleService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:roles,id',

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Services\Frontend\AccountService;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
@@ -16,12 +16,12 @@ class AccountController extends BaseController
      * AccountController 获取列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  AccountService $service
      * @return JsonResponse
      */
      #[ApiName(name:'AccountController-获取列表')]
-    public function index(SimpleRequest $request,AccountService $service):JsonResponse
+    public function index(Request $request,AccountService $service):JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -38,12 +38,12 @@ class AccountController extends BaseController
      * AccountController 添加信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  AccountService $service
      * @return JsonResponse
      */
      #[ApiName(name:'AccountController-添加信息')]
-    public function create(SimpleRequest $request,AccountService $service):JsonResponse
+    public function create(Request $request,AccountService $service):JsonResponse
     {
         $rules = [
             //
@@ -61,12 +61,12 @@ class AccountController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  AccountService $service
      * @return JsonResponse
      */
      #[ApiName(name:'AccountController-编辑信息')]
-    public function update(string $id,SimpleRequest $request,AccountService $service):JsonResponse
+    public function update(string $id,Request $request,AccountService $service):JsonResponse
     {
         $rules = [
             'id' => 'exists:accounts,id'
@@ -92,12 +92,12 @@ class AccountController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  AccountService $service
      * @return JsonResponse
      */
      #[ApiName(name:'AccountController-信息详情')]
-    public function detail(string $id,SimpleRequest $request,AccountService $service):JsonResponse
+    public function detail(string $id,Request $request,AccountService $service):JsonResponse
     {
         $rules = [
             'id' => 'exists:accounts,id'
@@ -121,12 +121,12 @@ class AccountController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  CommitInlineService $commitInlineService
      * @return JsonResponse
      */
      #[ApiName(name:'AccountController-删除信息')]
-    public function delete(string $id,SimpleRequest $request,AccountService $service): JsonResponse
+    public function delete(string $id,Request $request,AccountService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:accounts,id'

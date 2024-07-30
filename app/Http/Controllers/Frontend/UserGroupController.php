@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Services\Frontend\UserGroupService;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
 class UserGroupController extends BaseController
@@ -16,12 +16,12 @@ class UserGroupController extends BaseController
      * UserGroupController 获取列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'UserGroupController-获取列表')]
-    public function index(SimpleRequest $request, UserGroupService $service): JsonResponse
+    public function index(Request $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -38,12 +38,12 @@ class UserGroupController extends BaseController
      * UserGroupController 添加信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'UserGroupController-添加信息')]
-    public function create(SimpleRequest $request, UserGroupService $service): JsonResponse
+    public function create(Request $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             //
@@ -61,12 +61,12 @@ class UserGroupController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'UserGroupController-编辑信息')]
-    public function update(string $id, SimpleRequest $request, UserGroupService $service): JsonResponse
+    public function update(string $id, Request $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:user_groups,id'
@@ -92,12 +92,12 @@ class UserGroupController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'UserGroupController-信息详情')]
-    public function detail(string $id, SimpleRequest $request, UserGroupService $service): JsonResponse
+    public function detail(string $id, Request $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:user_groups,id'
@@ -121,12 +121,12 @@ class UserGroupController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserGroupService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'UserGroupController-删除信息')]
-    public function delete(string $id, SimpleRequest $request, UserGroupService $service): JsonResponse
+    public function delete(string $id, Request $request, UserGroupService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:user_groups,id'

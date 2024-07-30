@@ -8,7 +8,7 @@ use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
 class DictController extends BaseBackendController
@@ -17,11 +17,11 @@ class DictController extends BaseBackendController
      * 数据字典
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @return InertiaResponse
      */
     #[ApiName(name: '数据字典')]
-    public function index(SimpleRequest $request): InertiaResponse
+    public function index(Request $request): InertiaResponse
     {
         return Inertia::render('System/Dict', [
             'query' => [
@@ -36,12 +36,12 @@ class DictController extends BaseBackendController
      * 数据字典列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  DictService $service
      * @return JsonResponse
      */
     #[ApiName(name: '数据字典列表')]
-    public function list(SimpleRequest $request, DictService $service): JsonResponse
+    public function list(Request $request, DictService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -58,12 +58,12 @@ class DictController extends BaseBackendController
      * 添加数据字典
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  DictService $service
      * @return JsonResponse
      */
     #[ApiName(name: '添加数据字典')]
-    public function create(SimpleRequest $request, DictService $service): JsonResponse
+    public function create(Request $request, DictService $service): JsonResponse
     {
         $rules = [
             'name' => 'required|between:2,50',
@@ -88,12 +88,12 @@ class DictController extends BaseBackendController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  int $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  DictService $service
      * @return JsonResponse
      */
     #[ApiName(name: '编辑数据字典')]
-    public function update(int $id, SimpleRequest $request, DictService $service): JsonResponse
+    public function update(int $id, Request $request, DictService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:dicts,id',
@@ -130,12 +130,12 @@ class DictController extends BaseBackendController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  int $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  DictService $service
      * @return JsonResponse
      */
     #[ApiName(name: '删除数据字典')]
-    public function delete(int $id, SimpleRequest $request, DictService $service): JsonResponse
+    public function delete(int $id, Request $request, DictService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:dicts,id',

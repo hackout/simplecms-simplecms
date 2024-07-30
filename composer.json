@@ -15,7 +15,7 @@
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "simplecms/framework": "^1.0",
+        "simplecms/framework": "*",
         "simplecms/nickname": "^1.0",
         "simplecms/wechat": "^1.0",
         "tightenco/ziggy": "^2.2"

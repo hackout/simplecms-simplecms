@@ -8,7 +8,7 @@ use App\Services\Backend\ManagerService;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
@@ -36,12 +36,12 @@ class AuthController extends BaseBackendController
      * 登录后台
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest                          $request
+     * @param  Request                          $request
      * @param  AuthService                      $service
      * @return RedirectResponse|InertiaResponse
      */
     #[ApiName(name: '登录后台')]
-    public function auth(SimpleRequest $request, AuthService $service): RedirectResponse|InertiaResponse
+    public function auth(Request $request, AuthService $service): RedirectResponse|InertiaResponse
     {
         $data = $request->validate([
             'account' => 'required|exists:managers,account',
@@ -93,12 +93,12 @@ class AuthController extends BaseBackendController
      * 发送重置密码链接
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest                          $request
+     * @param  Request                          $request
      * @param  AuthService                      $service
      * @return RedirectResponse
      */
     #[ApiName(name: '发送重置密码链接')]
-    public function sentResetLink(SimpleRequest $request, AuthService $service): RedirectResponse
+    public function sentResetLink(Request $request, AuthService $service): RedirectResponse
     {
         $data = $request->validate([
             'email' => 'required|exists:managers,email',
@@ -135,12 +135,12 @@ class AuthController extends BaseBackendController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string                           $code
-     * @param  SimpleRequest                          $request
+     * @param  Request                          $request
      * @param  AuthService                      $service
      * @return RedirectResponse
      */
     #[ApiName(name: '重置登录密码')]
-    public function resetPassword(string $code, SimpleRequest $request, AuthService $service): RedirectResponse
+    public function resetPassword(string $code, Request $request, AuthService $service): RedirectResponse
     {
         $rules = [
             'token' => 'exists:password_reset_tokens,token',

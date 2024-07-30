@@ -6,7 +6,7 @@ use App\Services\Frontend\UserService;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
 class UserController extends BaseController
@@ -16,12 +16,12 @@ class UserController extends BaseController
      * UserController 获取列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
      #[ApiName(name:'UserController-获取列表')]
-    public function index(SimpleRequest $request,UserService $service):JsonResponse
+    public function index(Request $request,UserService $service):JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -38,12 +38,12 @@ class UserController extends BaseController
      * UserController 添加信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
      #[ApiName(name:'UserController-添加信息')]
-    public function create(SimpleRequest $request,UserService $service):JsonResponse
+    public function create(Request $request,UserService $service):JsonResponse
     {
         $rules = [
             //
@@ -61,12 +61,12 @@ class UserController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
      #[ApiName(name:'UserController-编辑信息')]
-    public function update(string $id,SimpleRequest $request,UserService $service):JsonResponse
+    public function update(string $id,Request $request,UserService $service):JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id'
@@ -92,12 +92,12 @@ class UserController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
      #[ApiName(name:'UserController-信息详情')]
-    public function detail(string $id,SimpleRequest $request,UserService $service):JsonResponse
+    public function detail(string $id,Request $request,UserService $service):JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id'
@@ -121,12 +121,12 @@ class UserController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
      #[ApiName(name:'UserController-删除信息')]
-    public function delete(string $id,SimpleRequest $request,UserService $service): JsonResponse
+    public function delete(string $id,Request $request,UserService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id'

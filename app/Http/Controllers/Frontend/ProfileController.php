@@ -6,7 +6,7 @@ use App\Services\Frontend\ProfileService;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use SimpleCMS\Framework\Http\Requests\SimpleRequest;
+use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
 class ProfileController extends BaseController
@@ -16,12 +16,12 @@ class ProfileController extends BaseController
      * ProfileController 获取列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'ProfileController-获取列表')]
-    public function index(SimpleRequest $request, ProfileService $service): JsonResponse
+    public function index(Request $request, ProfileService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -38,12 +38,12 @@ class ProfileController extends BaseController
      * ProfileController 添加信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'ProfileController-添加信息')]
-    public function create(SimpleRequest $request, ProfileService $service): JsonResponse
+    public function create(Request $request, ProfileService $service): JsonResponse
     {
         $rules = [
             //
@@ -61,12 +61,12 @@ class ProfileController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'ProfileController-编辑信息')]
-    public function update(string $id, SimpleRequest $request, ProfileService $service): JsonResponse
+    public function update(string $id, Request $request, ProfileService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:profiles,id'
@@ -92,12 +92,12 @@ class ProfileController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'ProfileController-信息详情')]
-    public function detail(string $id, SimpleRequest $request, ProfileService $service): JsonResponse
+    public function detail(string $id, Request $request, ProfileService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:profiles,id'
@@ -121,12 +121,12 @@ class ProfileController extends BaseController
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
-     * @param  SimpleRequest $request
+     * @param  Request $request
      * @param  ProfileService $service
      * @return JsonResponse
      */
     #[ApiName(name: 'ProfileController-删除信息')]
-    public function delete(string $id, SimpleRequest $request, ProfileService $service): JsonResponse
+    public function delete(string $id, Request $request, ProfileService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:profiles,id'
