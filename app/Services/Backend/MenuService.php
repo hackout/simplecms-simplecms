@@ -12,7 +12,7 @@ use SimpleCMS\Framework\Exceptions\SimpleException;
 class MenuService extends SimpleService
 {
 
-    public ?string $className = Menu::class;
+    public string $className = Menu::class;
 
     /**
      * 获取列表

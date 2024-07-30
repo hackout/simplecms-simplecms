@@ -8,7 +8,7 @@ use SimpleCMS\Framework\Services\SimpleService;
 
 class RequestLogService extends SimpleService
 {
-    public ?string $className = RequestLog::class;
+    public string $className = RequestLog::class;
 
     /**
      * 获取列表

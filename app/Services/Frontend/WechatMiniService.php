@@ -3,14 +3,14 @@
 namespace App\Services\Frontend;
 
 use Illuminate\Support\Collection;
-use App\Packages\Wechat\MiniProgram;
 use SimpleCMS\Framework\Exceptions\SimpleException;
+use SimpleCMS\Wechat\Facades\MiniProgram;
 
 class WechatMiniService
 {
     public function getOpenId(string $code): Collection
     {
-        $session = (new MiniProgram())->codeToSession($code);
+        $session = MiniProgram::codeToSession($code);
         if (!$session->has('openid') && $session->has('errmsg')) {
             throw new SimpleException($session->get('errmsg'));
         }

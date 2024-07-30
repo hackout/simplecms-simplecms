@@ -9,7 +9,7 @@ use SimpleCMS\Framework\Services\SimpleService;
 class ManagerService extends SimpleService
 {
 
-    public ?string $className = Manager::class;
+    public string $className = Manager::class;
 
     /**
      * 获取管理员选项列表

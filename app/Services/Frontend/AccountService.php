@@ -9,7 +9,7 @@ use SimpleCMS\Framework\Services\SimpleService;
 class AccountService extends SimpleService
 {
 
-    public ?string $className = Account::class;
+    public string $className = Account::class;
     
     /**
      * 获取列表

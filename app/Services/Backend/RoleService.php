@@ -10,7 +10,7 @@ use SimpleCMS\Framework\Services\SimpleService;
 
 class RoleService extends SimpleService
 {
-    public ?string $className = Role::class;
+    public string $className = Role::class;
 
     public function getRoleOptions(): array
     {

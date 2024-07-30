@@ -16,7 +16,7 @@ class UserService extends SimpleService
 {
     use ExportTemplateTrait, ImportTemplateTrait;
 
-    public ?string $className = User::class;
+    public string $className = User::class;
 
     /**
      * 获取默认密码

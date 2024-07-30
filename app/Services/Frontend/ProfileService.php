@@ -3,13 +3,12 @@
 namespace App\Services\Frontend;
 
 use App\Models\Profile;
-use App\Enums\Profile as ProfileEnum;
 use SimpleCMS\Framework\Services\SimpleService;
 
 class ProfileService extends SimpleService
 {
 
-    public ?string $className = Profile::class;
+    public string $className = Profile::class;
     
     /**
      * 获取列表

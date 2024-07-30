@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class DashboardService extends SimpleService
 {
     protected Manager|null $account;
-    public ?string $className = Manager::class;
+    public string $className = Manager::class;
 
     /**
      * 修改个人资料

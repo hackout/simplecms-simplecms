@@ -8,7 +8,7 @@ use SimpleCMS\Framework\Services\SimpleService;
 class DictService extends SimpleService
 {
 
-    public ?string $className = Dict::class;
+    public string $className = Dict::class;
 
     /**
      * 获取列表

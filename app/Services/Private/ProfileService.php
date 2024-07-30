@@ -5,11 +5,10 @@ namespace App\Services\Private;
 use App\Models\User;
 use App\Models\Profile;
 use SimpleCMS\Framework\Services\SimpleService;
-use App\Enums\Profile as ProfileEnum;
 
 class ProfileService extends SimpleService
 {
-    public ?string $className = Profile::class;
+    public string $className = Profile::class;
 
     /**
      * 创建用户资料

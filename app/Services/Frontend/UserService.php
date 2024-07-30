@@ -3,13 +3,12 @@
 namespace App\Services\Frontend;
 
 use App\Models\User;
-use App\Enums\User as UserEnum;
 use SimpleCMS\Framework\Services\SimpleService;
 
 class UserService extends SimpleService
 {
 
-    public ?string $className = User::class;
+    public string $className = User::class;
     
     /**
      * 获取列表

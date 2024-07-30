@@ -13,7 +13,7 @@ use SimpleCMS\Framework\Facades\SystemConfig as SystemConfigManage;
 
 class SystemConfigService extends SimpleService
 {
-    public ?string $className = SystemConfig::class;
+    public string $className = SystemConfig::class;
 
     /**
      * 系统参数类型

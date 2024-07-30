@@ -7,7 +7,7 @@ use SimpleCMS\Framework\Services\SimpleService;
 
 class DictItemService extends SimpleService
 {
-    public ?string $className = DictItem::class;
+    public string $className = DictItem::class;
 
     /**
      * 获取列表

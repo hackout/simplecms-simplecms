@@ -2,14 +2,13 @@
 
 namespace App\Services\Private;
 
-use App\Models\Account;
 use App\Models\User;
+use App\Models\Account;
 use SimpleCMS\Framework\Services\SimpleService;
-use App\Enums\User as UserEnum;
 
 class UserService extends SimpleService
 {
-    public ?string $className = User::class;
+    public string $className = User::class;
     
     /**
      * 更新账号登录信息

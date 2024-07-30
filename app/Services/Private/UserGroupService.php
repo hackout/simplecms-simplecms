@@ -8,7 +8,7 @@ use SimpleCMS\Framework\Services\SimpleService;
 
 class UserGroupService extends SimpleService
 {
-    public ?string $className = UserGroup::class;
+    public string $className = UserGroup::class;
 
     public function createByUser(User $user):void
     {

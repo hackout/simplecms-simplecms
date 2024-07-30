@@ -6,15 +6,15 @@ use App\Models\User;
 use App\Models\Account;
 use App\Enums\AccountEnum;
 use Illuminate\Support\Str;
-use App\Packages\Finger\Finger;
 use Illuminate\Support\Facades\Hash;
+use SimpleCMS\Framework\Facades\Finger;
 use SimpleCMS\Framework\Facades\SystemConfig;
 use SimpleCMS\Framework\Services\SimpleService;
 
 class AuthService extends SimpleService
 {
 
-    public ?string $className = Account::class;
+    public string $className = Account::class;
 
     /**
      * OpenId自动登录

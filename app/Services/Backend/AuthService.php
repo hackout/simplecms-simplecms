@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class AuthService extends SimpleService
 {
     protected Manager|null $account;
-    public ?string $className = Manager::class;
+    public string $className = Manager::class;
 
     /**
      * 后台登录

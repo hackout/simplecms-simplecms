@@ -3,13 +3,12 @@
 namespace App\Services\Frontend;
 
 use App\Models\UserGroup;
-use App\Enums\UserGroup as UserGroupEnum;
 use SimpleCMS\Framework\Services\SimpleService;
 
 class UserGroupService extends SimpleService
 {
 
-    public ?string $className = UserGroup::class;
+    public string $className = UserGroup::class;
     
     /**
      * 获取列表

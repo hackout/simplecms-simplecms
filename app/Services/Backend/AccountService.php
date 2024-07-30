@@ -12,7 +12,7 @@ class AccountService extends SimpleService
 {
     use ExportTemplateTrait, ImportTemplateTrait;
 
-    public ?string $className = Account::class;
+    public string $className = Account::class;
 
     /**
      * 获取列表
