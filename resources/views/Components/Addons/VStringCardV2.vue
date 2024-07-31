@@ -1,9 +1,9 @@
 <template>
-    <div class="simpleCMS-StringCardV2">
-        <div class="simpleCMS-StringCardV2-extra" :class="type">
+    <div class="SimpleCMS-StringCardV2">
+        <div class="SimpleCMS-StringCardV2-extra" :class="type">
             <component :is="`SimpleCMS${icon}`" size="28px"></component>
         </div>
-        <div class="simpleCMS-StringCardV2-content">
+        <div class="SimpleCMS-StringCardV2-content">
             <span :title="text">{{ text }}</span>
             <span>{{ name }}</span>
         </div>

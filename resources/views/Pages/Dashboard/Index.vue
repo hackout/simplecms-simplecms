@@ -1,6 +1,6 @@
 <template>
     <DefaultLayout :breadcrumb="false">
-        <div class="simpleCMS-box">
+        <div class="SimpleCMS-box">
             <el-row :gutter="20">
                 <el-col :span="8">
                     <VStringCard style="margin-top:20px;" name="CPU使用率" :text="sys.cpu.used" icon="IconCpu" type="success"></VStringCard>

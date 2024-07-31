@@ -646,7 +646,7 @@
             color: var(--el-color-primary);
         }
 
-        .simpleCMS {
+        .SimpleCMS {
             background-image: radial-gradient(100% 100% at 80% 20%, #0e123a 0%, var(--cms-bg-color) 50%);
             width: 100vw;
             height: 100vh;
@@ -708,7 +708,7 @@
     </style>
 </head>
 
-<body class="simpleCMS">
+<body class="SimpleCMS">
     <div class="box">
         <h1>@yield('title')</h1>
         <h4>@yield('message')</h4>

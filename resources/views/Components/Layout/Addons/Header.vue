@@ -1,18 +1,18 @@
 <template>
-    <div class="simpleCMS-header">
-        <div class="simpleCMS-header-box">
-            <div class="simpleCMS-header-box-search">
+    <div class="SimpleCMS-header">
+        <div class="SimpleCMS-header-box">
+            <div class="SimpleCMS-header-box-search">
                 <el-button circle size="large">
                     <SimpleCMSIconSearch size="16px"></SimpleCMSIconSearch>
                 </el-button>
-                <div class="simpleCMS-header-box-search-text">
+                <div class="SimpleCMS-header-box-search-text">
                     <span>搜索</span>
                 </div>
-                <div class="simpleCMS-header-box-search-tip">
+                <div class="SimpleCMS-header-box-search-tip">
                     <span>Ctrl + K</span>
                 </div>
             </div>
-            <div class="simpleCMS-header-box-navbar">
+            <div class="SimpleCMS-header-box-navbar">
                 <span>{{ $tool.dateFormat(current_time, '⏲ YYYY-MM-DD HH:mm:ss') }}</span>
                 <el-popover placement="bottom-end" :width="300">
                     <div class="profile">

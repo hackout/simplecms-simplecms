@@ -1,5 +1,5 @@
 <template>
-    <div class="simpleCMS-tabBar">
+    <div class="SimpleCMS-tabBar">
         
     </div>
 </template>

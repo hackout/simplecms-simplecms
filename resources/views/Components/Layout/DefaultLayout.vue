@@ -1,5 +1,5 @@
 <template>
-    <div class="simpleCMS-layout">
+    <div class="SimpleCMS-layout">
 
         <Head :title="pageTitle" />
         <el-container>

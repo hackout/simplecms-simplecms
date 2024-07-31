@@ -1,8 +1,8 @@
 <template>
-    <div class="simpleCMS-upload-file">
+    <div class="SimpleCMS-upload-file">
         <template v-if="multiple">
             <el-tooltip v-for="(_file, index) in image" placement="left" :disabled="type != 'image'"
-                popper-class="simpleCMS-upload-file-tooltip" :key="index">
+                popper-class="SimpleCMS-upload-file-tooltip" :key="index">
                 <template #content><el-image fit="fill" :src="_file.url ? _file.url : _file" style="width:128px;height:128px;" /></template>
                 <el-input :value="_file.name ? _file.name : fileName[index]" style="margin-bottom:6px" :placeholder="placeholderText" readonly>
                     <template #suffix>
@@ -17,7 +17,7 @@
             </el-input>
         </template>
         <el-tooltip v-else placement="top" :disabled="type != 'image' || !image || image.length == 0"
-            popper-class="simpleCMS-upload-file-tooltip">
+            popper-class="SimpleCMS-upload-file-tooltip">
             <template #content><el-image fit="fill" :src="image" style="width:128px;height:128px;" /></template>
             <el-input @click="openFileRef" v-model="fileName" :placeholder="placeholderText" readonly>
                 <template #suffix>

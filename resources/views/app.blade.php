@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div id="app" class="simpleCMS" data-page="{{ json_encode($page) }}"></div>
+    <div id="app" class="SimpleCMS" data-page="{{ json_encode($page) }}"></div>
     <div id="loading-bg">
         <div class="loading-logo">
             <img src="/assets/logo_load.png" />

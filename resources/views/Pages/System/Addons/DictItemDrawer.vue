@@ -20,7 +20,7 @@
         <el-table-column label="名称" width="200px" prop="name">
             <template #default="scope">
                 <el-tooltip placement="top" :disabled="!scope.row.thumbnail || scope.row.thumbnail.length == 0"
-                    popper-class="simpleCMS-upload-file-tooltip">
+                    popper-class="SimpleCMS-upload-file-tooltip">
                     <template #content><el-image :src="scope.row.thumbnail"
                             style="width:128px;height:128px;" /></template>
                     <span>{{ scope.row.name }}</span>

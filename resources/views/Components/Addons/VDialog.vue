@@ -1,28 +1,28 @@
 <template>
-    <div class="simpleCMS-dialog">
-        <div class="simpleCMS-dialog-button" ref="dialogButtonRef" @click="openDialog">
+    <div class="SimpleCMS-dialog">
+        <div class="SimpleCMS-dialog-button" ref="dialogButtonRef" @click="openDialog">
             <slot name="button"></slot>
         </div>
         <div v-if="dialogAppend" ref="dialogOverlayRef" v-show="showOverlay" @click.stop="closeDialog"
-            class="simpleCMS-dialog-overlay"></div>
-        <div class="simpleCMS-dialog-box" v-if="dialogAppend" v-show="showVisit" :class="offsetClass" ref="dialogBoxRef"
+            class="SimpleCMS-dialog-overlay"></div>
+        <div class="SimpleCMS-dialog-box" v-if="dialogAppend" v-show="showVisit" :class="offsetClass" ref="dialogBoxRef"
             :style="dialogStyle">
-            <div class="simpleCMS-dialog-header">
+            <div class="SimpleCMS-dialog-header">
                 <span>{{ title }}</span>
-                <div class="simpleCMS-dialog-header-close" @click="closeDialog">
+                <div class="SimpleCMS-dialog-header-close" @click="closeDialog">
                     <SimpleCMSIconX size="24px"></SimpleCMSIconX>
                 </div>
             </div>
-            <div class="simpleCMS-dialog-body">
+            <div class="SimpleCMS-dialog-body">
                 <slot v-if="$slots.default"></slot>
                 <template v-else>
                     <span v-if="textContent">{{ textContent }}</span>
                 </template>
             </div>
-            <div class="simpleCMS-dialog-footer">
+            <div class="SimpleCMS-dialog-footer">
                 <slot v-if="$slots.footer" name="footer"></slot>
                 <template v-else>
-                    <div class="simpleCMS-dialog-footer-buttons" v-if="dialogType === 'confirm' || dialogType === ''">
+                    <div class="SimpleCMS-dialog-footer-buttons" v-if="dialogType === 'confirm' || dialogType === ''">
                         <el-button @click="cancelDialog" class="el-button--dark">{{ cancelText
                             }}</el-button>
                         <el-button @click="confirmDialog" :loading="saving" type="primary">{{ confirmText
@@ -152,7 +152,7 @@ export default {
             }
         },
         autoIndex() {
-            return document.querySelectorAll('.simpleCMS-dialog-box').length
+            return document.querySelectorAll('.SimpleCMS-dialog-box').length
         },
         convertStyle() {
             const element = this.$refs.dialogButtonRef

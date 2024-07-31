@@ -1,4 +1,4 @@
-.simpleCMS {
+.SimpleCMS {
 
     &-upload-file {
         width: 100%;
@@ -12,7 +12,7 @@
     }
 }
 
-.simpleCMS-upload-file-tooltip {
+.SimpleCMS-upload-file-tooltip {
     z-index: calc(var(--el-index-popper) + 4001) !important;
     border-radius: var(--el-border-radius-base) !important;
     background-color: var(--el-bg-color-overlay) !important;
