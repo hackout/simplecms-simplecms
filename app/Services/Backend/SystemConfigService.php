@@ -104,26 +104,31 @@ class SystemConfigService extends SimpleService
      */
     public function save(array $data): void
     {
-        $sql = collect($data);
-        $configs = collect($this->getSystemConfig());
-        $file = $configs->filter(fn(array $n) => $n['type'] == 'file' || $n['type'] == 'image')->values()->pluck('code')->toArray();
-        $array = $configs->filter(fn(array $n) => $n['type'] == 'list' || $n['type'] == 'checkbox')->values()->pluck('code')->toArray();
-        $strings = $configs->filter(fn(array $n) => $n['type'] != 'list' && $n['type'] != 'checkbox' && $n['type'] != 'image' && $n['type'] != 'file')->values()->pluck('code')->toArray();
-        if (count($strings)) {
-            parent::quick('content', $sql->only($strings)->toArray());
-        }
-        if (count($array)) {
-            parent::quick('content', $sql->only($strings)->map(fn($value) => json_encode($value))->toArray());
-        }
-        if (count($file)) {
-            foreach ($file as $code) {
-                $value = $sql->get($code);
-                if ($value && $value instanceof UploadedFile) {
-                    $item = parent::findById($code);
-                    $item->media->each(fn(Media $media) => $media->delete());
-                    $item->addMedia($value)->toMediaCollection(SystemConfig::MEDIA_FILE);
+        foreach ($data as $key => $value) {
+            tap(SystemConfig::where('code',$key)->first(), function (SystemConfig $systemConfig) use ($value) {
+                if (
+                    !in_array($systemConfig->type, [
+                        'list',
+                        'checkbox',
+                        'image',
+                        'file'
+                    ])
+                ) {
+                    $systemConfig->update(['content' => $value]);
+                } else {
+                    $this->updateArray($systemConfig,$value);
                 }
-            }
+            });
+        }
+    }
+
+    private function updateArray(SystemConfig $systemConfig,$value):void
+    {
+        if (in_array($systemConfig->type, ['list', 'checkbox'])) {
+            $systemConfig->update(['content' => json_encode($value)]);
+        } elseif ($value && $value instanceof UploadedFile) {
+            $systemConfig->media && $systemConfig->media()->delete();
+            $systemConfig->addMedia($value)->toMediaCollection(SystemConfig::MEDIA_FILE);
         }
     }
 

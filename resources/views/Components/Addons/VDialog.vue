@@ -1,5 +1,5 @@
 <template>
-    <div class="SimpleCMS-dialog">
+    <div class="SimpleCMS-dialog" style="height:auto;">
         <div class="SimpleCMS-dialog-button" ref="dialogButtonRef" @click="openDialog">
             <slot name="button"></slot>
         </div>
