@@ -69,10 +69,10 @@ export default {
             }
         },
         breadcrumb(val) {
-            this.pageTitle = val
+            this.showBreadcrumb = val
         },
         tabBar(val) {
-            this.pageTitle = val
+            this.showTabBar = val
         }
     },
     data() {

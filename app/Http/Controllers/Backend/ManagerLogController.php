@@ -12,6 +12,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
+/**
+ * 后台管理员日志控制器
+ *
+ * 负责管理员操作日志的查看和清理逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read mixed $service 业务服务
+ */
+#[ApiName(name: '后台管理员日志控制器')]
 class ManagerLogController extends BaseBackendController
 {
 

@@ -9,6 +9,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
+/**
+ * 数据字典项控制器
+ *
+ * 负责数据字典子项的列表查询与增删改操作。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read mixed $service 业务服务
+ */
+#[ApiName(name: '数据字典项控制器')]
 class DictItemController extends BaseBackendController
 {
 

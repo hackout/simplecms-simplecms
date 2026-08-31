@@ -10,6 +10,17 @@ use App\Services\Backend\SystemConfigService;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
+/**
+ * 后台控制器
+ *
+ * 负责后台首页仪表盘与系统信息的统一展示与入口控制。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read SystemConfigService $service 系统配置服务
+ * @property-read DashboardService $dashboardService 仪表盘服务
+ */
+#[ApiName(name: '后台控制器')]
 class BackendController extends BaseBackendController
 {
 
@@ -30,6 +41,7 @@ class BackendController extends BaseBackendController
             'user_static' => $dashboardService->getUserStatic(),
             'manager_static' => $dashboardService->getManagerStatic(),
             'log_static' => $dashboardService->getLogStatic(),
+            'content_static' => $dashboardService->getContentStatic(),
         ]);
     }
 

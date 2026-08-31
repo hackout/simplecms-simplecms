@@ -34,6 +34,25 @@ class SimpleCMSRequests
         if (!$locale = $request->header('X-Accept-Language')) {
             $locale = $request->header('Accept-Language', config('app.locale'));
         }
-        App::setLocale($locale);
+
+        $locale = $this->normalizeLocale($locale);
+        App::setLocale($locale ?: config('app.locale'));
+    }
+
+    protected function normalizeLocale(?string $locale): ?string
+    {
+        if (blank($locale)) {
+            return null;
+        }
+
+        $locale = explode(',', $locale)[0];
+        $locale = preg_split('/[;]+/', $locale, 2)[0] ?? $locale;
+        $locale = trim($locale);
+
+        if ($locale === '') {
+            return null;
+        }
+
+        return $locale;
     }
 }

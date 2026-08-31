@@ -9,6 +9,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseController;
 
+/**
+ * 用户日志控制器
+ *
+ * 负责用户操作日志的查询、详情查看与清理逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read UserLogService $service 用户日志服务
+ */
+#[ApiName(name: '用户日志控制器')]
 class UserLogController extends BaseController
 {
 

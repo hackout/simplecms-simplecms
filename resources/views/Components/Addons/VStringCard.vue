@@ -1,11 +1,12 @@
 <template>
-    <div class="SimpleCMS-StringCard">
+    <div class="SimpleCMS-StringCard" :class="type" @click="$emit('click')">
         <div class="SimpleCMS-StringCard-content">
-            <span :title="text">{{ text }}</span>
-            <span>{{ name }}</span>
+            <span :title="resolvedText">{{ resolvedText }}</span>
+            <span>{{ resolvedName }}</span>
         </div>
         <div class="SimpleCMS-StringCard-extra" :class="type">
-            <component :is="`SimpleCMS${icon}`" size="28px"></component>
+            <component v-if="icon" :is="`SimpleCMS${icon}`" size="28px"></component>
+            <slot v-else name="icon"></slot>
         </div>
     </div>
 </template>
@@ -15,11 +16,11 @@ export default {
     name: 'VStringCard',
     props: {
         name: {
-            type: String,
+            type: [String, Number],
             default: ''
         },
         text: {
-            type: [String,Number],
+            type: [String, Number],
             default: ''
         },
         icon: {
@@ -29,6 +30,15 @@ export default {
         type: {
             type: String,
             default: ''
+        }
+    },
+    emits: ['click'],
+    computed: {
+        resolvedName() {
+            return this.name ?? ''
+        },
+        resolvedText() {
+            return this.text ?? ''
         }
     }
 }

@@ -12,6 +12,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
+/**
+ * 菜单管理控制器
+ *
+ * 负责后台菜单的列表、创建、更新和删除等管理逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read mixed $service 业务服务
+ */
+#[ApiName(name: '菜单管理控制器')]
 class MenuController extends BaseBackendController
 {
 

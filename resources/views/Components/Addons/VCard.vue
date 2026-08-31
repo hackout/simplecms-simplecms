@@ -1,9 +1,11 @@
 <template>
-    <div class="SimpleCMS-card">
-        <div class="SimpleCMS-card-header" v-if="$slots.header">
-            <slot name="header"></slot>
+    <div class="SimpleCMS-card" :class="[{ 'is-shadow': shadow, 'is-borderless': !bordered }, customClass]">
+        <div class="SimpleCMS-card-header" v-if="$slots.header || title">
+            <slot name="header">
+                <div class="SimpleCMS-card-header-title">{{ title }}</div>
+            </slot>
         </div>
-        <div class="SimpleCMS-card-body">
+        <div class="SimpleCMS-card-body" :style="bodyStyle">
             <slot></slot>
         </div>
         <div class="SimpleCMS-card-footer" v-if="$slots.footer">
@@ -16,22 +18,26 @@
 export default {
     name: 'VCard',
     props: {
-        
-    },
-    data() {
-        return {
-            route_name: '',
-            menuList: []
+        title: {
+            type: String,
+            default: ''
+        },
+        shadow: {
+            type: Boolean,
+            default: true
+        },
+        bordered: {
+            type: Boolean,
+            default: true
+        },
+        customClass: {
+            type: String,
+            default: ''
+        },
+        bodyStyle: {
+            type: [Object, String],
+            default: null
         }
-    },
-    watch: {
-        
-    },
-    mounted() {
-        this.$nextTick(() => {
-        })
-    },
-    methods: {
     }
 }
 </script>

@@ -12,15 +12,15 @@
         <div class="SimpleCMS-table-body" :style="{ height: maxStyle + 'px' }">
             <el-table :data="items" @selection-change="$emit('selection-change', $event)" :indent="6"
                 v-loading="loading" :row-key="rowKey" :tree-props="treeProps" :default-expand-all="defaultExpandAll"
-                @sort-change="changeSort" :highlight-current-row="false" :height="tableHeight" border
-                style="width: calc(100% - 2px)">
+                @sort-change="changeSort" :highlight-current-row="false" :height="tableHeight" :stripe="striped"
+                :border="border" style="width: calc(100% - 2px)">
                 <slot></slot>
                 <template #empty>
-                    <el-empty :image="emptyIcon" :description="emptyText" :image-size="168" />
+                    <el-empty :image="emptyIconState" :description="emptyTextState" :image-size="168" />
                 </template>
             </el-table>
         </div>
-        <div class="SimpleCMS-table-footer" ref="tableFooterRef" v-if="!hiddenFooter">
+        <div class="SimpleCMS-table-footer" ref="tableFooterRef" v-if="!hiddenFooter && showPagination">
             <div class="SimpleCMS-table-footer-left">
                 <slot v-if="$slots.footer_left" name="footer_left"></slot>
                 <span v-else>{{ totalText }}</span>
@@ -30,7 +30,7 @@
                 <template v-else>
                     <div class="SimpleCMS-table-footer-right-item">
                         <el-select :model-value="query.limit" @change="changeLimit">
-                            <el-option v-for="(d, index) in pageConfig.pageSizes" :key="index" :label="d"
+                            <el-option v-for="(d, index) in pageSizes" :key="index" :label="d"
                                 :value="d"></el-option>
                         </el-select>
                     </div>
@@ -66,11 +66,11 @@ export default {
         },
         data: {
             type: Array,
-            default: []
+            default: () => []
         },
         params: {
             type: Object,
-            default: {}
+            default: () => ({})
         },
         action: {
             type: String,
@@ -86,10 +86,10 @@ export default {
         },
         treeProps: {
             type: Object,
-            default: {
+            default: () => ({
                 children: 'children',
                 hasChildren: 'hasChildren'
-            }
+            })
         },
         rowKey: {
             type: String,
@@ -99,9 +99,33 @@ export default {
             type: Boolean,
             default: false
         },
+        showPagination: {
+            type: Boolean,
+            default: true
+        },
+        pageSizes: {
+            type: Array,
+            default: () => [10, 20, 50, 100]
+        },
+        striped: {
+            type: Boolean,
+            default: false
+        },
+        border: {
+            type: Boolean,
+            default: true
+        },
         padding: {
             type: Boolean,
             default: true
+        },
+        emptyText: {
+            type: String,
+            default: '暂无数据'
+        },
+        emptyIcon: {
+            type: String,
+            default: '/assets/images/no_data.png'
         }
     },
     emits: ['search', 'selection-change', 'change'],
@@ -109,16 +133,16 @@ export default {
         return {
             loading: false,
             pageConfig: tableConfig,
-            total: this.data.length,
-            items: this.data,
+            total: this.getTotalFromData(this.data),
+            items: this.getItemsFromData(this.data),
             tableHeight: this.height,
-            query: Object.assign(tableConfig.request, this.params),
+            query: Object.assign({}, tableConfig.request, this.params || {}),
             queryName: this.action,
-            emptyText: '暂无数据',
-            emptyIcon: '/assets/images/no_data.png',
             pageIndex: 0,
-            maxStyle: {},
-            pagePosition: []
+            maxStyle: 320,
+            pagePosition: [],
+            emptyTextState: this.emptyText,
+            emptyIconState: this.emptyIcon,
         }
     },
     watch: {
@@ -126,10 +150,36 @@ export default {
             this.queryName = val
             if (this.queryName) {
                 this.getData()
+            } else {
+                this.syncLocalData()
             }
         },
         height(val) {
             this.tableHeight = val
+        },
+        emptyText(val) {
+            this.emptyTextState = val
+        },
+        emptyIcon(val) {
+            this.emptyIconState = val
+        },
+        params: {
+            handler(val) {
+                this.query = Object.assign({}, tableConfig.request, val || {})
+                this.pageIndex = 0
+                if (!this.queryName) {
+                    this.syncLocalData()
+                }
+            },
+            deep: true
+        },
+        data: {
+            handler(val) {
+                if (!this.queryName) {
+                    this.syncLocalData()
+                }
+            },
+            deep: true
         }
     },
     computed: {
@@ -143,14 +193,15 @@ export default {
         totalText() {
             let start = (this.query.page - 1) * this.query.limit
             let end = start + this.query.limit
+            let safeTotal = Number(this.total) || 0
             let texts = [
                 '显示',
                 start + 1,
                 '至',
-                end > this.total ? this.total : end,
+                end > safeTotal ? safeTotal : end,
                 '条,',
                 '共',
-                this.total,
+                safeTotal,
                 '条记录.'
             ];
             return texts.join(' ');
@@ -179,10 +230,45 @@ export default {
             this.maxHeight()
             if (this.queryName) {
                 this.getData()
+            } else {
+                this.syncLocalData()
             }
         })
     },
     methods: {
+        getTotalFromData(list) {
+            if (!Array.isArray(list)) return 0
+            return list.length
+        },
+        getItemsFromData(list) {
+            return Array.isArray(list) ? list : []
+        },
+        normalizeResponse(res) {
+            if (Array.isArray(res)) {
+                return {
+                    total: res.length,
+                    items: res
+                }
+            }
+            if (res && typeof res === 'object') {
+                const list = Array.isArray(res.items) ? res.items : (Array.isArray(res.list) ? res.list : (Array.isArray(res.data) ? res.data : []))
+                const total = Number(res.total ?? res.count ?? res.totalCount ?? (Array.isArray(list) ? list.length : 0)) || 0
+                return {
+                    total,
+                    items: list
+                }
+            }
+            return {
+                total: 0,
+                items: []
+            }
+        },
+        syncLocalData() {
+            const normalized = this.normalizeResponse(this.data)
+            this.total = normalized.total
+            this.items = normalized.items
+            this.$emit('change', this.items)
+        },
         maxHeight() {
             let ref = this.$refs.tableRef
             let hRef = this.$refs.tableHeaderRef
@@ -191,9 +277,9 @@ export default {
             let h = hRef && hRef.$el ? hRef.$el.clientHeight : 0;
             let f = fRef && fRef.$el ? fRef.$el.clientHeight : 0;
             let mx = t - (h + f + 50)
-            this.maxStyle = mx
+            this.maxStyle = mx > 0 ? mx : 320
             if (this.tableHeight == '100%') {
-                this.tableHeight = mx + 'px'
+                this.tableHeight = this.maxStyle + 'px'
             }
         },
         setPage(i, index) {
@@ -219,38 +305,58 @@ export default {
         },
         changeLimit(v) {
             this.query.limit = v
+            this.query.page = 1
             this.getData()
         },
         refreshData() {
-            this.query = Object.assign(this.query, this.params)
+            this.query = Object.assign({}, tableConfig.request, this.params || {}, this.query)
             this.pageIndex = this.showPages.indexOf(this.query.page)
             this.getData()
         },
         changeSort({ prop, order }) {
-            this.query.prop = prop
-            this.query.order = order
+            const nextOrder = order === 'ascending' ? 'asc' : (order === 'descending' ? 'desc' : '')
+            this.query.prop = prop || ''
+            this.query.order = nextOrder
             this.getData()
         },
         async getData() {
-            if (!this.loading) {
-                this.loading = true
-                this.emptyText = '加载中'
-                this.emptyIcon = '/assets/images/coming.png'
-                this.items = []
-                let res = await this.$axios.get(this.$route(this.queryName, this.query))
-                this.loading = false
-                if (res.code == this.$config.successCode) {
-                    this.total = res.data.total
-                    this.items = res.data.items.length > 0 ? res.data.items : []
+            if (!this.queryName) {
+                this.syncLocalData()
+                return
+            }
+            if (this.loading) {
+                return
+            }
+            this.loading = true
+            this.emptyTextState = '加载中'
+            this.emptyIconState = '/assets/images/coming.png'
+            this.items = []
+            try {
+                const res = await this.$axios.get(this.$route(this.queryName, this.query))
+                const payload = res && typeof res === 'object' ? res : {}
+                const code = payload.code ?? payload.status ?? this.$config.successCode
+                const result = payload.data ?? payload
+                if (code == this.$config.successCode || code === 200 || code === 0) {
+                    const normalized = this.normalizeResponse(result)
+                    this.total = normalized.total
+                    this.items = normalized.items
                     if (this.items.length == 0) {
-                        this.emptyText = '暂无数据'
-                        this.emptyIcon = '/assets/images/no_data.png'
+                        this.emptyTextState = '暂无数据'
+                        this.emptyIconState = '/assets/images/no_data.png'
                     }
                 } else {
                     this.items = []
-                    this.emptyText = res.message
-                    this.emptyIcon = '/assets/images/error.png'
+                    this.total = 0
+                    this.emptyTextState = payload.message || '获取数据失败'
+                    this.emptyIconState = '/assets/images/error.png'
                 }
+            } catch (error) {
+                this.items = []
+                this.total = 0
+                this.emptyTextState = error?.message || '请求失败'
+                this.emptyIconState = '/assets/images/error.png'
+            } finally {
+                this.loading = false
                 this.$emit('change', this.items)
             }
         }

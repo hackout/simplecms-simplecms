@@ -9,19 +9,29 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
+/**
+ * 用户控制器
+ *
+ * 负责用户信息的列表查询、创建、编辑、详情查看及删除等前台接口。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read mixed $service 业务服务
+ */
+#[ApiName(name: '用户控制器')]
 class UserController extends BaseController
 {
 
     /**
-     * UserController 获取列表
+     * 获取列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserController-获取列表')]
-    public function index(Request $request,UserService $service):JsonResponse
+    #[ApiName(name: '获取列表')]
+    public function index(Request $request, UserService $service): JsonResponse
     {
         $rules = [
             'keyword' => 'sometimes|nullable|max:250'
@@ -29,21 +39,21 @@ class UserController extends BaseController
         $messages = [
             'keyword.max' => '关键词最大支持250个字符'
         ];
-        $data = $request->validate($rules,$messages);
+        $data = $request->validate($rules, $messages);
         $result = $service->getList($data);
         return $this->success($result);
     }
 
     /**
-     * UserController 添加信息
+     * 添加信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  Request $request
      * @param  UserService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserController-添加信息')]
-    public function create(Request $request,UserService $service):JsonResponse
+    #[ApiName(name: '添加信息')]
+    public function create(Request $request, UserService $service): JsonResponse
     {
         $rules = [
             //
@@ -51,13 +61,13 @@ class UserController extends BaseController
         $messages = [
             //
         ];
-        $data = $request->validate($rules,$messages);
+        $data = $request->validate($rules, $messages);
         $service->create($data);
         return $this->success();
     }
 
     /**
-     * UserController 编辑信息
+     * 编辑信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
@@ -65,8 +75,8 @@ class UserController extends BaseController
      * @param  UserService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserController-编辑信息')]
-    public function update(string $id,Request $request,UserService $service):JsonResponse
+    #[ApiName(name: '编辑信息')]
+    public function update(string $id, Request $request, UserService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id'
@@ -83,12 +93,12 @@ class UserController extends BaseController
         $data = $validator->safe()->only([
             //Todo..
         ]);
-        $service->update($id,$data);
+        $service->update($id, $data);
         return $this->success();
     }
 
     /**
-     * UserController 信息详情
+     * 信息详情
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
@@ -96,8 +106,8 @@ class UserController extends BaseController
      * @param  UserService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserController-信息详情')]
-    public function detail(string $id,Request $request,UserService $service):JsonResponse
+    #[ApiName(name: '信息详情')]
+    public function detail(string $id, Request $request, UserService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id'
@@ -115,9 +125,9 @@ class UserController extends BaseController
         return $this->success($result);
     }
 
-    
+
     /**
-     * UserController 删除信息
+     * 删除信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
@@ -125,8 +135,8 @@ class UserController extends BaseController
      * @param  UserService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'UserController-删除信息')]
-    public function delete(string $id,Request $request,UserService $service): JsonResponse
+    #[ApiName(name: '删除信息')]
+    public function delete(string $id, Request $request, UserService $service): JsonResponse
     {
         $rules = [
             'id' => 'exists:users,id'
@@ -143,9 +153,7 @@ class UserController extends BaseController
         $data = $validator->safe()->only([
             //Todo..
         ]);
-        $service->delete($id,$data);
+        $service->delete($id, $data);
         return $this->success();
     }
-    
-
 }

@@ -7,6 +7,15 @@ use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
+/**
+ * 公共控制器
+ *
+ * 处理前台公共接口与初始化入口等逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read mixed $service 业务服务
+ */
+#[ApiName(name: '公共控制器')]
 class PublicController extends BaseController
 {
 

@@ -112,6 +112,13 @@ export default {
         loading(val) {
             this.saving = val
         },
+        visible(val) {
+            if (val) {
+                this.openDialog()
+            } else {
+                this.closeDialog()
+            }
+        },
         appendToBody(val) {
             this.dialogAppend = val
         },
