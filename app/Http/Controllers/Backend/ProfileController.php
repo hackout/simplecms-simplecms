@@ -13,8 +13,13 @@ use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendControl
 /**
  * 管理员个人信息控制器
  *
+ * 负责后台管理员个人资料、邮箱和密码等安全设置的展示与更新。
+ *
  * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read DashboardService $service 个人资料服务
  */
+#[ApiName(name: '管理员个人信息控制器')]
 class ProfileController extends BaseBackendController
 {
 

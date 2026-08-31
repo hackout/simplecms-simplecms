@@ -11,6 +11,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendController;
 
+/**
+ * 系统配置控制器
+ *
+ * 负责系统配置、缓存及常用参数的后台管理逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read mixed $service 业务服务
+ */
+#[ApiName(name: '系统配置控制器')]
 class SystemController extends BaseBackendController
 {
 

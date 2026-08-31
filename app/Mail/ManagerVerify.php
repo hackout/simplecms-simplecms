@@ -40,7 +40,7 @@ class ManagerVerify extends Mailable
             view: 'emails.sent_verify_link',
             with: [
                 'email' => $this->email,
-                'url' => route('verify.email',['code'=>$this->code])
+                'url' => route('backend.verify.email', ['code' => $this->code]),
             ]
         );
     }

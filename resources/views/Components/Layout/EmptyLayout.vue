@@ -34,8 +34,8 @@ export default {
             deep: true
         },
         '$page.props.title': {
-            handler(){
-                this.pageTitle = this.$page.props.title
+            handler(val) {
+                this.pageTitle = val || this.$page.props.title
             }
         }
     },

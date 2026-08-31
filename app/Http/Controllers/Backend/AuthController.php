@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Services\Backend\AuthService;
 use App\Services\Backend\ManagerService;
 use Inertia\Response as InertiaResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use SimpleCMS\Framework\Attributes\ApiName;
 use Illuminate\Http\Request;
@@ -15,8 +16,13 @@ use SimpleCMS\Framework\Http\Controllers\BackendController as BaseBackendControl
 /**
  * 管理员登录控制器
  *
+ * 处理后台登录、退出、找回密码及邮箱验证等认证逻辑。
+ *
  * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read mixed $service 业务服务
  */
+#[ApiName(name: '管理员登录控制器')]
 class AuthController extends BaseBackendController
 {
 
@@ -58,7 +64,7 @@ class AuthController extends BaseBackendController
         $result = $service->login((string) $data['account'], (string) $data['password'], (bool) $data['remember']);
         if ($result === true) {
             $request->session()->regenerate();
-            (new ManagerService())->login(auth()->id());
+            (new ManagerService())->login(Auth::id());
             return to_route('backend.dashboard')->with('success', '欢迎回来【' . $data['account'] . '】');
         }
         return $result;
@@ -85,7 +91,7 @@ class AuthController extends BaseBackendController
     #[ApiName(name: '退出登录')]
     public function logout(): RedirectResponse
     {
-        auth('web')->logout();
+        Auth::guard('web')->logout();
         return to_route('backend.login')->with('success', '已退出登录，请重新登录账号');
     }
 

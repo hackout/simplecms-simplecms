@@ -12,6 +12,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
+/**
+ * 前台认证控制器
+ *
+ * 处理用户注册、登录、退出及授权相关的前台接口逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read mixed $service 业务服务
+ */
+#[ApiName(name: '前台认证控制器')]
 class AuthController extends BaseController
 {
 
@@ -72,7 +82,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * AccountController 编辑信息
+     * 编辑信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
@@ -80,7 +90,7 @@ class AuthController extends BaseController
      * @param  AccountService $service
      * @return JsonResponse
      */
-    #[ApiName(name: 'AccountController-编辑信息')]
+    #[ApiName(name: '编辑信息')]
     public function update(string $id, Request $request, AccountService $service): JsonResponse
     {
         $rules = [
@@ -103,7 +113,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * AccountController 信息详情
+     * 信息详情
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
@@ -111,7 +121,7 @@ class AuthController extends BaseController
      * @param  AccountService $service
      * @return JsonResponse
      */
-    #[ApiName(name: 'AccountController-信息详情')]
+    #[ApiName(name: '信息详情')]
     public function detail(string $id, Request $request, AccountService $service): JsonResponse
     {
         $rules = [
@@ -132,7 +142,7 @@ class AuthController extends BaseController
 
 
     /**
-     * AccountController 删除信息
+     * 删除信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
@@ -140,7 +150,7 @@ class AuthController extends BaseController
      * @param  AccountService $commitInlineService
      * @return JsonResponse
      */
-    #[ApiName(name: 'AccountController-删除信息')]
+    #[ApiName(name: '删除信息')]
     public function delete(string $id, Request $request, AccountService $service): JsonResponse
     {
         $rules = [

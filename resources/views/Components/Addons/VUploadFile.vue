@@ -66,14 +66,14 @@ export default {
     data() {
         return {
             loading: false,
-            fileName: this.multiple ? this.src.map(n=>n.name) : '',
+            fileName: this.multiple ? (Array.isArray(this.src) ? this.src.map(n => n && n.name ? n.name : n) : []) : '',
             image: this.src,
             placeholderText: this.placeholder
         }
     },
     watch: {
         src(val){
-            this.fileName = this.multiple ? val.map(n=>n.name) : ''
+            this.fileName = this.multiple ? (Array.isArray(val) ? val.map(n => n && n.name ? n.name : n) : []) : ''
             this.image = val
         },
         placeholder(val) {

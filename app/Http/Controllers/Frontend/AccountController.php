@@ -4,23 +4,34 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Services\Frontend\AccountService;
 use Illuminate\Support\Facades\Validator;
+use SimpleCMS\Framework\Attributes\ApiName;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use SimpleCMS\Framework\Http\Controllers\FrontendController as BaseController;
 
+/**
+ * 账号控制器
+ *
+ * 处理前台账号相关的查询、更新和删除等接口逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read mixed $service 业务服务
+ */
+#[ApiName(name: '账号控制器')]
 class AccountController extends BaseController
 {
 
     /**
-     * AccountController 获取列表
+     * 获取列表
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  Request $request
      * @param  AccountService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'AccountController-获取列表')]
+     #[ApiName(name:'获取列表')]
     public function index(Request $request,AccountService $service):JsonResponse
     {
         $rules = [
@@ -35,14 +46,14 @@ class AccountController extends BaseController
     }
 
     /**
-     * AccountController 添加信息
+     * 添加信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  Request $request
      * @param  AccountService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'AccountController-添加信息')]
+     #[ApiName(name:'添加信息')]
     public function create(Request $request,AccountService $service):JsonResponse
     {
         $rules = [
@@ -57,7 +68,7 @@ class AccountController extends BaseController
     }
 
     /**
-     * AccountController 编辑信息
+     * 编辑信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
@@ -65,7 +76,7 @@ class AccountController extends BaseController
      * @param  AccountService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'AccountController-编辑信息')]
+     #[ApiName(name:'编辑信息')]
     public function update(string $id,Request $request,AccountService $service):JsonResponse
     {
         $rules = [
@@ -88,7 +99,7 @@ class AccountController extends BaseController
     }
 
     /**
-     * AccountController 信息详情
+     * 信息详情
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string $id
@@ -96,7 +107,7 @@ class AccountController extends BaseController
      * @param  AccountService $service
      * @return JsonResponse
      */
-     #[ApiName(name:'AccountController-信息详情')]
+     #[ApiName(name:'信息详情')]
     public function detail(string $id,Request $request,AccountService $service):JsonResponse
     {
         $rules = [
@@ -117,7 +128,7 @@ class AccountController extends BaseController
 
     
     /**
-     * AccountController 删除信息
+     * 删除信息
      *
      * @author Dennis Lui <hackout@vip.qq.com>
      * @param  string         $id
@@ -125,7 +136,7 @@ class AccountController extends BaseController
      * @param  CommitInlineService $commitInlineService
      * @return JsonResponse
      */
-     #[ApiName(name:'AccountController-删除信息')]
+     #[ApiName(name:'删除信息')]
     public function delete(string $id,Request $request,AccountService $service): JsonResponse
     {
         $rules = [

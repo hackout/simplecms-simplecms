@@ -11,6 +11,17 @@ use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\DictItemController;
 use App\Http\Controllers\Backend\ManagerLogController;
+use App\Http\Controllers\Frontend\HomeController;
+
+Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
+Route::get('/about', [HomeController::class, 'about'])->name('frontend.about');
+Route::get('/services', [HomeController::class, 'services'])->name('frontend.services');
+Route::get('/solutions', [HomeController::class, 'solutions'])->name('frontend.solutions');
+Route::get('/products', [HomeController::class, 'products'])->name('frontend.products');
+Route::get('/cases', [HomeController::class, 'cases'])->name('frontend.cases');
+Route::get('/news', [HomeController::class, 'news'])->name('frontend.news');
+Route::get('/news/{slug}', [HomeController::class, 'newsDetail'])->name('frontend.news.detail')->where(['slug' => '[A-Za-z0-9\-]+']);
+Route::get('/contact', [HomeController::class, 'contact'])->name('frontend.contact');
 
 Route::group(['prefix' => '/backend'], function () {
     Route::middleware("auth")->group(function () {
@@ -22,8 +33,8 @@ Route::group(['prefix' => '/backend'], function () {
             Route::get('/email', [ProfileController::class, 'email'])->name('backend.dashboard.profile.email');
             Route::get('/password', [ProfileController::class, 'password'])->name('backend.dashboard.profile.password');
             Route::post('/', [ProfileController::class, 'update'])->name('backend.dashboard.profile_update');
-            Route::post('/email', [ProfileController::class, 'emailUpdate'])->name('backend.dashboard.profile.email_update');
-            Route::post('/password', [ProfileController::class, 'passwordUpdate'])->name('backend.dashboard.profile.password_update');
+            Route::post('/email', [ProfileController::class, 'updateEmail'])->name('backend.dashboard.profile.email_update');
+            Route::post('/password', [ProfileController::class, 'updatePassword'])->name('backend.dashboard.profile.password_update');
         });
         Route::group(['prefix' => '/system'], function () {
             Route::get('/', [SystemController::class, 'index'])->name('backend.system')->middleware('role:backend.system');

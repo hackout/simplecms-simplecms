@@ -5,6 +5,7 @@ namespace App\Services\Backend;
 use DB;
 use Str;
 use Carbon\Carbon;
+use App\Models\Article;
 use App\Models\Manager;
 use App\Mail\ManagerVerify;
 use Illuminate\Support\Facades\Hash;
@@ -127,6 +128,18 @@ class DashboardService extends SimpleService
         return [
             'today' => (new RequestLogService())->setQuery([['created_at', '>=', today()]])->count(),
             'total' => (new RequestLogService())->count(),
+        ];
+    }
+
+    public function getContentStatic(): array
+    {
+        $articles = Article::query();
+
+        return [
+            'published' => (clone $articles)->where('is_published', true)->where('status', 'published')->count(),
+            'draft' => (clone $articles)->where('status', 'draft')->count(),
+            'review' => (clone $articles)->where('status', 'review')->count(),
+            'total' => (clone $articles)->count(),
         ];
     }
 }

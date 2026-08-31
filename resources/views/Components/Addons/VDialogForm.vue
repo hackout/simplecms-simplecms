@@ -58,10 +58,6 @@
                                 :type="col.type ? col.type : 'date'" :placeholder="col.placeholder" color-format="hex"
                                 :predefine="col.predefine" :tabindex="col.tabindex" :disabled="col.disabled"
                                 @change="onChange(col.key, col.change)"></el-color-picker>
-                            <el-color-picker v-if="col.element == 'color'" v-model="form[col.key]" :show-alpha="false"
-                                :type="col.type ? col.type : 'date'" :placeholder="col.placeholder" color-format="hex"
-                                :predefine="col.predefine" :tabindex="col.tabindex" :disabled="col.disabled"
-                                @change="onChange(col.key, col.change)"></el-color-picker>
                             <el-checkbox-group v-if="col.element == 'checkbox'" v-model="form[col.key]" :min="col.min"
                                 :max="col.max" :disabled="col.disabled" @change="onChange(col.key, col.change)">
                                 <el-checkbox v-for="(column, index2) in option[col.key]" :tabindex="col.tabindex"
@@ -105,6 +101,15 @@
 import { ElMessage } from 'element-plus'
 export default {
     props: {
+        /**
+         * 表单项配置
+         * @type {Array}
+         * @default []
+         */
+        item: {
+            type: Array,
+            default: () => []
+        },
         /**
          * 按钮文本
          * @type {String}

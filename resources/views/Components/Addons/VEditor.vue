@@ -126,7 +126,7 @@ export default {
     mounted() {
         this.initialize()
     },
-    beforeDestroy() {
+    beforeUnmount() {
         this.quill = null
         delete this.quill
     },
@@ -207,11 +207,12 @@ export default {
                     }
                 })
                 this.quill.on('text-change', (delta, oldDelta, source) => {
-                    this.$emit('text-change', this._content, delta, source)
-                    this.$emit('input', this.output !== 'delta' ? this.quill.root.innerHTML : this.quill.getContents())
                     const html = this.quill.root.innerHTML
                     const text = this.quill.getText()
-                    this.$emit('change', { html, text, quill: this.quill })
+                    this.editContent = html
+                    this.$emit('text-change', html, delta, source)
+                    this.$emit('input', html)
+                    this.$emit('change', { html, text, quill: this.quill, delta, oldDelta, source })
                 })
                 this.$emit('ready', this.quill)
             }

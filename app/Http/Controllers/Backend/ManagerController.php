@@ -12,6 +12,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController;
 
+/**
+ * 管理员管理控制器
+ *
+ * 负责后台管理员的列表展示、信息维护、密码修改和删除等管理逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read ManagerService $service 管理员服务
+ */
+#[ApiName(name: '管理员管理控制器')]
 class ManagerController extends BackendController
 {
 

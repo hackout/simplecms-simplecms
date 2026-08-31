@@ -1,8 +1,8 @@
 <template>
-    <el-drawer v-model="visit" class="SimpleCMS-tableDrawer" size="950px" :title="drawerTitle"
-        @closed="$emit('closed')">
-        <VTable :action="queryAction" :round="false" @change="$emit('change',$event)" :params="queryParam" ref="tableRef" @search="$emit('search')"
-            @selection-change="$emit('selection-change', $event)">
+    <el-drawer v-model="visit" class="SimpleCMS-tableDrawer" :size="drawerSize" :title="drawerTitle"
+        @closed="handleClosed">
+        <VTable :action="queryAction" :round="false" @change="$emit('change', $event)" :params="queryParam"
+            ref="tableRef" @search="$emit('search')" @selection-change="$emit('selection-change', $event)">
             <template #header_left>
                 <slot name="header_left"></slot>
             </template>
@@ -17,17 +17,21 @@
 
 export default {
     props: {
+        modelValue: {
+            type: Boolean,
+            default: false
+        },
         title: {
             type: String,
             default: null
         },
         data: {
             type: Array,
-            default: []
+            default: () => []
         },
         params: {
             type: Object,
-            default: {}
+            default: () => ({})
         },
         action: {
             type: String,
@@ -38,17 +42,20 @@ export default {
             default: '65vw'
         }
     },
-    emits: ['closed', 'search', 'selection-change','change'],
+    emits: ['closed', 'search', 'selection-change', 'change', 'update:modelValue'],
     data() {
         return {
             drawerTitle: this.title,
             drawerSize: this.width,
-            visit: false,
+            visit: !!this.modelValue,
             queryParam: this.params,
             queryAction: this.action,
         }
     },
     watch: {
+        modelValue(val) {
+            this.visit = !!val
+        },
         title(val) {
             this.drawerTitle = val
         },
@@ -60,23 +67,29 @@ export default {
         },
         params: {
             handler(val) {
-                this.queryParam = val
+                this.queryParam = val || {}
             },
             deep: true
         }
     },
-    created() {
-        this.$nextTick(() => {
-
-        })
-    },
     methods: {
         open() {
             this.visit = true
+            this.$emit('update:modelValue', true)
+        },
+        close() {
+            this.visit = false
+            this.$emit('update:modelValue', false)
+        },
+        handleClosed() {
+            this.$emit('closed')
+            this.$emit('update:modelValue', false)
         },
         refreshData() {
             this.$nextTick(() => {
-                this.$refs.tableRef.refreshData()
+                if (this.$refs.tableRef && this.$refs.tableRef.refreshData) {
+                    this.$refs.tableRef.refreshData()
+                }
             })
         }
     }

@@ -19,12 +19,18 @@ class ManagerService extends SimpleService
      */
     public function getOptions(): array
     {
-        return parent::getAll([
-            'id',
+        return collect(parent::getAll([
+            'id as value',
             'name',
             'account'
-        ])->map(fn($n) => ['value' => $n['id'], 'name' => $n['name'] ?: $n['account']])
-            ->values()->toArray();
+        ]))
+            ->map(fn ($item) => [
+                'value' => data_get($item, 'value', data_get($item, 'id')),
+                'name' => data_get($item, 'name') ?: data_get($item, 'account'),
+            ])
+            ->filter(fn ($item) => !empty($item['value']))
+            ->values()
+            ->all();
     }
 
     /**

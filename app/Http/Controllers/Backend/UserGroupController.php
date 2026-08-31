@@ -11,6 +11,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController as BaseController;
 
+/**
+ * 用户分组控制器
+ *
+ * 处理用户分组的查询、创建和更新等后台管理逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read mixed $service 业务服务
+ */
+#[ApiName(name: '用户分组控制器')]
 class UserGroupController extends BaseController
 {
 

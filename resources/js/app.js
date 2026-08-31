@@ -16,6 +16,22 @@ import VDialogForm from '@view/Components/Addons/VDialogForm.vue'
 import VTableDrawer from '@view/Components/Addons/VTableDrawer.vue'
 import VUploadFile from '@view/Components/Addons/VUploadFile.vue'
 import VEditor from '@view/Components/Addons/VEditor.vue'
+import VBadge from '@view/Components/Addons/VBadge.vue'
+import VEmptyState from '@view/Components/Addons/VEmptyState.vue'
+import VStatusTag from '@view/Components/Addons/VStatusTag.vue'
+import VChart from '@view/Components/Addons/VChart.vue'
+import VStatCard from '@view/Components/Addons/VStatCard.vue'
+import VPageHeader from '@view/Components/Addons/VPageHeader.vue'
+import VFilterBar from '@view/Components/Addons/VFilterBar.vue'
+import VActionBar from '@view/Components/Addons/VActionBar.vue'
+import VPagePanel from '@view/Components/Addons/VPagePanel.vue'
+import VDescriptionList from '@view/Components/Addons/VDescriptionList.vue'
+import VCrudPage from '@view/Components/Addons/VCrudPage.vue'
+import VDetailPage from '@view/Components/Addons/VDetailPage.vue'
+import VFormPage from '@view/Components/Addons/VFormPage.vue'
+import VSearchForm from '@view/Components/Addons/VSearchForm.vue'
+import VFormItem from '@view/Components/Addons/VFormItem.vue'
+import VAdminDashboard from '@view/Components/Addons/VAdminDashboard.vue'
 import mixinJs from '@/utils/mixin'
 import axios from '@/utils/request'
 import tool from '@/utils/tool.js'
@@ -54,6 +70,22 @@ createInertiaApp({
         app.component('VTable', VTable)
         app.component('VEditor', VEditor)
         app.component('VCard', VCard)
+        app.component('VBadge', VBadge)
+        app.component('VEmptyState', VEmptyState)
+        app.component('VStatusTag', VStatusTag)
+        app.component('VChart', VChart)
+        app.component('VStatCard', VStatCard)
+        app.component('VPageHeader', VPageHeader)
+        app.component('VFilterBar', VFilterBar)
+        app.component('VActionBar', VActionBar)
+        app.component('VPagePanel', VPagePanel)
+        app.component('VDescriptionList', VDescriptionList)
+        app.component('VCrudPage', VCrudPage)
+        app.component('VDetailPage', VDetailPage)
+        app.component('VFormPage', VFormPage)
+        app.component('VSearchForm', VSearchForm)
+        app.component('VFormItem', VFormItem)
+        app.component('VAdminDashboard', VAdminDashboard)
         app.provide('route', ZiggyFunc);
         app.config.globalProperties.$route = ZiggyFunc
         app.config.globalProperties.$ajax = router

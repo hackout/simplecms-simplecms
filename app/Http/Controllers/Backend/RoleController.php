@@ -12,6 +12,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Http\Request;
 use SimpleCMS\Framework\Http\Controllers\BackendController;
 
+/**
+ * 角色管理控制器
+ *
+ * 负责角色列表展示、权限配置和角色数据维护等后台逻辑。
+ *
+ * @author Dennis Lui <hackout@vip.qq.com>
+ * @property-read Request $request 请求对象
+ * @property-read RoleService $service 角色服务
+ */
+#[ApiName(name: '角色管理控制器')]
 class RoleController extends BackendController
 {
 
